@@ -7,6 +7,7 @@ import Home from './components/Home';
 import PetList from './components/PetList';
 import PetForm from './components/PetForm';
 import ShopList from './components/ShopList';
+import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
         <Route path="/petlist" component={PetList} />
         <Route path="/petform" component={PetForm} />
         <Route path="/shoplist" component={ShopList} />
-        <Route path="/signin" component={SignUp} />
+        <Route path="/signin" component={SignIn} />
       </Switch>
     </div>
   );

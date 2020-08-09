@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import Header from './Header';
 
 const getDummy = (n = 30) => {
@@ -11,7 +10,7 @@ const getDummy = (n = 30) => {
   return l.map((i) => <h1 key={i}>{i}</h1>);
 };
 
-const HomeBody = styled.div`
+const HomeBlock = styled.div`
   margin-top: 5rem;
 `;
 
@@ -19,10 +18,10 @@ const Home = () => {
   return (
     <>
       <Header />
-      <HomeBody>
+      <HomeBlock>
         <h1>Home</h1>
         {getDummy()}
-      </HomeBody>
+      </HomeBlock>
     </>
   );
 };

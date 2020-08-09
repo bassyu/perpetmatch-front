@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const headerLinks = [
@@ -19,8 +19,6 @@ const headerLinks = [
     to: '/shoplist',
   },
 ];
-
-const user = '';
 
 const HeaderBlock = styled.div`
   position: fixed;
@@ -51,7 +49,7 @@ const HeaderLogo = styled(Link)`
   margin-right: 3.5rem;
 `;
 
-const HeaderLink = styled(Link)`
+const HeaderLink = styled(NavLink)`
   font-size: 1.125rem;
   font-weight: 600;
   cursor: pointer;
@@ -60,7 +58,7 @@ const HeaderLink = styled(Link)`
   color: #204030;
 
   &:hover {
-    color: #408060;
+    color: #a37e2c;
   }
   & + & {
     margin-left: 2rem;
@@ -72,17 +70,18 @@ const HeaderUser = styled.div`
   margin-left: auto;
   margin-top: 0.4rem;
   cursor: pointer;
-  color: #204030;
+  color: black;
 
   &:hover {
-    color: #408060;
+    color: gray;
   }
 `;
 
 const HeaderSignin = styled(Link)`
-  color: #204030;
+  text-decoration: none;
+  color: black;
   &:hover {
-    color: #408060;
+    color: gray;
   }
 `;
 
@@ -94,12 +93,20 @@ const HeaderLine = styled.hr`
 `;
 
 const Header = () => {
+  const [user, setUser] = useState('');
+
   return (
     <HeaderBlock>
       <HeaderWrapper>
         <HeaderLogo to="/">PERPET MATCH</HeaderLogo>
         {headerLinks.map((i) => (
-          <HeaderLink key={i.key} to={i.to}>
+          <HeaderLink
+            key={i.key}
+            to={i.to}
+            activeStyle={{
+              color: '#a37e2c',
+            }}
+          >
             {i.children}
           </HeaderLink>
         ))}
@@ -107,7 +114,7 @@ const Header = () => {
           {user ? (
             user + '님'
           ) : (
-            <HeaderSignin to="/signin">로그인/회원가입</HeaderSignin>
+            <HeaderSignin to="/signin">로그인/가입</HeaderSignin>
           )}
         </HeaderUser>
       </HeaderWrapper>

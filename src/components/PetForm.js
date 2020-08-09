@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Header from './Header';
 
 const getDummy = (n = 30) => {
   const l = [];
@@ -16,6 +17,7 @@ const HomeBody = styled.div`
 const PetForm = () => {
   return (
     <>
+      <Header />
       <HomeBody>
         <h1>PetForm</h1>
         {getDummy()}
