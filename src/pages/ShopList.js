@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from './Header';
+import Header from '../components/common/Header';
 
 const getDummy = (n = 30) => {
   const l = [];
@@ -10,20 +10,20 @@ const getDummy = (n = 30) => {
   return l.map((i) => <h1 key={i}>{i}</h1>);
 };
 
-const PetListBody = styled.div`
+const HomeBody = styled.div`
   margin-top: 5rem;
 `;
 
-const PetList = () => {
+const ShopList = () => {
   return (
     <>
       <Header />
-      <PetListBody>
-        <h1>PetList</h1>
+      <HomeBody>
+        <h1>ShopList</h1>
         {getDummy()}
-      </PetListBody>
+      </HomeBody>
     </>
   );
 };
 
-export default PetList;
+export default ShopList;

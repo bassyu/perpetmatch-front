@@ -38,7 +38,6 @@ const SignIn = () => {
     };
     fetchData();
   };
-  const onClickDummy = () => {};
 
   return (
     <>
@@ -58,14 +57,7 @@ const SignIn = () => {
           onChange={onChange}
         />
         <br />
-        <button
-          onClick={
-            onClick
-            //onClickDummy
-          }
-        >
-          확인
-        </button>
+        <button onClick={onClick}>확인</button>
       </SigninBlock>
     </>
   );

@@ -27,6 +27,7 @@ const HeaderBlock = styled.div`
   right: 0;
   background-color: white;
   color: #204030;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 `;
 
 const HeaderWrapper = styled.div`
@@ -89,37 +90,44 @@ const HeaderLine = styled.hr`
   border: 0;
   height: 0;
   margin: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  //border-top: 1px solid rgba(0, 0, 0, 0.1);
+`;
+
+const Spacer = styled.div`
+  height: 4rem;
 `;
 
 const Header = () => {
   const [user, setUser] = useState('');
 
   return (
-    <HeaderBlock>
-      <HeaderWrapper>
-        <HeaderLogo to="/">PERPET MATCH</HeaderLogo>
-        {headerLinks.map((i) => (
-          <HeaderLink
-            key={i.key}
-            to={i.to}
-            activeStyle={{
-              color: '#a37e2c',
-            }}
-          >
-            {i.children}
-          </HeaderLink>
-        ))}
-        <HeaderUser>
-          {user ? (
-            user + '님'
-          ) : (
-            <HeaderSignin to="/signin">로그인/가입</HeaderSignin>
-          )}
-        </HeaderUser>
-      </HeaderWrapper>
-      <HeaderLine />
-    </HeaderBlock>
+    <>
+      <HeaderBlock>
+        <HeaderWrapper>
+          <HeaderLogo to="/">PERPET MATCH</HeaderLogo>
+          {headerLinks.map((i) => (
+            <HeaderLink
+              key={i.key}
+              to={i.to}
+              activeStyle={{
+                color: '#a37e2c',
+              }}
+            >
+              {i.children}
+            </HeaderLink>
+          ))}
+          <HeaderUser>
+            {user ? (
+              user + '님'
+            ) : (
+              <HeaderSignin to="/signin">로그인/가입</HeaderSignin>
+            )}
+          </HeaderUser>
+        </HeaderWrapper>
+        <HeaderLine />
+      </HeaderBlock>
+      <Spacer />
+    </>
   );
 };
 

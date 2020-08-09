@@ -1,20 +1,18 @@
 import React from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
-import styled from 'styled-components';
 
-import Header from './components/Header';
-import Home from './components/Home';
-import PetList from './components/PetList';
-import PetForm from './components/PetForm';
-import ShopList from './components/ShopList';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
+import Home from './pages/Home';
+import PetList from './pages/PetList';
+import PetForm from './pages/PetForm';
+import ShopList from './pages/ShopList';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 const App = () => {
   return (
     <div className="App">
       <Switch>
-        <Route path="/" component={Home} exact />
+        <Route path={['/', '/@:username']} component={Home} exact />
         <Route path="/petlist" component={PetList} />
         <Route path="/petform" component={PetForm} />
         <Route path="/shoplist" component={ShopList} />
