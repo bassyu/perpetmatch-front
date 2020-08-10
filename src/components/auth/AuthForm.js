@@ -1,8 +1,46 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import palette from '../../lib/styles/palette';
+import Button from '../common/Button';
 
-const AuthFormBlock = styled.div``;
+const AuthFormBlock = styled.div`
+  h3 {
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+`;
+
+const StyledInput = styled.input`
+  font-size: 1rem;
+  border: solid 0.5px ${palette.gray[1]};
+  padding-bottom: 0.5rem;
+  outline: none;
+  width: 100%;
+  &:focus {
+    color: $oc-teal-7;
+    border: solid 0.5px ${palette.main[0]};
+  }
+  & + & {
+    margin-top: 1rem;
+  }
+`;
+
+const Footer = styled.div`
+  margin-top: 2rem;
+  text-align: center;
+  a {
+    color: black;
+    &:hover {
+      color: ${palette.gray[1]};
+    }
+  }
+`;
+
+const ButtonWithMarginTop = styled(Button)`
+  margin-top: 1rem;
+`;
 
 const AuthForm = () => {
   const [signup, setSignup] = useState({
@@ -38,22 +76,23 @@ const AuthForm = () => {
   return (
     <>
       <AuthFormBlock>
-        <h1>회원가입</h1>
-        <div>이름</div>
-        <input name="nickname" value={nickname} onChange={onChange} />
-        <br />
-        <div>아이디</div>
-        <input name="email" value={email} onChange={onChange} />
-        <br />
-        <div>비밀번호</div>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={onChange}
-        />
-        <br />
-        <button onClick={onClick}>확인</button>
+        <form>
+          <StyledInput
+            autoComplete="username"
+            name="usernameOrEmail"
+            placeholder="닉네임 혹은 이메일"
+          />
+          <StyledInput
+            autoComplete="new-password"
+            name="password"
+            placeholder="비밀번호"
+            type="password"
+          />
+          <ButtonWithMarginTop fullWidth>로그인</ButtonWithMarginTop>
+        </form>
+        <Footer>
+          <Link to="signup">회원가입</Link>
+        </Footer>
       </AuthFormBlock>
     </>
   );
