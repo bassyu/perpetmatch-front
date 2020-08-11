@@ -1,12 +1,12 @@
 import React from 'react';
 import AuthTemplate from '../components/auth/AuthTemplate';
-import AuthForm from '../components/auth/AuthForm';
+import SigninForm from '../components/auth/SigninForm';
 
 const SignIn = () => {
   return (
     <>
       <AuthTemplate>
-        <AuthForm />
+        <SigninForm />
       </AuthTemplate>
     </>
   );
