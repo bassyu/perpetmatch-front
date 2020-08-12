@@ -20,7 +20,8 @@ const AuthTemplateBlock = styled.div`
 const WhiteBox = styled.div`
   .logo-area {
     display: block;
-    padding-bottom: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
@@ -39,7 +40,9 @@ const AuthTemplate = ({ children }) => {
     <AuthTemplateBlock>
       <WhiteBox>
         <div className="logo-area">
-          <Link to="/">PERPET MATCH</Link>
+          <Link to="/">
+            <img src="/images/logo8.svg" alt="logo" />
+          </Link>
         </div>
         {children}
       </WhiteBox>

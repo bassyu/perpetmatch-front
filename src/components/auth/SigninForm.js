@@ -6,11 +6,12 @@ import Button from '../common/Button';
 import Input from '../common/Input';
 
 const SigninFormBlock = styled.div`
-  margin-top: 1rem;
+  margin-top: 2rem;
 `;
 
 const Footer = styled.div`
   margin-top: 1rem;
+  margin-bottom: 1rem;
   text-align: center;
   a {
     font-size: 0.8rem;

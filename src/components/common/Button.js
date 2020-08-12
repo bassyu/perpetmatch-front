@@ -14,7 +14,8 @@ const StyledButton = styled.button`
 
   background: ${palette.sub[0]};
   &:hover {
-    background: ${palette.sub[1]};
+    //background: ${palette.sub[1]};
+    opacity: 0.8;
   }
   ${(props) =>
     props.fullWidth &&
@@ -29,7 +30,8 @@ const StyledButton = styled.button`
     css`
       background: ${palette.main[0]};
       &:hover {
-        background: ${palette.main[1]};
+        //background: ${palette.main[1]};
+        opacity: 0.8;
       }
     `}
 `;
