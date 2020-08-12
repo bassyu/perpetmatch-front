@@ -15,6 +15,7 @@ const StyledButton = styled.button`
   width: 100%;
   background: white;
   cursor: pointer;
+  border-radius: 0.4rem;
 `;
 
 const SocialLogin = () => {
