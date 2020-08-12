@@ -26,8 +26,9 @@ const WhiteBox = styled.div`
     letter-spacing: 2px;
   }
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
+  border: solid 2rem ${palette.gray[0]};
   padding: 2rem;
-  width: 360px;
+  width: 480px;
   background: white;
   border-radius: 2px;
 `;

@@ -2,7 +2,7 @@ import React from 'react';
 import AuthTemplate from '../components/auth/AuthTemplate';
 import SignupForm from '../components/auth/SignupForm';
 
-const SignUp = () => {
+const Signup = () => {
   return (
     <AuthTemplate>
       <SignupForm />
@@ -10,4 +10,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Signup;

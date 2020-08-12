@@ -6,10 +6,7 @@ import Button from '../common/Button';
 import Input from '../common/Input';
 
 const SigninFormBlock = styled.div`
-  h3 {
-    margin: 0;
-    margin-bottom: 1rem;
-  }
+  margin-top: 1rem;
 `;
 
 const Footer = styled.div`
