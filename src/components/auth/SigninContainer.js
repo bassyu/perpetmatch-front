@@ -28,7 +28,7 @@ const SigninContainer = () => {
     dispatch(initializeForm('signin'));
   }, [dispatch]);
 
-  return <SigninForm form={form} onCahnge={onChange} onSubmit={onSubmit} />;
+  return <SigninForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };
 
 export default SigninContainer;

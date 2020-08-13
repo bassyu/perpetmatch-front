@@ -23,7 +23,7 @@ const socialMap = {
 };
 
 const SocialLoginBlock = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `;
 
 const StyledButton = styled.button`

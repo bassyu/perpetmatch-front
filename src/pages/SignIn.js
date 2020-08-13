@@ -1,16 +1,16 @@
 import React from 'react';
-import AuthTemplate from '../components/auth/AuthTemplate';
-import SigninForm from '../components/auth/SigninForm';
+import SigninTemplate from '../components/auth/SigninTemplate';
 import SocialLogin from '../components/auth/SocialLogin';
+import SigninContainer from '../components/auth/SigninContainer';
 
 const Signin = () => {
   return (
     <>
-      <AuthTemplate>
+      <SigninTemplate>
         <SocialLogin />
         <hr />
-        <SigninForm />
-      </AuthTemplate>
+        <SigninContainer />
+      </SigninTemplate>
     </>
   );
 };

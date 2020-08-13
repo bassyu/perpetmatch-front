@@ -21,7 +21,7 @@ const WhiteBox = styled.div`
   .logo-area {
     display: block;
     margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;

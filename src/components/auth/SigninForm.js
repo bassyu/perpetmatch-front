@@ -6,7 +6,7 @@ import Button from '../common/Button';
 import Input from '../common/Input';
 
 const SigninFormBlock = styled.div`
-  margin-top: 2rem;
+  margin-top: 1rem;
 `;
 
 const Footer = styled.div`
@@ -26,7 +26,7 @@ const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
 
-const SigninForm = (form, onChange, onSubmit) => {
+const SigninForm = ({ form, onChange, onSubmit }) => {
   return (
     <>
       <SigninFormBlock>
