@@ -23,7 +23,7 @@ const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
 
-const SignupForm = (form, onChange, onSubmit) => {
+const SignupForm = ({ form, onChange, onSubmit }) => {
   return (
     <>
       <SignupFormBlock>
