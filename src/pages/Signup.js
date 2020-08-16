@@ -1,9 +1,13 @@
 import React from 'react';
-import SignupForm from '../components/auth/SignupForm';
 import SignupContainer from '../components/auth/SignupContainer';
+import FormTemplate from '../components/FormTemplate';
 
 const Signup = () => {
-  return <SignupContainer />;
+  return (
+    <FormTemplate>
+      <SignupContainer />
+    </FormTemplate>
+  );
 };
 
 export default Signup;
