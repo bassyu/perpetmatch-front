@@ -25,9 +25,13 @@ const WhiteBox = styled.div`
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
+    img {
+      width: 15rem;
+      height: 3rem;
+    }
   }
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
-  border: solid 1.2rem ${palette.gray[0]};
+  border: solid 1.2rem ${palette.gray[2]};
   padding: 3rem;
   width: 480px;
   background: white;
@@ -41,7 +45,7 @@ const AuthTemplate = ({ children }) => {
       <WhiteBox>
         <div className="logo-area">
           <Link to="/">
-            <img src="/images/logo8.svg" alt="logo" />
+            <img src="/images/common/logo_b.png" alt="logo" />
           </Link>
         </div>
         {children}
