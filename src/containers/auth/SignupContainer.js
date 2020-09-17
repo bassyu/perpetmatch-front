@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import SignupForm from '../../components/auth/SignupForm';
 import { changeField, initializeForm } from '../../modules/auth';
-import SignupForm from './SignupForm';
 
 const SignupContainer = () => {
   const dispatch = useDispatch();

@@ -5,7 +5,6 @@ import {
   FACEBOOK_AUTH_URL,
   NAVER_AUTH_URL,
 } from '../../constants/index';
-import palette from '../../lib/styles/palette';
 
 const socialMap = {
   google: {
@@ -26,11 +25,11 @@ const SocialLoginBlock = styled.div`
   margin-bottom: 1rem;
 `;
 
-const StyledButton = styled.button`
+const SocialButton = styled.button`
   color: white;
   font-size: 0.8rem;
   font-weight: bold;
-  border: solid 0.5px ${palette.gray[1]};
+  border: none;
   padding: 1rem;
   outline: none;
   width: 100%;
@@ -55,15 +54,15 @@ const SocialLogin = () => {
 
   return (
     <SocialLoginBlock>
-      <StyledButton name="google" onClick={onClick}>
+      <SocialButton name="google" onClick={onClick}>
         Sign in with Google
-      </StyledButton>
-      <StyledButton name="facebook" onClick={onClick}>
+      </SocialButton>
+      <SocialButton name="facebook" onClick={onClick}>
         Sign in with facebook
-      </StyledButton>
-      <StyledButton name="naver" onClick={onClick}>
+      </SocialButton>
+      <SocialButton name="naver" onClick={onClick}>
         Sign in with NAVER
-      </StyledButton>
+      </SocialButton>
     </SocialLoginBlock>
   );
 };

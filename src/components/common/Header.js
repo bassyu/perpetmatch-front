@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -97,9 +97,7 @@ const Spacer = styled.div`
   height: 4rem;
 `;
 
-const Header = () => {
-  const [user, setUser] = useState('');
-
+const Header = ({ user }) => {
   return (
     <>
       <HeaderBlock>
@@ -120,7 +118,7 @@ const Header = () => {
             {user ? (
               user + '님'
             ) : (
-              <HeaderSignin to="/signin">로그인/가입</HeaderSignin>
+              <HeaderSignin to="/signin">로그인 / 가입</HeaderSignin>
             )}
           </HeaderUser>
         </HeaderWrapper>
