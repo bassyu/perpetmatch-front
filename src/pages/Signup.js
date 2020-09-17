@@ -1,5 +1,5 @@
 import React from 'react';
-import SignupContainer from '../components/auth/SignupContainer';
+import SignupContainer from '../containers/auth/SignupContainer';
 import FormTemplate from '../components/FormTemplate';
 
 const Signup = () => {

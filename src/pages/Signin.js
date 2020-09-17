@@ -1,7 +1,7 @@
 import React from 'react';
 import SigninTemplate from '../components/auth/SigninTemplate';
 import SocialLogin from '../components/auth/SocialLogin';
-import SigninContainer from '../components/auth/SigninContainer';
+import SigninContainer from '../containers/auth/SigninContainer';
 
 const Signin = () => {
   return (
