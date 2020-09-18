@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette';
 
-const AuthTemplateBlock = styled.div`
+const SigninTemplateBlock = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -37,10 +37,9 @@ const WhiteBox = styled.div`
   border-radius: 2px;
 `;
 
-const AuthTemplate = ({ children }) => {
-  console.log(children);
+const SigninTemplate = ({ children }) => {
   return (
-    <AuthTemplateBlock>
+    <SigninTemplateBlock>
       <WhiteBox>
         <div className="logo-area">
           <Link to="/">
@@ -49,8 +48,8 @@ const AuthTemplate = ({ children }) => {
         </div>
         {children}
       </WhiteBox>
-    </AuthTemplateBlock>
+    </SigninTemplateBlock>
   );
 };
 
-export default AuthTemplate;
+export default SigninTemplate;
