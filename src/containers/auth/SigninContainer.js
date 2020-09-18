@@ -25,8 +25,8 @@ const SigninContainer = ({ history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { usernameOremail, password } = form;
-    dispatch(signin({ usernameOremail, password }));
+    const { usernameOrEmail, password } = form;
+    dispatch(signin({ usernameOrEmail, password }));
   };
 
   useEffect(() => {
