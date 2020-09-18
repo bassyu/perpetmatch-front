@@ -12,24 +12,24 @@ const SignupContainer = () => {
   }));
 
   const onChange = (e) => {
-    const { vlaue, name } = e.target;
+    const { value, name } = e.target;
     dispatch(
       changeField({
         form: 'signup',
         key: name,
-        vlaue,
+        value,
       }),
     );
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { nickname, password, passwordConfirm } = form;
+    const { nickname, email, password, passwordConfirm } = form;
     if (password !== passwordConfirm) {
       // TODO : error processing
       return;
     }
-    dispatch(signup({ nickname, password }));
+    dispatch(signup({ nickname, email, password }));
   };
 
   useEffect(() => {
@@ -38,18 +38,18 @@ const SignupContainer = () => {
 
   useEffect(() => {
     if (authError) {
-      console.log('error');
+      console.log('회원가입 오류');
       console.log(authError);
       return;
     }
     if (auth) {
-      console.log('Sign Up Success');
+      console.log('회원가입 성공');
       console.log(auth);
       return;
     }
   }, [auth, authError]);
 
-  return <SignupForm form={form} onCahnge={onChange} onSubmit={onSubmit} />;
+  return <SignupForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };
 
 export default SignupContainer;
