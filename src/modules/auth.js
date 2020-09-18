@@ -9,11 +9,12 @@ import * as authAPI from '../lib/api/auth';
 // constants
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
+const TEMP_SET_AUTH = 'auth/TEMP_SET_AUTH';
+const SIGNOUT = 'auth/SIGNOUT';
 
 const [SIGNIN, SIGNIN_SUCCESS, SIGNIN_FAILURE] = createRequestActionTypes(
   'auth/SIGNIN',
 );
-
 const [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAILURE] = createRequestActionTypes(
   'auth/SIGNUP',
 );
@@ -24,6 +25,8 @@ export const changeField = createAction(
   ({ form, key, value }) => ({ form, key, value }),
 );
 export const initializeForm = createAction(INITIALIZE_FORM, (form) => form);
+export const tempSetAuth = createAction(TEMP_SET_AUTH, (auth) => auth);
+export const signout = createAction(SIGNOUT);
 
 export const signin = createAction(SIGNIN, ({ usernameOrEmail, password }) => ({
   usernameOrEmail,
@@ -35,7 +38,7 @@ export const signup = createAction(SIGNUP, ({ nickname, email, password }) => ({
   password,
 }));
 
-// saga
+// middleware
 const signinSaga = createRequestSaga(SIGNIN, authAPI.signin);
 const signupSaga = createRequestSaga(SIGNUP, authAPI.signup);
 export function* authSaga() {
@@ -55,7 +58,10 @@ const initialState = {
     usernameOrEmail: '',
     password: '',
   },
-  auth: null,
+  auth: {
+    accessToken: '',
+    tokenType: '',
+  },
   authError: null,
 };
 
@@ -69,10 +75,18 @@ const auth = handleActions(
       ...state,
       [form]: initialState[form],
     }),
+    [TEMP_SET_AUTH]: (state, { payload: auth }) => ({
+      ...state,
+      auth: { ...auth },
+    }),
+    [SIGNOUT]: (state) => ({
+      ...state,
+      auth: { accessToken: '', tokenType: '' },
+    }),
     [SIGNIN_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
-      auth,
+      auth: { ...auth },
     }),
     [SIGNIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
@@ -81,7 +95,7 @@ const auth = handleActions(
     [SIGNUP_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
-      auth,
+      auth: { ...auth },
     }),
     [SIGNUP_FAILURE]: (state, { payload: error }) => ({
       ...state,

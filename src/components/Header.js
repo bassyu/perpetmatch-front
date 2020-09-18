@@ -101,7 +101,7 @@ const Spacer = styled.div`
   height: 4.25rem;
 `;
 
-const Header = ({ user }) => {
+const Header = ({ user, onSignout }) => {
   return (
     <>
       <HeaderBlock>
@@ -128,7 +128,11 @@ const Header = ({ user }) => {
             </button>
           </div>
           <div className="user-area">
-            {user ? user + '님' : <Link to="/signin">회원가입 / 로그인</Link>}
+            {user ? (
+              <span onClick={onSignout}>{user.slice(0, 10) + '님'}</span>
+            ) : (
+              <Link to="/signin">회원가입 / 로그인</Link>
+            )}
           </div>
         </div>
         <HeaderLine />

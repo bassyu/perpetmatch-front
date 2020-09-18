@@ -43,7 +43,7 @@ const SignupContainer = ({ history }) => {
       console.log(authError);
       return;
     }
-    if (auth) {
+    if (auth.accessToken) {
       console.log('회원가입 성공');
       console.log(auth);
       history.push('/');

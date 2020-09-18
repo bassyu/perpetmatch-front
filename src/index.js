@@ -9,6 +9,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './modules';
+import { tempSetAuth } from './modules/auth';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -16,7 +17,20 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );
 
+function loadAuth() {
+  try {
+    const auth = localStorage.getItem('auth');
+    if (!auth) return;
+
+    console.log(auth);
+    store.dispatch(tempSetAuth(JSON.parse(auth)));
+  } catch (e) {
+    console.log('localStorage 오류');
+  }
+}
+
 sagaMiddleware.run(rootSaga);
+loadAuth();
 
 ReactDOM.render(
   <Provider store={store}>

@@ -39,9 +39,14 @@ const SigninContainer = ({ history }) => {
       console.log(authError);
       return;
     }
-    if (auth) {
+    if (auth.accessToken) {
       console.log('로그인 성공');
       history.push('/');
+      try {
+        localStorage.setItem('auth', JSON.stringify(auth));
+      } catch (e) {
+        console.log('localStorage 오류');
+      }
     }
   }, [history, auth, authError]);
 
