@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../lib/styles/palette';
+import { GoSearch } from 'react-icons/go';
 
 const headerLinks = [
   {
@@ -22,13 +23,14 @@ const headerLinks = [
 ];
 
 const HeaderBlock = styled.div`
+  z-index: 2;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background-color: ${palette.main[0]};
   color: #204030;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 
   .wrapper {
     padding-left: 4rem;
@@ -47,9 +49,22 @@ const HeaderBlock = styled.div`
         width: 136px;
       }
     }
-    .user-area {
-      font-weight: bold;
+    .search-area {
       margin-left: auto;
+      button {
+        background: none;
+        outline: none;
+        border: none;
+        color: ${palette.gray[0]};
+        cursor: pointer;
+        &:hover {
+          color: ${palette.gray[4]};
+        }
+      }
+    }
+    .user-area {
+      margin-left: 3rem;
+      font-weight: bold;
       cursor: pointer;
 
       &:hover {
@@ -79,7 +94,7 @@ const HeaderLine = styled.hr`
   border: 0;
   height: 0;
   margin: 0;
-  //border-top: 1px solid rgba(0, 0, 0, 0.1);
+  //border-top: 1px solid rgba(0, 0, 0, 0.3);
 `;
 
 const Spacer = styled.div`
@@ -107,6 +122,11 @@ const Header = ({ user }) => {
               {i.text}
             </HeaderLink>
           ))}
+          <div className="search-area">
+            <button>
+              <GoSearch />
+            </button>
+          </div>
           <div className="user-area">
             {user ? user + '님' : <Link to="/signin">회원가입 / 로그인</Link>}
           </div>
