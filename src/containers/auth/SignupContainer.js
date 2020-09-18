@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import SignupForm from '../../components/auth/SignupForm';
 import { changeField, initializeForm, signup } from '../../modules/auth';
 
-const SignupContainer = () => {
+const SignupContainer = ({ history }) => {
   const dispatch = useDispatch();
   const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.signup,
@@ -45,11 +46,11 @@ const SignupContainer = () => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      return;
+      history.push('/');
     }
-  }, [auth, authError]);
+  }, [history, auth, authError]);
 
   return <SignupForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };
 
-export default SignupContainer;
+export default withRouter(SignupContainer);
