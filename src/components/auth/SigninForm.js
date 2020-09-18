@@ -17,7 +17,7 @@ const Footer = styled.div`
     font-size: 0.8rem;
     color: black;
     &:hover {
-      color: ${palette.gray[1]};
+      color: ${palette.gray[6]};
     }
   }
 `;
@@ -50,7 +50,7 @@ const SigninForm = ({ form, onChange, onSubmit }) => {
         </form>
         <Footer>
           <Link to="/signup">회원가입</Link> |
-          <Link to="/find"> 아이디/비밀번호 찾기</Link>
+          <Link to="/signin"> 아이디/비밀번호 찾기</Link>
         </Footer>
       </SigninFormBlock>
     </>

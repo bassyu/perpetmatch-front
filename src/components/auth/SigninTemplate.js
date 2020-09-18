@@ -20,14 +20,13 @@ const AuthTemplateBlock = styled.div`
 const WhiteBox = styled.div`
   .logo-area {
     display: block;
-    margin-top: 2rem;
-    margin-bottom: 2.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
     img {
-      width: 15rem;
-      height: 3rem;
+      width: 10rem;
     }
   }
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);

@@ -4,9 +4,11 @@ import FormTemplate from '../components/FormTemplate';
 
 const Signup = () => {
   return (
-    <FormTemplate>
-      <SignupContainer />
-    </FormTemplate>
+    <>
+      <FormTemplate>
+        <SignupContainer />
+      </FormTemplate>
+    </>
   );
 };
 

@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import palette from '../lib/styles/palette';
 
-const formTemplateBlock = styled.div`
+const FormTemplateBlock = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background: ${palette.gray[0]};
+  background: ${palette.gray[3]};
 
   display: fixed;
   flex-direction: column;
@@ -20,8 +20,7 @@ const formTemplateBlock = styled.div`
 const WhiteBox = styled.div`
   .title-area {
     display: block;
-    margin-top: 2rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
@@ -33,20 +32,16 @@ const WhiteBox = styled.div`
   border-radius: 2px;
 `;
 
-const formTemplate = ({ children }) => {
+const FormTemplate = ({ children }) => {
   console.log(children);
   return (
-    <formTemplateBlock>
+    <FormTemplateBlock>
       <WhiteBox>
-        <div className="title-area">
-          <Link to="/">
-            <img src="/images/logo8.svg" alt="logo" />
-          </Link>
-        </div>
+        <div className="title-area">회원가입</div>
         {children}
       </WhiteBox>
-    </formTemplateBlock>
+    </FormTemplateBlock>
   );
 };
 
-export default formTemplate;
+export default FormTemplate;

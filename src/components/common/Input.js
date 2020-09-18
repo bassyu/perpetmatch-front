@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyledInput = styled.input`
   font-size: 1rem;
-  border: solid 0.08rem ${palette.gray[1]};
+  border: solid 0.08rem ${palette.gray[3]};
   padding: 1rem;
   outline: none;
   width: ${({ width }) => width || '100%'};
