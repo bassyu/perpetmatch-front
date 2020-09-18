@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Header from '../components/Header';
 import Slider from 'react-slick';
 import Fade from 'react-reveal/Fade';
+import HeaderContainer from '../containers/common/HeaderContainer';
 
 const getDummy = (n = 30) => {
   const l = [];
@@ -89,7 +90,7 @@ const Home = () => {
   };
   return (
     <>
-      <Header />
+      <HeaderContainer />
       <HomeBlock>
         <SliderWrapper>
           <Slider {...settings}>

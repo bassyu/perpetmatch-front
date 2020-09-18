@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../components/Header';
+import HeaderContainer from '../containers/common/HeaderContainer';
 
 const getDummy = (n = 30) => {
   const l = [];
@@ -17,7 +17,7 @@ const PetListBody = styled.div`
 const PetList = () => {
   return (
     <>
-      <Header />
+      <HeaderContainer />
       <PetListBody>
         <h1>PetList</h1>
         {getDummy()}

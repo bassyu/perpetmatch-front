@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../components/Header';
+import HeaderContainer from '../containers/common/HeaderContainer';
 
 const getDummy = (n = 30) => {
   const l = [];
@@ -17,7 +17,7 @@ const HomeBody = styled.div`
 const ShopList = () => {
   return (
     <>
-      <Header />
+      <HeaderContainer />
       <HomeBody>
         <h1>ShopList</h1>
         {getDummy()}
