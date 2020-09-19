@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SignupForm from '../../components/auth/SignupForm';
 import { changeField, initializeForm, signup } from '../../modules/auth';
 
 const SignupContainer = ({ history }) => {
+  const [confirm, setConfirm] = useState(false);
   const dispatch = useDispatch();
-  const { form, auth, authError } = useSelector(({ auth }) => ({
+  const { form, signupResult } = useSelector(({ auth }) => ({
     form: auth.signup,
-    auth: auth.auth,
-    authError: auth.authError,
+    signupResult: auth.signupResult,
   }));
+  const { nickname, email, password, passwordConfirm } = form;
+  const { success, failure, message } = signupResult;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -25,32 +27,41 @@ const SignupContainer = ({ history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { nickname, email, password, passwordConfirm } = form;
-    if (password !== passwordConfirm) {
-      // TODO : error processing
-      return;
-    }
     dispatch(signup({ nickname, email, password }));
   };
 
   useEffect(() => {
+    setConfirm(password === passwordConfirm);
+  }, [password, passwordConfirm]);
+
+  useEffect(() => {
     dispatch(initializeForm('signup'));
+    dispatch(initializeForm('signupResult'));
   }, [dispatch]);
 
   useEffect(() => {
-    if (authError) {
+    if (failure) {
       console.log('회원가입 오류');
-      console.log(authError);
+      alert(message);
+      dispatch(initializeForm('signupResult'));
       return;
     }
-    if (auth.accessToken) {
+    if (success) {
       console.log('회원가입 성공');
-      console.log(auth);
-      history.push('/');
+      alert(message);
+      history.push('/signin');
+      dispatch(initializeForm('signupResult'));
     }
-  }, [history, auth, authError]);
+  }, [dispatch, history, success, failure, message]);
 
-  return <SignupForm form={form} onChange={onChange} onSubmit={onSubmit} />;
+  return (
+    <SignupForm
+      form={form}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      confirm={confirm}
+    />
+  );
 };
 
 export default withRouter(SignupContainer);

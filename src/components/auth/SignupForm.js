@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
 import Input from '../common/Input';
 
@@ -14,10 +12,18 @@ const SignupFormBlock = styled.div`
 `;
 
 const ButtonWithMarginTop = styled(Button)`
-  margin-top: 4rem;
+  margin-top: 3rem;
 `;
 
-const SignupForm = ({ form, onChange, onSubmit }) => {
+const Message = styled.div`
+  color: ${({ confirm }) => (confirm ? 'green' : 'red')};
+  font-size: 0.5rem;
+  margin-top: 0.5rem;
+  padding-left: 0.2rem;
+`;
+
+const SignupForm = ({ form, onChange, onSubmit, confirm }) => {
+  const { nickname, email, password, passwordConfirm } = form;
   return (
     <>
       <SignupFormBlock>
@@ -27,14 +33,14 @@ const SignupForm = ({ form, onChange, onSubmit }) => {
             autoComplete="username"
             name="nickname"
             onChange={onChange}
-            value={form.nickname}
+            value={nickname}
           />
           <p>이메일</p>
           <Input
             autoComplete="email"
             name="email"
             onChange={onChange}
-            value={form.email}
+            value={email}
           />
           <p>비밀번호</p>
           <Input
@@ -42,7 +48,7 @@ const SignupForm = ({ form, onChange, onSubmit }) => {
             name="password"
             type="password"
             onChange={onChange}
-            value={form.password}
+            value={password}
           />
           <p>비밀번호 확인</p>
           <Input
@@ -50,8 +56,16 @@ const SignupForm = ({ form, onChange, onSubmit }) => {
             name="passwordConfirm"
             type="password"
             onChange={onChange}
-            value={form.passwordConfirm}
+            value={passwordConfirm}
           />
+          {password && passwordConfirm && (
+            <Message confirm={confirm}>
+              &#8251;
+              {confirm
+                ? ' 비밀번호가 일치합니다.'
+                : ' 비밀번호가 일치하지 않습니다.'}
+            </Message>
+          )}
           <ButtonWithMarginTop fullWidth>다음</ButtonWithMarginTop>
         </form>
       </SignupFormBlock>

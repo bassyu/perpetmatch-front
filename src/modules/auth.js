@@ -54,11 +54,17 @@ const initialState = {
     password: '',
     passwordConfirm: '',
   },
+  signupResult: {
+    success: null,
+    failure: null,
+    message: '',
+  },
   signin: {
     usernameOrEmail: '',
     password: '',
   },
   auth: {
+    nickname: '',
     accessToken: '',
     tokenType: '',
   },
@@ -81,25 +87,34 @@ const auth = handleActions(
     }),
     [SIGNOUT]: (state) => ({
       ...state,
-      auth: { accessToken: '', tokenType: '' },
+      auth: {},
     }),
-    [SIGNIN_SUCCESS]: (state, { payload: auth }) => ({
+    [SIGNIN_SUCCESS]: (state, { payload: response }) => ({
       ...state,
       authError: null,
-      auth: { ...auth },
+      auth: { ...response.data },
     }),
     [SIGNIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
       authError: error,
     }),
-    [SIGNUP_SUCCESS]: (state, { payload: auth }) => ({
+    [SIGNUP_SUCCESS]: (state, { payload: response }) => ({
       ...state,
-      authError: null,
-      auth: { ...auth },
+      signupResult: {
+        ...state.signupResult,
+        success: true,
+        failure: false,
+        message: response.data.message,
+      },
     }),
     [SIGNUP_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      authError: error,
+      signupResult: {
+        ...state.signupResult,
+        success: false,
+        failure: true,
+        message: error.response.data.message,
+      },
     }),
   },
   initialState,
