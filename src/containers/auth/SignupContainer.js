@@ -7,12 +7,13 @@ import { changeField, initializeForm, signup } from '../../modules/auth';
 const SignupContainer = ({ history }) => {
   const [confirm, setConfirm] = useState(false);
   const dispatch = useDispatch();
-  const { form, signupResult } = useSelector(({ auth }) => ({
+  const { form, signupResult, authError } = useSelector(({ auth }) => ({
     form: auth.signup,
     signupResult: auth.signupResult,
+    authError: auth.authError,
   }));
   const { nickname, email, password, passwordConfirm } = form;
-  const { success, failure, message } = signupResult;
+  const { success, message } = signupResult;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -40,7 +41,7 @@ const SignupContainer = ({ history }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (failure) {
+    if (authError) {
       console.log('회원가입 오류');
       alert(message);
       dispatch(initializeForm('signupResult'));
@@ -52,7 +53,7 @@ const SignupContainer = ({ history }) => {
       history.push('/signin');
       dispatch(initializeForm('signupResult'));
     }
-  }, [dispatch, history, success, failure, message]);
+  }, [dispatch, history, success, message, authError]);
 
   return (
     <SignupForm

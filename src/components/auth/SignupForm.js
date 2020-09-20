@@ -3,21 +3,13 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 import Input from '../common/Input';
 
-const SignupFormBlock = styled.div`
-  form {
-    p {
-      font-weight: 500;
-      margin-top: 1.75rem;
-      margin-bottom: 0.5rem;
-    }
-  }
-`;
+const SignupFormBlock = styled.div``;
 
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 3rem;
 `;
 
-const Message = styled.div`
+const Comment = styled.div`
   color: ${({ confirm }) => (confirm ? 'green' : 'red')};
   font-size: 0.75rem;
   margin-top: 0.5rem;
@@ -63,12 +55,12 @@ const SignupForm = ({ form, onChange, onSubmit, confirm }) => {
             value={passwordConfirm}
           />
           {password && passwordConfirm && (
-            <Message confirm={confirm}>
+            <Comment confirm={confirm}>
               &#8251;
               {confirm
                 ? ' 비밀번호가 일치합니다.'
                 : ' 비밀번호가 일치하지 않습니다.'}
-            </Message>
+            </Comment>
           )}
           <ButtonWithMarginTop fullWidth>다음</ButtonWithMarginTop>
         </form>

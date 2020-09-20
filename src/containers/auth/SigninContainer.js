@@ -6,9 +6,9 @@ import { changeField, initializeForm, signin } from '../../modules/auth';
 
 const SigninContainer = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, auth, authError } = useSelector(({ auth }) => ({
+  const { form, user, authError } = useSelector(({ auth }) => ({
     form: auth.signin,
-    auth: auth.auth,
+    user: auth.user,
     authError: auth.authError,
   }));
 
@@ -39,16 +39,16 @@ const SigninContainer = ({ history }) => {
       console.log(authError);
       return;
     }
-    if (auth.accessToken) {
+    if (user.accessToken) {
       console.log('로그인 성공');
       history.push('/');
       try {
-        localStorage.setItem('auth', JSON.stringify(auth));
+        localStorage.setItem('user', JSON.stringify(user));
       } catch (e) {
         console.log('localStorage 오류');
       }
     }
-  }, [history, auth, authError]);
+  }, [history, user, authError]);
 
   return <SigninForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };

@@ -5,11 +5,11 @@ import { signout } from '../../modules/auth';
 
 const HeaderContainer = () => {
   const { nickname } = useSelector(({ auth }) => ({
-    nickname: auth.auth.nickname,
+    nickname: auth.user.nickname,
   }));
   const dispatch = useDispatch();
   const onSignout = () => {
-    localStorage.removeItem('auth');
+    localStorage.removeItem('user');
     dispatch(signout());
   };
   return <Header nickname={nickname} onSignout={onSignout} />;
