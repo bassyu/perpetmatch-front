@@ -113,7 +113,6 @@ const Home = () => {
         </SliderWrapper>
       </HomeBlock>
       {getDummy()}
-      {getDummy()}
     </>
   );
 };
