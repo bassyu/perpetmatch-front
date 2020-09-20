@@ -6,7 +6,9 @@ import Input from '../common/Input';
 const SignupFormBlock = styled.div`
   form {
     p {
-      margin-bottom: 0.2rem;
+      font-weight: 500;
+      margin-top: 1.75rem;
+      margin-bottom: 0.5rem;
     }
   }
 `;
@@ -17,7 +19,7 @@ const ButtonWithMarginTop = styled(Button)`
 
 const Message = styled.div`
   color: ${({ confirm }) => (confirm ? 'green' : 'red')};
-  font-size: 0.5rem;
+  font-size: 0.75rem;
   margin-top: 0.5rem;
   padding-left: 0.2rem;
 `;
@@ -47,6 +49,7 @@ const SignupForm = ({ form, onChange, onSubmit, confirm }) => {
             autoComplete="new-password"
             name="password"
             type="password"
+            placeholder="비밀번호 (영문, 숫자, 특수문자 8-20자)"
             onChange={onChange}
             value={password}
           />
@@ -55,6 +58,7 @@ const SignupForm = ({ form, onChange, onSubmit, confirm }) => {
             autoComplete="new-password"
             name="passwordConfirm"
             type="password"
+            placeholder="비밀번호 (영문, 숫자, 특수문자 8-20자)"
             onChange={onChange}
             value={passwordConfirm}
           />

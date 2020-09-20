@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import palette from '../lib/styles/palette';
 
 const FormTemplateBlock = styled.div`
@@ -23,11 +22,12 @@ const WhiteBox = styled.div`
     margin-bottom: 3rem;
     text-align: center;
     font-weight: bold;
+    font-size: 1.25rem;
     letter-spacing: 2px;
   }
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
   padding: 3rem;
-  width: 480px;
+  width: 32rem;
   background: white;
   border-radius: 2px;
 `;
