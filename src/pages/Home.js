@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../components/Header';
 import Slider from 'react-slick';
 import Fade from 'react-reveal/Fade';
 import HeaderContainer from '../containers/common/HeaderContainer';
