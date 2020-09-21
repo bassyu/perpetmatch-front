@@ -75,7 +75,7 @@ const HeaderBlock = styled.div`
 `;
 
 const HeaderLink = styled(NavLink)`
-  padding-top: 0.4rem;
+  padding-top: 0.25rem;
   font-size: 1.125rem;
   font-weight: 600;
   cursor: pointer;

@@ -7,6 +7,7 @@ import PetForm from './pages/PetForm';
 import ShopList from './pages/ShopList';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
@@ -18,6 +19,15 @@ const App = () => {
         <Route path="/shoplist" component={ShopList} />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} />
+        <Route path="/profile" component={Profile} />
+        <Route
+          render={({ location }) => (
+            <div>
+              <h2>Page Not Found</h2>
+              <h3>{location.pathname}</h3>
+            </div>
+          )}
+        />
       </Switch>
     </div>
   );

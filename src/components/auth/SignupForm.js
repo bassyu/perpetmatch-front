@@ -16,7 +16,7 @@ const Comment = styled.div`
   padding-left: 0.2rem;
 `;
 
-const SignupForm = ({ form, onChange, onSubmit, confirm }) => {
+const SignupForm = ({ form, onChange, onSubmit }) => {
   const { nickname, email, password, passwordConfirm } = form;
   return (
     <>
@@ -55,9 +55,9 @@ const SignupForm = ({ form, onChange, onSubmit, confirm }) => {
             value={passwordConfirm}
           />
           {password && passwordConfirm && (
-            <Comment confirm={confirm}>
+            <Comment confirm={password === passwordConfirm}>
               &#8251;
-              {confirm
+              {password === passwordConfirm
                 ? ' 비밀번호가 일치합니다.'
                 : ' 비밀번호가 일치하지 않습니다.'}
             </Comment>

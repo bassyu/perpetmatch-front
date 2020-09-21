@@ -22,6 +22,10 @@ const Footer = styled.div`
   }
 `;
 
+const InputWithMarginTop = styled(Input)`
+  margin-top: 1rem;
+`;
+
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
@@ -38,7 +42,7 @@ const SigninForm = ({ form, onChange, onSubmit }) => {
             onChange={onChange}
             value={form.usernameOrEmail}
           />
-          <Input
+          <InputWithMarginTop
             autoComplete="new-password"
             name="password"
             placeholder="비밀번호"

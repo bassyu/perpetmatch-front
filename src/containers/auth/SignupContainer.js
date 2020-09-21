@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SignupForm from '../../components/auth/SignupForm';
 import { changeField, initializeForm, signup } from '../../modules/auth';
 
 const SignupContainer = ({ history }) => {
-  const [confirm, setConfirm] = useState(false);
   const dispatch = useDispatch();
-  const { form, signupResult, authError } = useSelector(({ auth }) => ({
+  const { form, signupResult } = useSelector(({ auth }) => ({
     form: auth.signup,
     signupResult: auth.signupResult,
-    authError: auth.authError,
   }));
-  const { nickname, email, password, passwordConfirm } = form;
-  const { success, message } = signupResult;
+  const { nickname, email, password } = form;
+  const { success, failure, message } = signupResult;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -32,16 +30,12 @@ const SignupContainer = ({ history }) => {
   };
 
   useEffect(() => {
-    setConfirm(password === passwordConfirm);
-  }, [password, passwordConfirm]);
-
-  useEffect(() => {
     dispatch(initializeForm('signup'));
     dispatch(initializeForm('signupResult'));
   }, [dispatch]);
 
   useEffect(() => {
-    if (authError) {
+    if (failure) {
       console.log('회원가입 오류');
       alert(message);
       dispatch(initializeForm('signupResult'));
@@ -53,16 +47,9 @@ const SignupContainer = ({ history }) => {
       history.push('/signin');
       dispatch(initializeForm('signupResult'));
     }
-  }, [dispatch, history, success, message, authError]);
+  }, [dispatch, history, success, failure, message]);
 
-  return (
-    <SignupForm
-      form={form}
-      onChange={onChange}
-      onSubmit={onSubmit}
-      confirm={confirm}
-    />
-  );
+  return <SignupForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };
 
 export default withRouter(SignupContainer);
