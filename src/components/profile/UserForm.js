@@ -1,32 +1,12 @@
 import React, { useState } from 'react';
 import * as profileAPI from '../../lib/api/profile';
-
+import { locations } from '../../constants/index';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
 import Input from '../common/Input';
 import Select from '../common/Select';
 import Textarea from '../common/Textarea';
-
-const locations = [
-  '강원도',
-  '경기도',
-  '경상남도',
-  '경상북도',
-  '광주',
-  '대구',
-  '대전',
-  '부산',
-  '서울',
-  '세종',
-  '울산',
-  '인천',
-  '전라남도',
-  '전라북도',
-  '제주도',
-  '충청남도',
-  '충청북도',
-];
 
 const commentMap = {
   apartment: ' 아파트, 연립주택, 대세대주택, 기숙사',
@@ -59,7 +39,7 @@ const UserForm = () => {
   const [form, setForm] = useState({
     age: 0,
     occupation: '',
-    location: '#강원도',
+    location: '강원도',
     houseType: '',
     experience: false,
     liveAlone: false,
@@ -121,7 +101,9 @@ const UserForm = () => {
               <p>지역</p>
               <Select name="location" width="7rem" onChange={onChange}>
                 {locations.map((i) => (
-                  <option key={i}>#{i}</option>
+                  <option key={i} value={i}>
+                    #{i}
+                  </option>
                 ))}
               </Select>
             </div>
