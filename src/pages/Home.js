@@ -89,7 +89,7 @@ const Home = () => {
   };
   return (
     <>
-      <HeaderContainer />
+      <HeaderContainer width="auto" />
       <HomeBlock>
         <SliderWrapper>
           <Slider {...settings}>
