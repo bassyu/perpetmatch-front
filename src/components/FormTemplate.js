@@ -14,9 +14,17 @@ const FormTemplateBlock = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: auto;
 `;
 
 const WhiteBox = styled.div`
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.125);
+  padding: 3rem 2rem;
+  margin: 2rem;
+  width: 34rem;
+  background: white;
+  border-radius: 2px;
+
   .title-area {
     display: block;
     margin-bottom: 1.25rem;
@@ -33,11 +41,6 @@ const WhiteBox = styled.div`
       margin-bottom: 0.5rem;
     }
   }
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.125);
-  padding: 3rem 2rem;
-  width: 34rem;
-  background: white;
-  border-radius: 2px;
 `;
 
 const FormTemplate = ({ children, title }) => {
