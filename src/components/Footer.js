@@ -75,7 +75,7 @@ const Footer = () => {
               <br />
               <span>E. your@email.com </span>
               <span> 사업자 등록번호 : 123-123-12345 </span>
-              <span> 대표 : </span>
+              <span> 대표 : 유강현</span>
             </address>
             <p class="copyright">
               Copyrighⓒ2020 PERPET MATCH <span> l </span> with by SW Maestro
