@@ -108,7 +108,7 @@ const Header = ({ nickname, onSignout }) => {
         <div className="wrapper">
           <div className="logo-area">
             <Link to="/">
-              <img src="/images/common/logo_w.png" alt="logo" />
+              <img src="/images/common/logo.png" alt="logo" />
             </Link>
           </div>
           {headerLinks.map((i) => (
