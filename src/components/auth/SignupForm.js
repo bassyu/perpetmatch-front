@@ -3,26 +3,20 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 import Input from '../common/Input';
 
-const SignupFormBlock = styled.div`
-  form {
-    p {
-      margin-bottom: 0.2rem;
-    }
-  }
-`;
+const SignupFormBlock = styled.div``;
 
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 3rem;
 `;
 
-const Message = styled.div`
+const Comment = styled.div`
   color: ${({ confirm }) => (confirm ? 'green' : 'red')};
-  font-size: 0.5rem;
+  font-size: 0.75rem;
   margin-top: 0.5rem;
   padding-left: 0.2rem;
 `;
 
-const SignupForm = ({ form, onChange, onSubmit, confirm }) => {
+const SignupForm = ({ form, onChange, onSubmit }) => {
   const { nickname, email, password, passwordConfirm } = form;
   return (
     <>
@@ -47,6 +41,7 @@ const SignupForm = ({ form, onChange, onSubmit, confirm }) => {
             autoComplete="new-password"
             name="password"
             type="password"
+            placeholder="비밀번호 (영문, 숫자, 특수문자 8-20자)"
             onChange={onChange}
             value={password}
           />
@@ -55,16 +50,17 @@ const SignupForm = ({ form, onChange, onSubmit, confirm }) => {
             autoComplete="new-password"
             name="passwordConfirm"
             type="password"
+            placeholder="비밀번호 (영문, 숫자, 특수문자 8-20자)"
             onChange={onChange}
             value={passwordConfirm}
           />
           {password && passwordConfirm && (
-            <Message confirm={confirm}>
+            <Comment confirm={password === passwordConfirm}>
               &#8251;
-              {confirm
+              {password === passwordConfirm
                 ? ' 비밀번호가 일치합니다.'
                 : ' 비밀번호가 일치하지 않습니다.'}
-            </Message>
+            </Comment>
           )}
           <ButtonWithMarginTop fullWidth>다음</ButtonWithMarginTop>
         </form>

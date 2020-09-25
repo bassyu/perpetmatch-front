@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SignupForm from '../../components/auth/SignupForm';
 import { changeField, initializeForm, signup } from '../../modules/auth';
 
 const SignupContainer = ({ history }) => {
-  const [confirm, setConfirm] = useState(false);
   const dispatch = useDispatch();
   const { form, signupResult } = useSelector(({ auth }) => ({
     form: auth.signup,
     signupResult: auth.signupResult,
   }));
-  const { nickname, email, password, passwordConfirm } = form;
+  const { nickname, email, password } = form;
   const { success, failure, message } = signupResult;
 
   const onChange = (e) => {
@@ -29,10 +28,6 @@ const SignupContainer = ({ history }) => {
     e.preventDefault();
     dispatch(signup({ nickname, email, password }));
   };
-
-  useEffect(() => {
-    setConfirm(password === passwordConfirm);
-  }, [password, passwordConfirm]);
 
   useEffect(() => {
     dispatch(initializeForm('signup'));
@@ -54,14 +49,7 @@ const SignupContainer = ({ history }) => {
     }
   }, [dispatch, history, success, failure, message]);
 
-  return (
-    <SignupForm
-      form={form}
-      onChange={onChange}
-      onSubmit={onSubmit}
-      confirm={confirm}
-    />
-  );
+  return <SignupForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };
 
 export default withRouter(SignupContainer);

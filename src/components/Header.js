@@ -8,12 +8,12 @@ const headerLinks = [
   {
     key: 'petlist',
     text: '입양하기',
-    to: '/petlist',
+    to: '/pet/list',
   },
   {
     key: 'petform',
     text: '파양하기',
-    to: '/petform',
+    to: '/pet/form',
   },
   {
     key: 'shoplist',
@@ -33,10 +33,10 @@ const HeaderBlock = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 
   .wrapper {
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     position: relative;
-    width: auto;
+    width: ${({ width }) => width || '80rem'};
     height: 4.25rem;
     display: flex;
     margin: 0 auto;
@@ -75,7 +75,7 @@ const HeaderBlock = styled.div`
 `;
 
 const HeaderLink = styled(NavLink)`
-  padding-top: 0.4rem;
+  padding-top: 0.25rem;
   font-size: 1.125rem;
   font-weight: 600;
   cursor: pointer;
@@ -88,13 +88,6 @@ const HeaderLink = styled(NavLink)`
   & + & {
     margin-left: 3rem;
   }
-`;
-
-const HeaderLine = styled.hr`
-  border: 0;
-  height: 0;
-  margin: 0;
-  //border-top: 1px solid rgba(0, 0, 0, 0.3);
 `;
 
 const Spacer = styled.div`
@@ -135,7 +128,6 @@ const Header = ({ nickname, onSignout }) => {
             )}
           </div>
         </div>
-        <HeaderLine />
       </HeaderBlock>
       <Spacer />
     </>

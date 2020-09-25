@@ -5,7 +5,7 @@ import FormTemplate from '../components/FormTemplate';
 const Signup = () => {
   return (
     <>
-      <FormTemplate>
+      <FormTemplate title="회원가입">
         <SignupContainer />
       </FormTemplate>
     </>

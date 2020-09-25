@@ -9,7 +9,7 @@ import * as authAPI from '../lib/api/auth';
 // constants
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
-const TEMP_SET_AUTH = 'auth/TEMP_SET_AUTH';
+const TEMP_SET_USER = 'auth/TEMP_SET_USER';
 const SIGNOUT = 'auth/SIGNOUT';
 
 const [SIGNIN, SIGNIN_SUCCESS, SIGNIN_FAILURE] = createRequestActionTypes(
@@ -25,7 +25,7 @@ export const changeField = createAction(
   ({ form, key, value }) => ({ form, key, value }),
 );
 export const initializeForm = createAction(INITIALIZE_FORM, (form) => form);
-export const tempSetAuth = createAction(TEMP_SET_AUTH, (auth) => auth);
+export const tempSetUser = createAction(TEMP_SET_USER, (user) => user);
 export const signout = createAction(SIGNOUT);
 
 export const signin = createAction(SIGNIN, ({ usernameOrEmail, password }) => ({
@@ -56,14 +56,13 @@ const initialState = {
   },
   signupResult: {
     success: null,
-    failure: null,
     message: '',
   },
   signin: {
     usernameOrEmail: '',
     password: '',
   },
-  auth: {
+  user: {
     nickname: '',
     accessToken: '',
     tokenType: '',
@@ -81,18 +80,18 @@ const auth = handleActions(
       ...state,
       [form]: initialState[form],
     }),
-    [TEMP_SET_AUTH]: (state, { payload: auth }) => ({
+    [TEMP_SET_USER]: (state, { payload: user }) => ({
       ...state,
-      auth: { ...auth },
+      user,
     }),
     [SIGNOUT]: (state) => ({
       ...state,
-      auth: {},
+      user: {},
     }),
     [SIGNIN_SUCCESS]: (state, { payload: response }) => ({
       ...state,
       authError: null,
-      auth: { ...response.data },
+      user: response.data,
     }),
     [SIGNIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
@@ -101,7 +100,6 @@ const auth = handleActions(
     [SIGNUP_SUCCESS]: (state, { payload: response }) => ({
       ...state,
       signupResult: {
-        ...state.signupResult,
         success: true,
         failure: false,
         message: response.data.message,
@@ -110,7 +108,6 @@ const auth = handleActions(
     [SIGNUP_FAILURE]: (state, { payload: error }) => ({
       ...state,
       signupResult: {
-        ...state.signupResult,
         success: false,
         failure: true,
         message: error.response.data.message,
