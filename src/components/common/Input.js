@@ -9,6 +9,7 @@ const StyledInput = styled.input`
   padding: 0.75rem;
   outline: none;
   width: ${({ width }) => width || '100%'};
+  height: ${({ height }) => height};
   text-align: ${({ textAlign }) => textAlign || 'left'};
   &:focus {
     color: $oc-teal-7;

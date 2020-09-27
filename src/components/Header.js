@@ -37,7 +37,7 @@ const HeaderBlock = styled.div`
     padding-right: 1rem;
     position: relative;
     width: ${({ width }) => width || '80rem'};
-    height: 4.25rem;
+    height: 4.5rem;
     display: flex;
     margin: 0 auto;
     align-items: center;
@@ -46,7 +46,7 @@ const HeaderBlock = styled.div`
     .logo-area {
       margin-right: 4rem;
       img {
-        width: 136px;
+        width: 10rem;
       }
     }
     .search-area {

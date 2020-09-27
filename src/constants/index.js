@@ -219,5 +219,6 @@ export const petTitles = [
   '허배너스',
   '홋카이도 이누',
   '휘핏',
-  'a',
 ];
+
+export const petAges = ['1년이하', '1년~7년', '7년이상'];
