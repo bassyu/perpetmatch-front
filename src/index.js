@@ -25,7 +25,7 @@ function loadAuth() {
 
     const { nickname, accessToken, tokenType } = JSON.parse(user);
     store.dispatch(tempSetUser({ nickname, accessToken, tokenType }));
-    client.defaults.headers['Authrization'] = `${tokenType} ${accessToken}`;
+    client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
   } catch (e) {
     console.log('localStorage 오류');
   }

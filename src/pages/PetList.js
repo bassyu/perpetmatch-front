@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 import Tags from '../components/common/Tags';
+import { locations } from '../constants/index';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 
@@ -199,19 +200,40 @@ const PetList = () => {
                 width="18rem"
                 settings={{
                   enforceWhitelist: true,
-                  whitelist: petTitles,
+                  whitelist: locations,
                   dropdown: {
                     position: 'input',
                     enabled: 0,
                   },
-                  callbacks: {
-                    add: on,
-                    remove: on,
-                  },
+                  callbacks: {},
                 }}
               />
-              <StyledTags placeholder="견종" width="18rem" />
-              <StyledTags placeholder="나이" width="18rem" />
+              <StyledTags
+                placeholder="견종"
+                width="18rem"
+                settings={{
+                  enforceWhitelist: true,
+                  whitelist: locations,
+                  dropdown: {
+                    position: 'input',
+                    enabled: 0,
+                  },
+                  callbacks: {},
+                }}
+              />
+              <StyledTags
+                placeholder="나이"
+                width="18rem"
+                settings={{
+                  enforceWhitelist: true,
+                  whitelist: locations,
+                  dropdown: {
+                    position: 'input',
+                    enabled: 0,
+                  },
+                  callbacks: {},
+                }}
+              />
               <StyledInput placeholder="최대" />
               <p>껌 까지</p>
             </div>

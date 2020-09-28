@@ -2,7 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SignupForm from '../../components/auth/SignupForm';
-import { changeField, initializeForm, signup } from '../../modules/auth';
+import {
+  changeField,
+  initializeForm,
+  signin,
+  signup,
+} from '../../modules/auth';
 
 const SignupContainer = ({ history }) => {
   const dispatch = useDispatch();
@@ -44,10 +49,12 @@ const SignupContainer = ({ history }) => {
     if (success) {
       console.log('회원가입 성공');
       alert(message);
-      history.push('/signin');
+      console.log(email, password);
+      dispatch(signin({ email, password }));
       dispatch(initializeForm('signupResult'));
+      history.push('/signup/complete');
     }
-  }, [dispatch, history, success, failure, message]);
+  }, [dispatch, history, email, password, success, failure, message]);
 
   return <SignupForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };
