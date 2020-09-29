@@ -44,7 +44,6 @@ const WhiteBox = styled.div`
 `;
 
 const FormTemplate = ({ children, title }) => {
-  console.log(children);
   return (
     <FormTemplateBlock>
       <WhiteBox>

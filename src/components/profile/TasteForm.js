@@ -9,14 +9,14 @@ import Tags from '../common/Tags';
 
 const apiMap = {
   add: {
-    location: profileAPI.writeZone,
-    petTitle: profileAPI.writePetTitle,
-    petAge: profileAPI.writePetAge,
+    location: profileAPI.addZone,
+    petTitle: profileAPI.addPetTitle,
+    petAge: profileAPI.addPetAge,
   },
   remove: {
-    location: profileAPI.writeZone,
-    petTitle: profileAPI.writePetTitle,
-    petAge: profileAPI.writePetAge,
+    location: profileAPI.removeZone,
+    petTitle: profileAPI.removePetTitle,
+    petAge: profileAPI.removePetAge,
   },
 };
 
@@ -61,13 +61,9 @@ const TasteForm = ({ history }) => {
     f();
   }, []);
 
-  const onChangeCheckbox = (e) => {
-    e.persist();
-    const { checked, name } = e.target;
-    setForm({ ...form, [name]: checked });
-  };
-
   const onChangeTags = (e) => {
+    console.log(e);
+    console.log(e.detail.data.value);
     async function f(e) {
       try {
         const response = await apiMap[e.type][e.detail.tagify.settings.name](
@@ -76,10 +72,16 @@ const TasteForm = ({ history }) => {
         console.log(response);
       } catch (e) {
         console.log('failure');
-        console.log(e);
+        console.log(e.response);
       }
     }
     f(e);
+  };
+
+  const onChangeCheckbox = (e) => {
+    e.persist();
+    const { checked, name } = e.target;
+    setForm({ ...form, [name]: checked });
   };
 
   const onSubmit = async (e) => {

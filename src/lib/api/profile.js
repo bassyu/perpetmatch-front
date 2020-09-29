@@ -25,20 +25,20 @@ export const writeUser = ({
     description,
   });
 
-export const writePetTitle = ({ petTitle }) =>
+export const addPetTitle = ({ petTitle }) =>
   client.post('/api/profiles/pet/title', { petTitle });
 
-export const deletePetTitle = ({ petTitle }) =>
+export const removePetTitle = ({ petTitle }) =>
   client.delete('/api/profiles/pet/title', { petTitle });
 
-export const writePetAge = ({ petAge }) =>
-  client.post('api/profiles/pet/age', { petAge });
+export const addPetAge = ({ petAge }) =>
+  client.post('/api/profiles/pet/age', { petAge });
 
-export const deletePetAge = ({ petAge }) =>
-  client.delete('api/profiles/pet/age', { petAge });
+export const removePetAge = ({ petAge }) =>
+  client.delete('/api/profiles/pet/age', { petAge });
 
-export const writeZone = ({ province }) =>
-  client.post('api/profiles/zone', { province });
+export const addZone = ({ province }) =>
+  client.post('/api/profiles/zone', { province });
 
-export const deleteZone = ({ province }) =>
-  client.delete('api/profiles/zone', { province });
+export const removeZone = ({ province }) =>
+  client.delete('/api/profiles/zone', { province });
