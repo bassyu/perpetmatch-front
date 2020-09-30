@@ -49,7 +49,7 @@ const TasteForm = ({ history }) => {
   });
 
   useEffect(() => {
-    async function f() {
+    async function setFormAPI() {
       try {
         const response = await profileAPI.getUser();
         setForm(response.data.data);
@@ -58,7 +58,7 @@ const TasteForm = ({ history }) => {
         console.log('프로필 불러오기 오류');
       }
     }
-    f();
+    setFormAPI();
   }, []);
 
   const onChangeTags = (e) => {
