@@ -36,7 +36,7 @@ const HeaderBlock = styled.div`
     padding-left: 1rem;
     padding-right: 1rem;
     position: relative;
-    width: ${({ width }) => width || '80rem'};
+    width: 80rem;
     height: 4.5rem;
     display: flex;
     margin: 0 auto;

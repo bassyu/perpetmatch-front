@@ -64,7 +64,7 @@ const TasteForm = ({ history }) => {
   const onChangeTags = (e) => {
     console.log(e);
     console.log(e.detail.data.value);
-    async function f(e) {
+    async function callAPI(e) {
       try {
         const response = await apiMap[e.type][e.detail.tagify.settings.name](
           e.detail.data.value,
@@ -75,7 +75,7 @@ const TasteForm = ({ history }) => {
         console.log(e.response);
       }
     }
-    f(e);
+    callAPI(e);
   };
 
   const onChangeCheckbox = (e) => {
