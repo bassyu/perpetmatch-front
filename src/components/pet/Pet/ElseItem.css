@@ -1,0 +1,14 @@
+.else-item {
+  padding-top: 12px;
+  display: inline-flex;
+  align-items: center; /* 세로 가운데 정렬 */
+  user-select: none;
+}
+
+.remove {
+  margin-right: 20px;
+  margin-left: 5px;
+  color: #e64980;
+  font-weight: bold;
+  cursor: pointer;
+}
