@@ -88,32 +88,30 @@ const Home = () => {
     nextArrow: <Arrow type="next" />,
   };
   return (
-    <>
+    <HomeBlock>
       <HeaderContainer width="auto" />
-      <HomeBlock>
-        <SliderWrapper>
-          <Slider {...settings}>
-            <SlideDiv background="/images/home/bg_visual1.png">
-              <Fade top>
-                <span className="img">
-                  <img
-                    src="/images/home/img_visual1.png"
-                    alt="완벽한 만남 완벽한 이별"
-                  />
-                </span>
-              </Fade>
-            </SlideDiv>
-            <SlideDiv background="/images/home/bg_visual2.png">
-              <span className="title">Love & belif</span>
-            </SlideDiv>
-            <SlideDiv background="/images/home/bg_visual3.png">
-              <span className="title">Deposit</span>
-            </SlideDiv>
-          </Slider>
-        </SliderWrapper>
-      </HomeBlock>
+      <SliderWrapper>
+        <Slider {...settings}>
+          <SlideDiv background="/images/home/bg_visual1.png">
+            <Fade top>
+              <span className="img">
+                <img
+                  src="/images/home/img_visual1.png"
+                  alt="완벽한 만남 완벽한 이별"
+                />
+              </span>
+            </Fade>
+          </SlideDiv>
+          <SlideDiv background="/images/home/bg_visual2.png">
+            <span className="title">Love & belif</span>
+          </SlideDiv>
+          <SlideDiv background="/images/home/bg_visual3.png">
+            <span className="title">Deposit</span>
+          </SlideDiv>
+        </Slider>
+      </SliderWrapper>
       {getDummy()}
-    </>
+    </HomeBlock>
   );
 };
 

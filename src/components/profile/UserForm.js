@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as profileAPI from '../../lib/api/profile';
-import { locations } from '../../constants/index';
+import { whiteLocations } from '../../constants/index';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
@@ -109,9 +109,9 @@ const UserForm = ({ history }) => {
           <div>
             <p>지역</p>
             <Select name="location" width="7rem" onChange={onChange}>
-              {locations.map((i) => (
+              {whiteLocations.map((i) => (
                 <option key={i} value={i}>
-                  #{i}
+                  {i}
                 </option>
               ))}
             </Select>

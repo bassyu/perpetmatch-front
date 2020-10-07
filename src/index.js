@@ -27,7 +27,7 @@ function loadAuth() {
     store.dispatch(tempSetUser({ nickname, accessToken, tokenType }));
     client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
   } catch (e) {
-    console.log('localStorage 오류');
+    console.log('loadAuth() 오류');
   }
 }
 

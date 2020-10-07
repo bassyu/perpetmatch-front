@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import { locations, petAges, petTitles } from '../../constants/index';
+import {
+  whiteLocations,
+  whitePetTitles,
+  whitePetAges,
+} from '../../constants/index';
 import * as profileAPI from '../../lib/api/profile';
 import Button from '../common/Button';
 import Input from '../common/Input';
@@ -116,7 +120,7 @@ const TasteForm = ({ history }) => {
         settings={{
           ...settings,
           name: 'location',
-          whitelist: locations,
+          whitelist: whiteLocations,
         }}
       />
       <p>품종</p>
@@ -124,7 +128,7 @@ const TasteForm = ({ history }) => {
         settings={{
           ...settings,
           name: 'petTitle',
-          whitelist: petTitles,
+          whitelist: whitePetTitles,
         }}
       />
       <p>나이</p>
@@ -132,7 +136,7 @@ const TasteForm = ({ history }) => {
         settings={{
           ...settings,
           name: 'petAge',
-          whitelist: petAges,
+          whitelist: whitePetAges,
         }}
       />
       <p>기타 희망 내용</p>
