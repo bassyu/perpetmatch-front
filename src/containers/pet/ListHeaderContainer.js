@@ -31,7 +31,7 @@ const ListHeaderContainer = () => {
       }),
     );
   };
-
+  /*
   useEffect(() => {
     const parse = (value) =>
       value ? JSON.parse(value).map((i) => i.value) : [];
@@ -56,7 +56,7 @@ const ListHeaderContainer = () => {
     wantLineAge,
     wantNeutered,
     credit,
-  ]);
+  ]);*/
 
   return <ListHeader form={form} items={items} onChange={onChange} />;
 };
