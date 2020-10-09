@@ -18,7 +18,7 @@ const headerLinks = [
   {
     key: 'shoplist',
     text: '쇼핑하기',
-    to: '/shoplist',
+    to: '/shop/list',
   },
 ];
 
@@ -33,13 +33,12 @@ const HeaderBlock = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 
   .wrapper {
-    padding-left: 1rem;
-    padding-right: 1rem;
     position: relative;
     width: 80rem;
     height: 4.5rem;
-    display: flex;
     margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
     align-items: center;
     color: white;
 
@@ -91,7 +90,7 @@ const HeaderLink = styled(NavLink)`
 `;
 
 const Spacer = styled.div`
-  height: 4.25rem;
+  height: 4.5rem;
 `;
 
 const Header = ({ nickname, onSignout }) => {

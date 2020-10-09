@@ -5,16 +5,15 @@ import palette from '../../lib/styles/palette';
 const StyledButton = styled.button`
   border: none;
   border-radius: 4px;
+  padding: 0.25rem 1rem;
+  background: ${(props) => props.background || palette.sub[0]};
   font-size: 0.75rem;
   font-weight: bold;
-  padding: 0.25rem 1rem;
   color: white;
   outline: none;
   cursor: pointer;
 
-  background: ${palette.sub[0]};
   &:hover {
-    //background: ${palette.sub[1]};
     opacity: 0.8;
   }
   ${(props) =>

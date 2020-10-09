@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../components/common/Button';
+import Footer from '../components/Footer';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 
@@ -16,6 +17,7 @@ const PetBoardBlock = styled.div`
     margin: 0 auto;
     .box {
       float: right;
+      height: 0;
       margin-right: 8rem;
       width: 20rem;
 
@@ -25,11 +27,43 @@ const PetBoardBlock = styled.div`
         font-size: 1.5rem;
         font-weight: 700;
       }
+      p {
+        border-bottom: solid 0.125rem ${palette.gray[4]};
+        padding-bottom: 0.5rem;
+        font-size: 1rem;
+      }
       .tags {
-        margin: 0.75rem 0;
+        margin: 1.5rem 0;
         font-size: 1.125rem;
+        font-weight: 500;
         color: ${palette.gray[6]};
         span + span {
+          margin-left: 0.5rem;
+        }
+      }
+      .price-area {
+        font-family: Montserrat;
+        font-size: 2rem;
+        color: ${palette.sub[0]};
+        .price {
+          font-weight: 500;
+          font-size: 2.5rem;
+          margin-right: 0.25rem;
+        }
+      }
+      .btn-area {
+        margin: 2rem 0;
+        button {
+          width: 9.75rem;
+          height: 3rem;
+          font-size: 1.125rem;
+        }
+        button + button {
+          margin-left: 0.5rem;
+        }
+      }
+      .share-area {
+        img + img {
           margin-left: 0.5rem;
         }
       }
@@ -39,6 +73,16 @@ const PetBoardBlock = styled.div`
     width: 80rem;
     margin: 0 auto;
     padding: 4rem 6rem;
+    img {
+      width: 42rem;
+      height: 30rem;
+    }
+    img + img {
+      margin-top: 1rem;
+    }
+    p {
+      font-size: 1.25rem;
+    }
   }
 `;
 
@@ -70,50 +114,50 @@ const PetBoard = () => {
             <span>#천안</span>
             <span>#1살</span>
           </div>
-          <div className="btn">
-            <Button>신청</Button>
+          <div className="price-area">
+            <span className="price">150000</span>껌
+          </div>
+          <div className="btn-area">
+            <Button background={'#8164ae'}>신 청</Button>
             <Button>관심글 등록</Button>
           </div>
-          <div className="share">
-            <p className="share_text">공유하기</p>
-            <p className="share_btn">
-              <a href="#n">
-                <img src="/images/sub/btn_share1.png" alt="페이스북" />
-              </a>
-              <a href="#n">
-                <img src="/images/sub/btn_share2.png" alt="카카오톡" />
-              </a>
-              <a href="#n">
-                <img src="/images/sub/btn_share3.png" alt="공유하기" />
-              </a>
-            </p>
+          <div className="share-area">
+            <p>공유하기</p>
+            <img src="/images/sub/btn_share1.png" alt="페이스북" />
+            <img src="/images/sub/btn_share2.png" alt="카카오톡" />
+            <img src="/images/sub/btn_share3.png" alt="공유하기" />
           </div>
         </div>
       </div>
       <div className="context">
         <img src="/images/sub/img_adopt1.png" alt="" />
+        <img src="/images/sub/img_adopt2.png" alt="" />
+        <img src="/images/sub/img_adopt2.png" alt="" />
+        <img src="/images/sub/img_adopt2.png" alt="" />
+        <img src="/images/sub/img_adopt1.png" alt="" />
+        <img src="/images/sub/img_adopt1.png" alt="" />
         <p>
           지난주에 천안삼거리 다리밑에서 우연히 발견하게 되었습니다.
           <br />
           사정상 저희가 기를 순 없어서 입양하실 분을 구하게 되었습니다.
         </p>
-        <img src="/images/sub/img_adopt2.png" alt="" />
         <p>
           지난주에 천안삼거리 다리밑에서 우연히 발견하게 되었습니다.
           <br />
           사정상 저희가 기를 순 없어서 입양하실 분을 구하게 되었습니다.
         </p>
-        <img src="/images/sub/img_adopt2.png" alt="" />
-        <img src="/images/sub/img_adopt2.png" alt="" />
-        <img src="/images/sub/img_adopt2.png" alt="" />
-        <img src="/images/sub/img_adopt2.png" alt="" />
-        <img src="/images/sub/img_adopt1.png" alt="" />
-        <img src="/images/sub/img_adopt1.png" alt="" />
-        <img src="/images/sub/img_adopt1.png" alt="" />
-        <img src="/images/sub/img_adopt1.png" alt="" />
-        <img src="/images/sub/img_adopt1.png" alt="" />
-        <img src="/images/sub/img_adopt1.png" alt="" />
+        <p>
+          지난주에 천안삼거리 다리밑에서 우연히 발견하게 되었습니다.
+          <br />
+          사정상 저희가 기를 순 없어서 입양하실 분을 구하게 되었습니다.
+        </p>
+        <p>
+          지난주에 천안삼거리 다리밑에서 우연히 발견하게 되었습니다.
+          <br />
+          사정상 저희가 기를 순 없어서 입양하실 분을 구하게 되었습니다.
+        </p>
       </div>
+      <Footer />
     </PetBoardBlock>
   );
 };

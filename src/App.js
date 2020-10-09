@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Home from './pages/Home';
-import ShopList from './pages/ShopList';
+import Shop from './pages/Shop';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
@@ -16,7 +16,7 @@ const App = () => {
         <Route path={['/', '/@:username']} component={Home} exact />
         <Route path="/profile" component={Profile} />
         <Route path="/pet" component={Pet} />
-        <Route path="/shoplist" component={ShopList} />
+        <Route path="/shop" component={Shop} />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} exact />
         <Route path="/signup/complete" component={SignupComplete} />
