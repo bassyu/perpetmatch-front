@@ -10,7 +10,8 @@ const FooterLine = styled.hr`
 `;
 
 const FooterBlock = styled.div`
-  z-index: 2;
+  z-index: 3;
+
   position: 0;
   top: fixed;
   left: 0;
@@ -19,10 +20,10 @@ const FooterBlock = styled.div`
   color: #204030;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
   .wrapper {
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding: 0 2rem;
     position: relative;
-    width: auto;
+    width: 80rem;
+
     height: 10rem;
     display: flex;
     margin: 0 auto;
@@ -37,7 +38,8 @@ const FooterBlock = styled.div`
     .logo-area {
       margin-bottom: 2rem;
       img {
-        width: 200 px;
+        width: 15rem;
+        opacity: 0.5;
       }
     }
 
@@ -62,9 +64,8 @@ const Footer = () => {
     <div>
       <FooterBlock>
         <div className="wrapper">
-          <div className="blank-area"></div>
           <div className="logo-area">
-            <img src="../images/common/footer_logo.png" alt="logo" />
+            <img src="../images/common/logo_w.png" alt="logo" />
           </div>
           <div className="footer-info">
             <address>
@@ -81,12 +82,12 @@ const Footer = () => {
             </p>
           </div>
           <div className="footer-sns">
-            <img src="/images/home/footer_sns1.png" />
-            <img src="/images/home/footer_sns2.png" />
-            <img src="/images/home/footer_sns3.png" />
-            <img src="/images/home/footer_sns4.png" />
-            <img src="/images/home/footer_sns5.png" />
-            <img src="/images/home/footer_sns6.png" />
+            <img src="/images/common/footer_sns1.png" alt="sns-img" />
+            <img src="/images/common/footer_sns2.png" alt="sns-img" />
+            <img src="/images/common/footer_sns3.png" alt="sns-img" />
+            <img src="/images/common/footer_sns4.png" alt="sns-img" />
+            <img src="/images/common/footer_sns5.png" alt="sns-img" />
+            <img src="/images/common/footer_sns6.png" alt="sns-img" />
           </div>
         </div>
         <FooterLine></FooterLine>
