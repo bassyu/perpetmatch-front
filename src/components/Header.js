@@ -74,7 +74,7 @@ const HeaderBlock = styled.div`
 `;
 
 const HeaderLink = styled(NavLink)`
-  padding-top: 0.25rem;
+  padding-top: 0.4rem;
   font-size: 1.125rem;
   font-weight: 600;
   cursor: pointer;
@@ -87,6 +87,13 @@ const HeaderLink = styled(NavLink)`
   & + & {
     margin-left: 3rem;
   }
+`;
+
+const HeaderLine = styled.hr`
+  border: 0;
+  height: 0;
+  margin: 0;
+  //border-top: 1px solid rgba(0, 0, 0, 0.3);
 `;
 
 const Spacer = styled.div`
@@ -127,6 +134,7 @@ const Header = ({ nickname, onSignout }) => {
             )}
           </div>
         </div>
+        <HeaderLine />
       </HeaderBlock>
       <Spacer />
     </>
