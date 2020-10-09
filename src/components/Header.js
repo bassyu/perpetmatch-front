@@ -8,17 +8,17 @@ const headerLinks = [
   {
     key: 'petlist',
     text: '입양하기',
-    to: '/petlist',
+    to: '/pet/list',
   },
   {
     key: 'petform',
     text: '파양하기',
-    to: '/petform',
+    to: '/pet/form',
   },
   {
     key: 'shoplist',
     text: '쇼핑하기',
-    to: '/shoplist',
+    to: '/shop/list',
   },
 ];
 
@@ -36,8 +36,8 @@ const HeaderBlock = styled.div`
     padding-left: 4rem;
     padding-right: 4rem;
     position: relative;
-    width: auto;
-    height: 4.25rem;
+    width: 80rem;
+    height: 4.5rem;
     display: flex;
     margin: 0 auto;
     align-items: center;
@@ -46,7 +46,7 @@ const HeaderBlock = styled.div`
     .logo-area {
       margin-right: 4rem;
       img {
-        width: 136px;
+        width: 10rem;
       }
     }
     .search-area {

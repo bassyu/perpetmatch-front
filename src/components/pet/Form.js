@@ -81,9 +81,10 @@ class Form extends Component {
                 <input
                   type="text"
                   name="title"
+                  textAlign="center"
                   id="title"
                   onClick={onChange}
-                  style={{ width: '580px' }}
+                  style={{ width: '30rem' }}
                 />
                 <p>입양조건</p>
                 <div style={{ display: 'inline-flex' }}>
@@ -93,7 +94,7 @@ class Form extends Component {
                       name="month"
                       id="month"
                       onClick={onChange}
-                      style={{ width: '130px' }}
+                      style={{ width: '9rem' }}
                     />
                     <span>개월</span>
                   </label>
@@ -103,7 +104,7 @@ class Form extends Component {
                       name="credit"
                       id="credit"
                       onClick={onChange}
-                      style={{ width: '290px', marginTop: '-5px' }}
+                      style={{ width: '14rem', marginTop: '-5px' }}
                     />
                     <span>껌</span>
                   </label>
@@ -111,22 +112,24 @@ class Form extends Component {
                 <div style={{ display: 'inline-flex' }}>
                   <label>
                     <p id="cal">
-                      ※ 최소 매달 반려동물의 필요한 음식 및 용품을 계산하여
-                      책정해주세요.
+                      <h5>
+                        ※ 최소 매달 반려동물의 필요한 음식 및 용품을 계산하여
+                        책정해주세요.
+                      </h5>
                     </p>
                   </label>
                   <div
                     className="cal-button"
                     id="cal-button"
-                    style={{ marginLeft: '12px' }}
+                    style={{ marginLeft: '5px' }}
                     onClick={this.openModal1}
                   >
                     껌 계산기
                   </div>
                 </div>
                 <div style={{ display: 'inline-flex' }}>
-                  <p style={{ width: '320px' }}>나이</p>
-                  <p style={{ width: '280px' }}>성별</p>
+                  <p style={{ width: '15rem' }}>나이</p>
+                  <p style={{ width: '15rem' }}>성별</p>
                 </div>
                 <div style={{ display: 'inline-flex' }}>
                   <label>
@@ -135,8 +138,9 @@ class Form extends Component {
                       name="year"
                       id="year"
                       onClick={onChange}
+                      style={{ width: '13rem' }}
                     />
-                    <span style={{ marginRight: '80px' }}>살</span>
+                    <span style={{ marginRight: '10px' }}>살</span>
                   </label>
                   <label>
                     <div className="radio-gender">
@@ -182,7 +186,7 @@ class Form extends Component {
                   id="petTitle"
                   placeholder="직접 입력"
                   onClick={onChange}
-                  style={{ width: '580px' }}
+                  style={{ width: '30rem' }}
                 />
                 <p>건강</p>
                 <div style={{ display: 'inline-flex' }}>
@@ -244,7 +248,7 @@ class Form extends Component {
                   </div>
                 </div>
                 <p>기타</p>
-                <div style={{ width: '700px' }}>
+                <div style={{ width: '30rem' }}>
                   <ElseForm
                     value={input}
                     onKeyPress={handleKeyPress}
@@ -266,7 +270,11 @@ class Form extends Component {
                   사진 첨부하기<span>※ 가로형 사진 권장</span>
                 </p>
                 <NewPhoto />
-                <div className="create-button" onClick={onCreate}>
+                <div
+                  className="create-button"
+                  onClick={onCreate}
+                  style={{ width: '30rem' }}
+                >
                   등록
                 </div>
                 <ModalCredit isOpen1={isModal1Open} close={this.closeModal1} />

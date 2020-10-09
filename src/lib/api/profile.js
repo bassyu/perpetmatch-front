@@ -1,5 +1,7 @@
 import client from './client';
 
+export const getUser = () => client.get('/api/profiles');
+
 export const writeUser = ({
   age,
   occupation,
@@ -23,11 +25,20 @@ export const writeUser = ({
     description,
   });
 
-export const writePetTitle = ({ petTitle }) =>
-  client.post('api/post/pet/title', { petTitle });
+export const addPetTitle = ({ petTitle }) =>
+  client.post('/api/profiles/pet/title', { petTitle });
 
-export const writePetAge = ({ petAge }) =>
-  client.post('api/post/pet/age', { petAge });
+export const removePetTitle = ({ petTitle }) =>
+  client.delete('/api/profiles/pet/title', { petTitle });
 
-export const writeZone = ({ province }) =>
-  client.post('api/post/profiles/zone', { province });
+export const addPetAge = ({ petAge }) =>
+  client.post('/api/profiles/pet/age', { petAge });
+
+export const removePetAge = ({ petAge }) =>
+  client.delete('/api/profiles/pet/age', { petAge });
+
+export const addZone = ({ province }) =>
+  client.post('/api/profiles/zone', { province });
+
+export const removeZone = ({ province }) =>
+  client.delete('/api/profiles/zone', { province });

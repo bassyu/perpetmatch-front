@@ -7,17 +7,19 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Pet from './pages/Pet';
+import SignupComplete from './pages/SignupComplete';
 
 const App = () => {
   return (
     <div className="App">
       <Switch>
         <Route path={['/', '/@:username']} component={Home} exact />
+        <Route path="/profile" component={Profile} />
         <Route path="/pet" component={Pet} />
         <Route path="/shoplist" component={ShopList} />
         <Route path="/signin" component={Signin} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/profile" component={Profile} />
+        <Route path="/signup" component={Signup} exact />
+        <Route path="/signup/complete" component={SignupComplete} />
         <Route
           render={({ location }) => (
             <div>

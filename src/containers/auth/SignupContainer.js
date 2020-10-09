@@ -2,16 +2,25 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SignupForm from '../../components/auth/SignupForm';
-import { changeField, initializeForm, signup } from '../../modules/auth';
+import client from '../../lib/api/client';
+import {
+  changeField,
+  initializeForm,
+  signin,
+  signup,
+} from '../../modules/auth';
 
 const SignupContainer = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, signupResult } = useSelector(({ auth }) => ({
+  const { form, signupResult, user, authError } = useSelector(({ auth }) => ({
     form: auth.signup,
     signupResult: auth.signupResult,
+    user: auth.user,
+    authError: auth.authError,
   }));
   const { nickname, email, password } = form;
   const { success, failure, message } = signupResult;
+  const { accessToken, tokenType } = user;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -44,10 +53,28 @@ const SignupContainer = ({ history }) => {
     if (success) {
       console.log('회원가입 성공');
       alert(message);
-      history.push('/signin');
+      dispatch(signin({ usernameOrEmail: email, password })); // 회원가입 후 자동 로그인
       dispatch(initializeForm('signupResult'));
     }
-  }, [dispatch, history, success, failure, message]);
+  }, [dispatch, history, email, password, success, failure, message]);
+
+  useEffect(() => {
+    if (authError) {
+      console.log('로그인 오류');
+      console.log(authError);
+      return;
+    }
+    if (accessToken) {
+      console.log('로그인 성공');
+      client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
+      history.push('/signup/complete');
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (e) {
+        console.log('localStorage 오류');
+      }
+    }
+  }, [history, user, accessToken, tokenType, authError]);
 
   return <SignupForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SigninForm from '../../components/auth/SigninForm';
+import client from '../../lib/api/client';
 import { changeField, initializeForm, signin } from '../../modules/auth';
 
 const SigninContainer = ({ history }) => {
@@ -11,6 +12,7 @@ const SigninContainer = ({ history }) => {
     user: auth.user,
     authError: auth.authError,
   }));
+  const { accessToken, tokenType } = user;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -39,8 +41,9 @@ const SigninContainer = ({ history }) => {
       console.log(authError);
       return;
     }
-    if (user.accessToken) {
+    if (accessToken) {
       console.log('로그인 성공');
+      client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
       history.push('/');
       try {
         localStorage.setItem('user', JSON.stringify(user));
@@ -48,7 +51,7 @@ const SigninContainer = ({ history }) => {
         console.log('localStorage 오류');
       }
     }
-  }, [history, user, authError]);
+  }, [history, user, accessToken, tokenType, authError]);
 
   return <SigninForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };
