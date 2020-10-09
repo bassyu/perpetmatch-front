@@ -11,6 +11,7 @@ const FooterLine = styled.hr`
 
 const FooterBlock = styled.div`
   z-index: 3;
+
   position: 0;
   top: fixed;
   left: 0;
@@ -22,6 +23,7 @@ const FooterBlock = styled.div`
     padding: 0 2rem;
     position: relative;
     width: 80rem;
+
     height: 10rem;
     display: flex;
     margin: 0 auto;

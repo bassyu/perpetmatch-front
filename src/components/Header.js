@@ -18,7 +18,7 @@ const headerLinks = [
   {
     key: 'shoplist',
     text: '쇼핑하기',
-    to: '/shoplist',
+    to: '/shop/list',
   },
 ];
 
@@ -33,8 +33,8 @@ const HeaderBlock = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 
   .wrapper {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
     position: relative;
     width: 80rem;
     height: 4.5rem;
@@ -75,7 +75,7 @@ const HeaderBlock = styled.div`
 `;
 
 const HeaderLink = styled(NavLink)`
-  padding-top: 0.25rem;
+  padding-top: 0.4rem;
   font-size: 1.125rem;
   font-weight: 600;
   cursor: pointer;
@@ -90,6 +90,13 @@ const HeaderLink = styled(NavLink)`
   }
 `;
 
+const HeaderLine = styled.hr`
+  border: 0;
+  height: 0;
+  margin: 0;
+  //border-top: 1px solid rgba(0, 0, 0, 0.3);
+`;
+
 const Spacer = styled.div`
   height: 4.25rem;
 `;
@@ -101,7 +108,7 @@ const Header = ({ nickname, onSignout }) => {
         <div className="wrapper">
           <div className="logo-area">
             <Link to="/">
-              <img src="/images/common/logo_w.png" alt="logo" />
+              <img src="/images/common/logo.png" alt="logo" />
             </Link>
           </div>
           {headerLinks.map((i) => (
@@ -128,6 +135,7 @@ const Header = ({ nickname, onSignout }) => {
             )}
           </div>
         </div>
+        <HeaderLine />
       </HeaderBlock>
       <Spacer />
     </>

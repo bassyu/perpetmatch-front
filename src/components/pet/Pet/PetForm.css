@@ -1,0 +1,207 @@
+.form {
+  display: flex;
+
+  font-weight: bold;
+}
+
+.form input {
+  flex: 1;
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid #bdbdbd;
+  margin-top: -5px;
+  height: 60px;
+  font-family: sans-serif;
+  padding-left: 30px;
+}
+
+.create-button {
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-right: 5rem;
+  background: #56adb4;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.create-button:hover,
+cal-button:hover {
+  background: #d5d5d5;
+  color: #8c8c8c;
+  width: 30rem;
+}
+
+span {
+  margin-left: 10px;
+}
+
+#credit {
+  margin-left: 55px;
+}
+
+#cal {
+  font-weight: initial;
+  font-size: 0.9rem;
+  line-height: 30px;
+}
+
+.cal-button {
+  width: 8rem;
+  height: 3px;
+  padding: 1.5rem;
+  padding-top: 0.5rem;
+  margin-top: 1rem;
+  background: #56adb4;
+  color: white;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+input[id='male'] + label,
+input[id='woman'] + label,
+input[id='dog'] + label,
+input[id='cat'] + label,
+input[id='outside'] + label,
+input[id='checkUp_yes'] + label,
+input[id='checkUp_no'] + label,
+input[id='lineAge_yes'] + label,
+input[id='lineAge_no'] + label,
+input[id='neutered_yes'] + label,
+input[id='neutered_no'] + label {
+  display: inline-block;
+  border: 1px solid #bdbdbd;
+  cursor: pointer;
+  text-align: center;
+  line-height: 60px;
+}
+
+input[id='male'] + label,
+input[id='woman'] + label {
+  width: 7rem;
+
+  margin-left: 10px;
+  margin-top: -5px;
+}
+
+input[id='dog'] + label,
+input[id='cat'] + label,
+input[id='outside'] + label {
+  width: 9rem;
+  height: 60px;
+  margin-right: 25px;
+}
+
+input[id='checkUp_yes'] + label,
+input[id='checkUp_no'] + label,
+input[id='lineAge_yes'] + label,
+input[id='lineAge_no'] + label,
+input[id='neutered_yes'] + label,
+input[id='neutered_no'] + label {
+  width: 5.5rem;
+  height: 60px;
+  margin-left: 10px;
+}
+
+input[id='male']:checked + label,
+input[id='woman']:checked + label,
+input[id='dog']:checked + label,
+input[id='cat']:checked + label,
+input[id='outside']:checked + label,
+input[id='checkUp_yes']:checked + label,
+input[id='checkUp_no']:checked + label,
+input[id='lineAge_yes']:checked + label,
+input[id='lineAge_no']:checked + label,
+input[id='neutered_yes']:checked + label,
+input[id='neutered_no']:checked + label {
+  background: #e0b94f;
+  color: white;
+}
+
+input[id='male'],
+input[id='woman'],
+input[id='dog'],
+input[id='cat'],
+input[id='outside'],
+input[id='checkUp_yes'],
+input[id='checkUp_no'],
+input[id='lineAge_yes'],
+input[id='lineAge_no'],
+input[id='neutered_yes'],
+input[id='neutered_no'] {
+  display: none;
+}
+
+#health1,
+#health2,
+#health3 {
+  width: 18rem;
+  height: 60px;
+  border: 1px solid #bdbdbd;
+  color: #747474;
+  margin-bottom: 10px;
+  text-align: center;
+  line-height: 60px;
+}
+
+.elseForm {
+  display: flex;
+  width: 30.5rem;
+}
+
+.elseAdd-button {
+  width: 5.5rem;
+  height: 62px;
+  margin-left: 10px;
+  margin-top: -5px;
+  border: 1px solid #bdbdbd;
+  background: #e0b94f;
+  color: white;
+  text-align: center;
+  line-height: 60px;
+  cursor: pointer;
+}
+
+#description {
+  width: 30rem;
+  height: 140px;
+  flex: 1;
+  font-size: 1rem;
+  font-family: sans-serif;
+  outline: none;
+  border: 1px solid #bdbdbd;
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
+#photo {
+  font-weight: normal;
+  margin-top: 25px;
+}
+
+#photo > span {
+  font-size: 0.7rem;
+}
+
+input[type='file'] {
+  width: 30rem;
+  height: 130px;
+  margin-right: 23px;
+  display: none;
+}
+
+input[id='boardImage1'] + label,
+input[id='boardImage2'] + label,
+input[id='boardImage3'] + label,
+input[id='boardImage4'] + label {
+  width: 6.4rem;
+  height: 6.4rem;
+  display: inline-block;
+  border: 1px solid #bdbdbd;
+  cursor: pointer;
+  text-align: center;
+  line-height: 125px;
+}

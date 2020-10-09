@@ -43,7 +43,7 @@ const SigninTemplate = ({ children }) => {
       <WhiteBox>
         <div className="logo-area">
           <Link to="/">
-            <img src="/images/common/logo_b.png" alt="logo" />
+            <img src="/images/common/logo.png" alt="logo" />
           </Link>
         </div>
         {children}
