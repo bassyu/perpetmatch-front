@@ -20,12 +20,13 @@ const headerLinks = [
 ];
 
 const ShopListBlock = styled.div`
+  background: white;
   .header {
     position: fixed;
     top: 4.5rem;
     left: 0;
     right: 0;
-    background: ${palette.gray[1]};
+    background: ${palette.gray[0]};
     .wrapper {
       width: 80rem;
       height: 3.5rem;
@@ -34,7 +35,7 @@ const ShopListBlock = styled.div`
       display: flex;
       align-items: center;
       a {
-        border-bottom: solid 0.25rem ${palette.gray[2]};
+        border-bottom: solid 0.25rem ${palette.gray[0]};
         width: 8rem;
         line-height: 3.25rem;
         text-align: center;
@@ -42,6 +43,13 @@ const ShopListBlock = styled.div`
         font-size: 1.125rem;
         font-weight: 700;
       }
+    }
+  }
+  .banner {
+    background: #a9f0fd;
+    text-align: center;
+    img {
+      height: 22rem;
     }
   }
 `;
@@ -71,8 +79,10 @@ const ShopList = () => {
         </div>
       </div>
       <Spacer />
-      <div></div>
-      <div>
+      <div className="banner">
+        <img src="/images/sub/sub_visual3.png" alt="img" />
+      </div>
+      <div className="best-list">
         <h1>1</h1>
         <h1>2</h1>
         <h1>3</h1>

@@ -3,22 +3,26 @@ import { takeLatest } from 'redux-saga/effects';
 import createRequestSaga, {
   createRequestActionTypes,
 } from '../lib/createRequestSaga';
-import * as petListAPI from '../lib/api/petList';
+import * as petAPI from '../lib/api/pet';
 
 // constants
-const CHANGE_FILED = 'petList/CHANGE_FILED';
+const CHANGE_FILED = 'pet/CHANGE_FILED';
 
 const [
   SEARCH_PET_LIST,
   SEARCH_PET_LIST_SUCCESS,
   SEARCH_PET_LIST_FAILURE,
-] = createRequestActionTypes('petList/SEARCH_PET_LIST');
+] = createRequestActionTypes('pet/SEARCH_PET_LIST');
 
 // actions
-export const changeField = createAction(CHANGE_FILED, ({ key, value }) => ({
-  key,
-  value,
-}));
+export const changeField = createAction(
+  CHANGE_FILED,
+  ({ form, key, value }) => ({
+    form,
+    key,
+    value,
+  }),
+);
 export const searchPetList = createAction(
   SEARCH_PET_LIST,
   ({
@@ -43,15 +47,15 @@ export const searchPetList = createAction(
 // middleware
 const searchPetListSaga = createRequestSaga(
   SEARCH_PET_LIST,
-  petListAPI.searchPetList,
+  petAPI.searchPetList,
 );
-export function* petListSaga() {
+export function* petSaga() {
   yield takeLatest(SEARCH_PET_LIST, searchPetListSaga);
 }
 
 // reducer
 const initialState = {
-  form: {
+  searchForm: {
     zones: '',
     petTitles: '',
     petAges: '',
@@ -81,12 +85,12 @@ const initialState = {
   ],
 };
 
-const petList = handleActions(
+const pet = handleActions(
   {
-    [CHANGE_FILED]: (state, { payload: { key, value } }) => ({
+    [CHANGE_FILED]: (state, { payload: { form, key, value } }) => ({
       ...state,
-      form: {
-        ...state.form,
+      [form]: {
+        ...state[form],
         [key]: value,
       },
     }),
@@ -99,4 +103,4 @@ const petList = handleActions(
   initialState,
 );
 
-export default petList;
+export default pet;

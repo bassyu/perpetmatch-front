@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import List from '../../components/pet/List';
 
 const ListContainer = () => {
-  const { items } = useSelector(({ petList }) => ({ items: petList.items }));
+  const { items } = useSelector(({ pet }) => ({ items: pet.items }));
 
   return <List items={items} />;
 };

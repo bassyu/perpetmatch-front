@@ -63,7 +63,7 @@ const Footer = () => {
       <FooterBlock>
         <div className="wrapper">
           <div className="logo-area">
-            <img src="../images/common/logo_w.png" alt="logo" />
+            <img src="/images/common/logo_w.png" alt="logo" />
           </div>
           <div className="footer-info">
             <address>
@@ -75,7 +75,7 @@ const Footer = () => {
               <span> 사업자 등록번호 : 123-123-12345 </span>
               <span> 대표 : 유강현</span>
             </address>
-            <p class="copyright">
+            <p className="copyright">
               Copyrighⓒ2020 PERPET MATCH <span> l </span> with by SW Maestro
             </p>
           </div>

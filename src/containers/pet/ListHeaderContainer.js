@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ListHeader from '../../components/pet/ListHeader';
-import { changeField, searchPetList } from '../../modules/petList';
+import { changeField, searchPetList } from '../../modules/pet';
 
 const ListHeaderContainer = () => {
   const dispatch = useDispatch();
-  const { form, items } = useSelector(({ petList }) => ({
-    form: petList.form,
-    items: petList.items,
+  const { searchForm, items } = useSelector(({ pet }) => ({
+    searchForm: pet.searchForm,
+    items: pet.items,
   }));
   const {
     zones,
@@ -17,21 +17,22 @@ const ListHeaderContainer = () => {
     wantLineAge,
     wantNeutered,
     credit,
-  } = form;
+  } = searchForm;
 
   const onChange = (e) => {
     e.persist();
     let { name, value } = e.target;
 
-    console.log(name, value, form);
+    console.log(name, value, searchForm);
     dispatch(
       changeField({
+        form: 'searchForm',
         key: name,
         value: value,
       }),
     );
   };
-  /*
+
   useEffect(() => {
     const parse = (value) =>
       value ? JSON.parse(value).map((i) => i.value) : [];
@@ -56,9 +57,11 @@ const ListHeaderContainer = () => {
     wantLineAge,
     wantNeutered,
     credit,
-  ]);*/
+  ]);
 
-  return <ListHeader form={form} items={items} onChange={onChange} />;
+  return (
+    <ListHeader searchForm={searchForm} items={items} onChange={onChange} />
+  );
 };
 
 export default ListHeaderContainer;

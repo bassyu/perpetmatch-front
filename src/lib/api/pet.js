@@ -1,5 +1,7 @@
 import client from './client';
 
+export const getBoard = ({ id }) => client.get(`/api/boards/${id}`);
+
 export const searchPetList = ({
   zones,
   petTitles,

@@ -62,7 +62,7 @@ const StyledInput = styled(Input)`
   margin-left: 2rem;
 `;
 
-const ListHeader = ({ form, items, onChange }) => {
+const ListHeader = ({ searchForm, items, onChange }) => {
   const {
     zones,
     petTitles,
@@ -71,7 +71,7 @@ const ListHeader = ({ form, items, onChange }) => {
     wantLineAge,
     wantNeutered,
     credit,
-  } = form;
+  } = searchForm;
   const settings = {
     enforceWhitelist: true,
     dropdown: {

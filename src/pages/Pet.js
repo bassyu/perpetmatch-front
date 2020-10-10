@@ -10,7 +10,7 @@ const Pet = () => {
       <Switch>
         <Route path="/pet/form" component={PetForm} />
         <Route path="/pet/list" component={PetList} />
-        <Route path="/pet/boadr" component={PetBoard} />
+        <Route path="/pet/board/:id" component={PetBoard} />
       </Switch>
     </>
   );

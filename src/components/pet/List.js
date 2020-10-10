@@ -78,7 +78,7 @@ const List = ({ items }) => {
       <ListItems>
         {items.map((i) => (
           <li key={i.id} className="item">
-            <Link to="/pet/boadr">
+            <Link to={`/pet/board/${i.id}`}>
               <img src={i.boardImage1} alt="pet-img" />
               <div className="title">{i.title}</div>
               <div className="tags">
