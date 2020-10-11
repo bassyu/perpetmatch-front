@@ -6,6 +6,7 @@ import {
   whitePetAges,
 } from '../../constants/index';
 import palette from '../../lib/styles/palette';
+import Button from '../common/Button';
 import Input from '../common/Input';
 import Tags from '../common/Tags';
 
@@ -30,14 +31,15 @@ const ListHeaderBlock = styled.div`
       }
     }
     .bottom {
+      margin-top: 4rem;
       padding: 0 1rem;
       display: flex;
       justify-content: space-between;
-      margin-top: 4rem;
+      align-items: center;
       p {
+        margin-top: 1rem;
         color: ${palette.gray[7]};
         font-weight: 500;
-        margin-top: 1rem;
         font-size: 1.25rem;
       }
     }
@@ -45,7 +47,7 @@ const ListHeaderBlock = styled.div`
 `;
 
 const StyledTags = styled(Tags)`
-  width: ${({ width }) => width};
+  width: 14rem;
   margin-right: 1rem;
   .tagify__input {
     height: 2.5rem;
@@ -54,15 +56,22 @@ const StyledTags = styled(Tags)`
   }
 `;
 
-const StyledInput = styled(Input)`
-  width: 8rem;
-  height: 3rem;
-  border-radius: 0.5rem;
-  margin-top: 0.5rem;
-  margin-left: 2rem;
+const StyledSpan = styled.span`
+  width: 6rem !important;
+  height: 2.5rem;
+  margin-left: 0.5rem;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
 `;
 
-const ListHeader = ({ searchForm, items, onChange }) => {
+const StyledInput = styled(Input)`
+  width: 6rem;
+  height: 2.5rem;
+  margin-left: 1rem;
+  border: white;
+`;
+
+const ListHeader = ({ searchForm, boards, onChange }) => {
   const {
     zones,
     petTitles,
@@ -84,7 +93,7 @@ const ListHeader = ({ searchForm, items, onChange }) => {
       <div className="wrapper">
         <div className="top">
           <p>
-            총 <span className="count">{items.length}</span> 아이들이 기다리고
+            총 <span className="count">{boards.length}</span> 아이들이 기다리고
             있어요!
           </p>
           <Input width="32rem" />
@@ -99,7 +108,6 @@ const ListHeader = ({ searchForm, items, onChange }) => {
               whitelist: whiteLocations,
               placeholder: '지역',
             }}
-            width="18rem"
           />
           <StyledTags
             name="petTitles"
@@ -110,7 +118,6 @@ const ListHeader = ({ searchForm, items, onChange }) => {
               whitelist: whitePetTitles,
               placeholder: '견종',
             }}
-            width="18rem"
           />
           <StyledTags
             name="petAges"
@@ -121,9 +128,36 @@ const ListHeader = ({ searchForm, items, onChange }) => {
               whitelist: whitePetAges,
               placeholder: '나이',
             }}
-            width="18rem"
           />
+          <label>
+            <Input
+              name="wantCheckUp"
+              type="checkbox"
+              checked={wantCheckUp}
+              onChange={onChange}
+            />
+            <StyledSpan>#건강검진</StyledSpan>
+          </label>
+          <label>
+            <Input
+              name="wantLineAge"
+              type="checkbox"
+              checked={wantLineAge}
+              onChange={onChange}
+            />
+            <StyledSpan>#혈통서</StyledSpan>
+          </label>
+          <label>
+            <Input
+              name="wantNeutered"
+              type="checkbox"
+              checked={wantNeutered}
+              onChange={onChange}
+            />
+            <StyledSpan>#중성화</StyledSpan>
+          </label>
           <StyledInput
+            type="number"
             name="credit"
             value={credit}
             placeholder="최대 껌"

@@ -27,7 +27,7 @@ const StyledInput = styled.input`
   &[type='radio'] + span {
     font-size: 1rem;
     display: inline-block;
-    background: none;
+    background: white;
     padding: 0.75rem;
     width: ${({ width }) => width || '100%'};
     text-align: center;

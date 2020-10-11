@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import ListContainer from '../containers/pet/ListContainer';
@@ -9,12 +9,6 @@ const PetListBlock = styled.div`
 `;
 
 const PetList = () => {
-  useEffect(() => {
-    window.scrollTo({ top: 600 });
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1);
-  });
   return (
     <PetListBlock>
       <HeaderContainer />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import HeaderContainer from '../containers/common/HeaderContainer';
@@ -59,6 +59,13 @@ const Spacer = styled.div`
 `;
 
 const ShopList = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 600 });
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 1);
+  });
+
   return (
     <ShopListBlock>
       <HeaderContainer />

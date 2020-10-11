@@ -69,14 +69,14 @@ const ListItems = styled.ul`
   }
 `;
 
-const List = ({ items }) => {
+const List = ({ boards }) => {
   return (
     <ListBlock>
       <p>
         베스트 매칭! <span>나에게 꼭 어울릴 만한 친구들이에요</span>
       </p>
       <ListItems>
-        {items.map((i) => (
+        {boards.map((i) => (
           <li key={i.id} className="item">
             <Link to={`/pet/board/${i.id}`}>
               <img src={i.boardImage1} alt="pet-img" />

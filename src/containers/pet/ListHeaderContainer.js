@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ListHeader from '../../components/pet/ListHeader';
-import { changeField, searchPetList } from '../../modules/pet';
+import { changeField, getBoards, searchBoards } from '../../modules/pet';
 
 const ListHeaderContainer = () => {
   const dispatch = useDispatch();
-  const { searchForm, items } = useSelector(({ pet }) => ({
+  const { searchForm, boards } = useSelector(({ pet }) => ({
     searchForm: pet.searchForm,
-    items: pet.items,
+    boards: pet.boards,
   }));
   const {
     zones,
@@ -22,7 +22,9 @@ const ListHeaderContainer = () => {
   const onChange = (e) => {
     e.persist();
     let { name, value } = e.target;
-
+    if (['wantCheckUp', 'wantLineAge', 'wantNeutered'].includes(name)) {
+      value = e.target.checked;
+    }
     console.log(name, value, searchForm);
     dispatch(
       changeField({
@@ -37,16 +39,30 @@ const ListHeaderContainer = () => {
     const parse = (value) =>
       value ? JSON.parse(value).map((i) => i.value) : [];
 
+    const form = {
+      zones: parse(zones),
+      petTitles: parse(petTitles),
+      petAges: parse(petAges),
+      wantCheckUp,
+      wantLineAge,
+      wantNeutered,
+      credit: parseInt(credit),
+    };
+
     dispatch(
-      searchPetList({
-        zones: parse(zones),
-        petTitles: parse(petTitles),
-        petAges: parse(petAges),
+      [
+        zones,
+        petTitles,
+        petAges,
         wantCheckUp,
         wantLineAge,
         wantNeutered,
-        credit: parseInt(credit),
-      }),
+        credit,
+      ]
+        .map((i) => Boolean(i))
+        .includes(true)
+        ? searchBoards(form)
+        : getBoards(),
     );
   }, [
     dispatch,
@@ -60,7 +76,7 @@ const ListHeaderContainer = () => {
   ]);
 
   return (
-    <ListHeader searchForm={searchForm} items={items} onChange={onChange} />
+    <ListHeader searchForm={searchForm} boards={boards} onChange={onChange} />
   );
 };
 

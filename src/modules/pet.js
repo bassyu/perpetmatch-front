@@ -7,12 +7,16 @@ import * as petAPI from '../lib/api/pet';
 
 // constants
 const CHANGE_FILED = 'pet/CHANGE_FILED';
-
 const [
-  SEARCH_PET_LIST,
-  SEARCH_PET_LIST_SUCCESS,
-  SEARCH_PET_LIST_FAILURE,
-] = createRequestActionTypes('pet/SEARCH_PET_LIST');
+  GET_BOARDS,
+  GET_BOARDS_SUCCESS,
+  GET_BOARDS_FAILURE,
+] = createRequestActionTypes('pet/GET_BOARDS');
+const [
+  SEARCH_BOARDS,
+  SEARCH_BOARDS_SUCCESS,
+  SEARCH_BOARDS_FAILURE,
+] = createRequestActionTypes('pet/SEARCH_BOARDS');
 
 // actions
 export const changeField = createAction(
@@ -23,8 +27,9 @@ export const changeField = createAction(
     value,
   }),
 );
-export const searchPetList = createAction(
-  SEARCH_PET_LIST,
+export const getBoards = createAction(GET_BOARDS, () => {});
+export const searchBoards = createAction(
+  SEARCH_BOARDS,
   ({
     zones,
     petTitles,
@@ -45,12 +50,12 @@ export const searchPetList = createAction(
 );
 
 // middleware
-const searchPetListSaga = createRequestSaga(
-  SEARCH_PET_LIST,
-  petAPI.searchPetList,
-);
+const getBoardsSaga = createRequestSaga(GET_BOARDS, petAPI.getBoards);
+const searchBoardsSaga = createRequestSaga(SEARCH_BOARDS, petAPI.searchBoards);
+
 export function* petSaga() {
-  yield takeLatest(SEARCH_PET_LIST, searchPetListSaga);
+  yield takeLatest(GET_BOARDS, getBoardsSaga);
+  yield takeLatest(SEARCH_BOARDS, searchBoardsSaga);
 }
 
 // reducer
@@ -62,9 +67,9 @@ const initialState = {
     wantCheckUp: false,
     wantLineAge: false,
     wantNeutered: false,
-    credit: 150000,
+    credi: 150000,
   },
-  items: [
+  boards: [
     {
       id: 286,
       title: '버려진 포메 보호하고 있습니다',
@@ -83,6 +88,7 @@ const initialState = {
       createdAt: '2020-09-25',
     },
   ],
+  petError: null,
 };
 
 const pet = handleActions(
@@ -94,11 +100,22 @@ const pet = handleActions(
         [key]: value,
       },
     }),
-    [SEARCH_PET_LIST_SUCCESS]: (state, { payload: response }) => ({
+    [GET_BOARDS_SUCCESS]: (state, { payload: response }) => ({
       ...state,
-      items: response.data.data.content,
+      boards: response.data.data.content,
     }),
-    [SEARCH_PET_LIST_FAILURE]: (state) => ({ ...state }),
+    [GET_BOARDS_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      petError: error,
+    }),
+    [SEARCH_BOARDS_SUCCESS]: (state, { payload: response }) => ({
+      ...state,
+      boards: response.data.data.content,
+    }),
+    [SEARCH_BOARDS_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      petError: error,
+    }),
   },
   initialState,
 );

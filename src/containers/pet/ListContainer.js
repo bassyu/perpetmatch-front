@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import List from '../../components/pet/List';
 
 const ListContainer = () => {
-  const { items } = useSelector(({ pet }) => ({ items: pet.items }));
+  const { boards } = useSelector(({ pet }) => ({ boards: pet.boards }));
 
-  return <List items={items} />;
+  return <List boards={boards} />;
 };
 
 export default ListContainer;

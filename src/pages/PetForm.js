@@ -14,9 +14,12 @@ const PetForm = () => {
     };
     render.readAsDataURL(e.target.files[0]);
   };
+
   return (
     <>
       <Form />
+      <input type="file" onChange={onLoadImg} />
+      <img src={dataURL} />
     </>
   );
 };
