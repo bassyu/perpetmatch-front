@@ -57,7 +57,7 @@ const SliderWrapper = styled.div`
   }
 `;
 
-const SlideDiv = styled.div`
+const SliderItem = styled.div`
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url(${({ background }) => background});
   display: flex !important;
@@ -93,7 +93,7 @@ const Home = () => {
       <HeaderContainer width="auto" />
       <SliderWrapper>
         <Slider {...settings}>
-          <SlideDiv background="/images/home/bg_visual1.png">
+          <SliderItem background="/images/home/bg_visual1.png">
             <Fade top>
               <span className="img">
                 <img
@@ -102,13 +102,13 @@ const Home = () => {
                 />
               </span>
             </Fade>
-          </SlideDiv>
-          <SlideDiv background="/images/home/bg_visual2.png">
+          </SliderItem>
+          <SliderItem background="/images/home/bg_visual2.png">
             <span className="title">Love & belif</span>
-          </SlideDiv>
-          <SlideDiv background="/images/home/bg_visual3.png">
+          </SliderItem>
+          <SliderItem background="/images/home/bg_visual3.png">
             <span className="title">Deposit</span>
-          </SlideDiv>
+          </SliderItem>
         </Slider>
       </SliderWrapper>
       <Footer />
