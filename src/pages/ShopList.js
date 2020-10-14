@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Footer from '../components/Footer';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
+import Slider from 'react-slick';
 
 const headerLinks = [
   {
@@ -51,6 +52,7 @@ const ShopListBlock = styled.div`
   }
   .banner {
     background: #a9f0fd;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
     text-align: center;
     img {
       height: 22rem;
@@ -110,6 +112,7 @@ const ShopListBlock = styled.div`
           margin-top: 0.5rem;
           border-top: solid 0.08rem ${palette.gray[4]};
           padding-top: 0.5rem;
+          font-family: Montserrat;
           font-size: 1.5rem;
           font-weight: 500;
           .sale {
@@ -118,7 +121,6 @@ const ShopListBlock = styled.div`
           }
           .sub {
             font-size: 1rem;
-            font-weight: 400;
             &.price {
               text-decoration: line-through;
             }
@@ -134,18 +136,27 @@ const ShopListBlock = styled.div`
     }
   }
   .slider {
-    height: 25rem;
     background: #edf6f0;
     .wrapper {
+      width: 80rem;
+      margin: 0 auto;
+      padding: 2rem 10rem;
       p {
-        padding: 2rem 0;
+        margin-top: 0;
+        margin-bottom: 1rem;
         text-align: center;
         color: ${palette.main[0]};
         font-size: 2rem;
         font-weight: 700;
       }
-      width: 80rem;
-      margin: 0 auto;
+      .slider-item {
+        overflow: hidden;
+        width: 6rem;
+        border-radius: 10rem;
+        img {
+          width: 100%;
+        }
+      }
     }
   }
 `;
@@ -256,6 +267,16 @@ const ShopList = () => {
     },
   ]);
 
+  const settings = {
+    className: 'center',
+    centerMode: true,
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+  };
+
   useEffect(() => {
     window.scrollTo({ top: 600 });
     setTimeout(() => {
@@ -315,6 +336,23 @@ const ShopList = () => {
       <div className="slider">
         <div className="wrapper">
           <p>인기 해시태그 용품</p>
+          <Slider {...settings}>
+            <div className="slider-item">
+              <img src="/images/sub/img_item1.png" alt="tag-item" />
+            </div>
+            <div className="slider-item">
+              <img src="/images/sub/img_item2.png" alt="tag-item" />
+            </div>
+            <div className="slider-item">
+              <img src="/images/sub/img_item3.png" alt="tag-item" />
+            </div>
+            <div className="slider-item">
+              <img src="/images/sub/img_item1.png" alt="tag-item" />
+            </div>
+            <div className="slider-item">
+              <img src="/images/sub/img_item2.png" alt="tag-item" />
+            </div>
+          </Slider>
         </div>
       </div>
       <div className="shop-list">
@@ -323,7 +361,6 @@ const ShopList = () => {
           {news.map((i, index) => (
             <li key={i.id}>
               <Link to={`/shop/board/${i.id}`}>
-                <div className="ranking">{index + 1}</div>
                 <img src={i.image} alt="best" />
                 <div className="company">{i.company}</div>
                 <div className="title">{i.title}</div>
@@ -334,7 +371,7 @@ const ShopList = () => {
                   </span>
                   <span className="sub price">{i.price}</span>
                   <span className="price">
-                    {i.price - (1 - i.sale / 100)}
+                    {i.price * (1 - i.sale / 100)}
                     <span className="sub">껌</span>
                   </span>
                 </div>
