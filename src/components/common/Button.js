@@ -29,7 +29,6 @@ const StyledButton = styled.button`
     css`
       background: ${palette.main[0]};
       &:hover {
-        //background: ${palette.main[1]};
         opacity: 0.8;
       }
     `}

@@ -5,6 +5,8 @@ import Footer from '../components/Footer';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 import Slider from 'react-slick';
+import Button from '../components/common/Button';
+import { AiOutlineArrowRight } from 'react-icons/ai';
 
 const headerLinks = [
   {
@@ -21,10 +23,43 @@ const headerLinks = [
   },
 ];
 
+const sliderItems = [
+  {
+    text: '#처방사료',
+    image: '/images/sub/img_item1.png',
+    background: 'rgba(86, 173, 180, 0.7)',
+  },
+  {
+    text: '#유기농간식',
+    image: '/images/sub/img_item2.png',
+    background: 'rgba(143, 164, 33, 0.7)',
+  },
+  {
+    text: '#교육장난감',
+    image: '/images/sub/img_item3.png',
+    background: 'rgba(225, 192, 115, 0.7)',
+  },
+  {
+    text: '#처방사료',
+    image: '/images/sub/img_item1.png',
+    background: 'rgba(86, 173, 180, 0.7)',
+  },
+  {
+    text: '#유기농간식',
+    image: '/images/sub/img_item2.png',
+    background: 'rgba(143, 164, 33, 0.7)',
+  },
+  {
+    text: '#교육장난감',
+    image: '/images/sub/img_item3.png',
+    background: 'rgba(225, 192, 115, 0.7)',
+  },
+];
+
 const ShopListBlock = styled.div`
   background: white;
   .shop-header {
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     top: 4.5rem;
     left: 0;
@@ -134,6 +169,16 @@ const ShopListBlock = styled.div`
         margin-right: 0;
       }
     }
+    .btn-area {
+      width: 20rem;
+      margin: 0 auto;
+      margin-bottom: 5rem;
+      button {
+        border-radius: 4rem;
+        background: #9f83cb;
+        font-size: 1.5rem;
+      }
+    }
   }
   .slider {
     background: #edf6f0;
@@ -150,9 +195,21 @@ const ShopListBlock = styled.div`
         font-weight: 700;
       }
       .slider-item {
+        position: relative;
         overflow: hidden;
-        width: 6rem;
+        border: solid 1.5rem #edf6f0;
         border-radius: 10rem;
+        .text {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          padding-top: 40%;
+          background: ${({ background }) => background || 'rgba(0, 0, 0, 0.3)'};
+          text-align: center;
+          color: white;
+          font-size: 1.5rem;
+          font-weight: 500;
+        }
         img {
           width: 100%;
         }
@@ -332,26 +389,24 @@ const ShopList = () => {
             </li>
           ))}
         </ul>
+        <div className="btn-area">
+          <Button fullWidth>
+            다른 상품 더 보기 <AiOutlineArrowRight size="1.25rem" />
+          </Button>
+        </div>
       </div>
       <div className="slider">
         <div className="wrapper">
           <p>인기 해시태그 용품</p>
           <Slider {...settings}>
-            <div className="slider-item">
-              <img src="/images/sub/img_item1.png" alt="tag-item" />
-            </div>
-            <div className="slider-item">
-              <img src="/images/sub/img_item2.png" alt="tag-item" />
-            </div>
-            <div className="slider-item">
-              <img src="/images/sub/img_item3.png" alt="tag-item" />
-            </div>
-            <div className="slider-item">
-              <img src="/images/sub/img_item1.png" alt="tag-item" />
-            </div>
-            <div className="slider-item">
-              <img src="/images/sub/img_item2.png" alt="tag-item" />
-            </div>
+            {sliderItems.map((i) => (
+              <div className="slider-item">
+                <div className="text" style={{ background: i.background }}>
+                  {i.text}
+                </div>
+                <img src={i.image} alt="slider-img" />
+              </div>
+            ))}
           </Slider>
         </div>
       </div>
@@ -379,6 +434,11 @@ const ShopList = () => {
             </li>
           ))}
         </ul>
+        <div className="btn-area">
+          <Button fullWidth>
+            다른 상품 더 보기 <AiOutlineArrowRight size="1.25rem" />
+          </Button>
+        </div>
       </div>
       <Footer />
     </ShopListBlock>
