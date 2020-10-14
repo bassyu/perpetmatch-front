@@ -21,7 +21,7 @@ const arrowMap = {
 const Arrow = ({ className, onClick, type }) => {
   return (
     <div className={className} onClick={onClick}>
-      <img src={arrowMap[type]} alt="btn_prev" />
+      <img src={arrowMap[type]} alt="arrow" />
     </div>
   );
 };
