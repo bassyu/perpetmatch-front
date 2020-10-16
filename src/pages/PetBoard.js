@@ -23,7 +23,7 @@ const PetBoardBlock = styled.div`
     margin: 0 auto;
     .box {
       float: right;
-      height: 0;
+      height: 1rem;
       margin-right: 8rem;
       width: 20rem;
 
@@ -132,44 +132,40 @@ const PetBoard = ({ match }) => {
   return (
     <PetBoardBlock>
       <HeaderContainer />
-      {data && (
-        <>
-          <div className="menu">
-            <div className="box">
-              <div className="title">{data.title}</div>
-              <div className="tags">
-                {[
-                  data.zone,
-                  data.gender && genderMap[data.gender],
-                  data.petTitle,
-                  data.petAge,
-                ].map((i) => i && <span>#{i}</span>)}
-              </div>
-              <div className="price-area">
-                <span className="price">{data.credit}</span>껌
-              </div>
-              <div className="btn-area">
-                <Button background={'#8164ae'}>신 청</Button>
-                <Button>관심글 등록</Button>
-              </div>
-              <div className="share-area">
-                <p>공유하기</p>
-                <img src="/images/sub/btn_share1.png" alt="페이스북" />
-                <img src="/images/sub/btn_share2.png" alt="카카오톡" />
-                <img src="/images/sub/btn_share3.png" alt="공유하기" />
-              </div>
-            </div>
+      <div className="menu">
+        <div className="box">
+          <div className="title">{data.title}</div>
+          <div className="tags">
+            {[
+              data.zone,
+              data.gender && genderMap[data.gender],
+              data.petTitle,
+              data.petAge,
+            ].map((i) => i && <span>#{i}</span>)}
           </div>
-          <div className="context">
-            <div className="wrapper">
-              <img src={data.boardImage1} alt="boardImage1" />
-              <img src={data.boardImage2} alt="boardImage2" />
-              <img src={data.boardImage3} alt="boardImage3" />
-              <p className="description">{data.description}</p>
-            </div>
+          <div className="price-area">
+            <span className="price">{data.credit}</span>껌
           </div>
-        </>
-      )}
+          <div className="btn-area">
+            <Button background={'#8164ae'}>신 청</Button>
+            <Button>관심글 등록</Button>
+          </div>
+          <div className="share-area">
+            <p>공유하기</p>
+            <img src="/images/sub/btn_share1.png" alt="페이스북" />
+            <img src="/images/sub/btn_share2.png" alt="카카오톡" />
+            <img src="/images/sub/btn_share3.png" alt="공유하기" />
+          </div>
+        </div>
+      </div>
+      <div className="context">
+        <div className="wrapper">
+          <img src={data.boardImage1} alt="boardImage1" />
+          <img src={data.boardImage2} alt="boardImage2" />
+          <img src={data.boardImage3} alt="boardImage3" />
+          <p className="description">{data.description}</p>
+        </div>
+      </div>
       <Footer />
     </PetBoardBlock>
   );

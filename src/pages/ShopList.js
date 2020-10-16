@@ -58,7 +58,7 @@ const sliderItems = [
 
 const ShopListBlock = styled.div`
   background: white;
-  .shop-header {
+  .header {
     z-index: 2;
     position: fixed;
     top: 4.5rem;
@@ -135,7 +135,7 @@ const ShopListBlock = styled.div`
           border: solid 0.08rem ${palette.gray[4]};
         }
         .company {
-          margin-top: 1rem;
+          margin-top: 0.5rem;
           color: ${palette.sub[0]};
           font-weight: 700;
         }
@@ -329,9 +329,12 @@ const ShopList = () => {
     centerMode: true,
     dots: false,
     infinite: true,
-    speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: 'linear',
   };
 
   useEffect(() => {
@@ -344,7 +347,7 @@ const ShopList = () => {
   return (
     <ShopListBlock>
       <HeaderContainer />
-      <div className="shop-header">
+      <div className="header">
         <div className="wrapper">
           {headerLinks.map((i) => (
             <NavLink
