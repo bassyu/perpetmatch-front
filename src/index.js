@@ -11,6 +11,7 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './modules';
 import { tempSetUser } from './modules/auth';
 import client from './lib/api/client';
+import 'antd/dist/antd.css';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(

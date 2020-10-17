@@ -75,10 +75,11 @@ const HeaderBlock = styled.div`
 
 const HeaderLink = styled(NavLink)`
   padding-top: 0.4rem;
-  font-size: 1.125rem;
-  font-weight: 600;
   cursor: pointer;
   white-space: pre;
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 600;
   text-decoration: none;
 
   &:hover {
