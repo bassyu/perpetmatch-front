@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
 
 const StyledButton = styled.button`
-  border: solid 0.125rem ${palette.sub[0]};
+  border: none;
   border-radius: 4px;
   padding: 0.25rem 1rem;
   background: ${(props) => props.background || palette.sub[0]};

@@ -14,7 +14,7 @@ const ListBlock = styled.div`
     margin-top: 4rem;
     margin-bottom: 2rem;
     span {
-      color: ${palette.gray[5]};
+      color: ${palette.gray[6]};
       font-size: 1rem;
       margin-left: 2rem;
     }
@@ -42,13 +42,14 @@ const ListItems = styled.ul`
       font-size: 1.25rem;
       font-weight: 500;
       color: ${palette.main[0]};
-      border-bottom: 1px solid ${palette.gray[4]};
+      border-bottom: 0.01rem solid ${palette.gray[4]};
       padding: 0.5rem 0;
     }
     .tags {
-      font-size: 1rem;
-      border-bottom: 1px solid ${palette.gray[4]};
+      border-bottom: 0.01rem solid ${palette.gray[4]};
       padding: 0.5rem 0.25rem;
+      color: ${palette.gray[7]};
+      font-size: 1rem;
       span + span {
         margin-left: 0.5rem;
       }
@@ -83,7 +84,9 @@ const List = ({ boards }) => {
               <div className="title">{i.title}</div>
               <div className="tags">
                 {i.tags.map((tag) => (
-                  <span key={tag}>#{tag}</span>
+                  <span className="tag" key={tag}>
+                    #{tag}
+                  </span>
                 ))}
               </div>
               <div className="price-area">

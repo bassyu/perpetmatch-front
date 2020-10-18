@@ -74,7 +74,7 @@ const ShopListBlock = styled.div`
       padding: 0 3rem;
       display: flex;
       align-items: center;
-      a {
+      .link {
         border-bottom: solid 0.25rem ${palette.gray[0]};
         width: 8rem;
         line-height: 3.25rem;
@@ -112,13 +112,16 @@ const ShopListBlock = styled.div`
       li {
         width: 24rem;
         height: 32rem;
+        float: left;
         margin: 0;
         margin-bottom: 3rem;
         margin-right: 2rem;
-        float: left;
         overflow: hidden;
         font-weight: 500;
 
+        a {
+          color: black;
+        }
         .ranking {
           position: absolute;
           width: 3rem;
@@ -175,8 +178,9 @@ const ShopListBlock = styled.div`
       margin-bottom: 5rem;
       button {
         border-radius: 4rem;
+        padding: 0.75rem 0;
         background: #9f83cb;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
       }
     }
   }
@@ -351,6 +355,7 @@ const ShopList = () => {
         <div className="wrapper">
           {headerLinks.map((i) => (
             <NavLink
+              className="link"
               key={i.text}
               to={i.to}
               activeStyle={{
@@ -394,7 +399,7 @@ const ShopList = () => {
         </ul>
         <div className="btn-area">
           <Button fullWidth>
-            다른 상품 더 보기 <AiOutlineArrowRight size="1.25rem" />
+            다른 상품 더 보기 <AiOutlineArrowRight size="1rem" />
           </Button>
         </div>
       </div>
@@ -439,7 +444,7 @@ const ShopList = () => {
         </ul>
         <div className="btn-area">
           <Button fullWidth>
-            다른 상품 더 보기 <AiOutlineArrowRight size="1.25rem" />
+            다른 상품 더 보기 <AiOutlineArrowRight size="1rem" />
           </Button>
         </div>
       </div>

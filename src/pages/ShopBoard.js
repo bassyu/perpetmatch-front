@@ -7,6 +7,8 @@ import palette from '../lib/styles/palette';
 import cn from 'classnames';
 import Input from '../components/common/Input';
 import { Pagination } from 'antd';
+import throttle from '../lib/throttle';
+import { withRouter } from 'react-router-dom';
 
 const headerTop = 640;
 const headerItem = [
@@ -42,7 +44,7 @@ const ShopBoardBlock = styled.div`
     }
     .right {
       width: 50%;
-      padding-left: 4em;
+      padding-left: 5em;
 
       .title-area {
         border-bottom: 0.325rem solid black;
@@ -58,8 +60,8 @@ const ShopBoardBlock = styled.div`
         }
       }
       .price-area {
-        border-bottom: solid 0.125rem ${palette.gray[4]};
-        padding: 1.5rem 0;
+        border-bottom: solid 0.01rem ${palette.gray[5]};
+        padding: 0.75rem 0;
         display: flex;
         font-family: Montserrat;
         font-size: 3rem;
@@ -70,14 +72,14 @@ const ShopBoardBlock = styled.div`
           font-weight: 700;
         }
         .price {
-          margin-left: 2rem;
+          margin-left: 1rem;
         }
         .sub {
           font-size: 2rem;
           font-weight: 400;
 
           &.price {
-            line-height: 3rem;
+            line-height: 4.5rem;
             margin-left: auto;
             color: ${palette.gray[5]};
             font-size: 1.75rem;
@@ -87,14 +89,15 @@ const ShopBoardBlock = styled.div`
       }
       .option-area {
         p {
-          padding: 0.25rem 0;
+          margin: 0;
+          padding: 1rem 0;
           color: ${palette.gray[7]};
-          font-size: 1.25rem;
+          font-size: 1rem;
           font-weight: 700;
         }
       }
       .result-area {
-        border-bottom: solid 0.125rem ${palette.gray[4]};
+        border-bottom: solid 0.01rem ${palette.gray[5]};
         padding: 1.25rem 0;
         display: flex;
         line-height: 3rem;
@@ -123,14 +126,14 @@ const ShopBoardBlock = styled.div`
         display: flex;
         button {
           width: 48%;
-          height: 4.5rem;
-          font-size: 1.5rem;
+          height: 4rem;
+          font-size: 1.25rem;
         }
         button + button {
           margin-left: 1rem;
-          border: solid 0.125rem ${palette.gray[4]};
+          border: solid 0.01rem ${palette.gray[5]};
           background: white;
-          color: ${palette.gray[4]};
+          color: ${palette.gray[5]};
         }
       }
     }
@@ -167,6 +170,7 @@ const ShopBoardBlock = styled.div`
 
   .quick-menu {
     width: 80rem;
+    height: 0;
     margin: 0 auto;
     padding: 2rem 4rem;
 
@@ -184,6 +188,7 @@ const ShopBoardBlock = styled.div`
 
       select {
         height: 3.5rem;
+        font-size: 1rem;
       }
       .price-area {
         //margin-top: auto;
@@ -201,14 +206,14 @@ const ShopBoardBlock = styled.div`
         display: flex;
         button {
           width: 48%;
-          height: 4rem;
-          font-size: 1.25rem;
+          height: 3.5rem;
+          font-size: 1rem;
         }
         button + button {
           margin-left: 1rem;
-          border: solid 0.125rem ${palette.gray[4]};
+          border: solid 0.01rem ${palette.gray[5]};
           background: white;
-          color: ${palette.gray[4]};
+          color: ${palette.gray[5]};
         }
       }
     }
@@ -231,6 +236,9 @@ const ShopBoardBlock = styled.div`
         font-size: 1.5rem;
         font-weight: 500;
       }
+      ul {
+        padding-left: 15rem;
+      }
       .review {
       }
       .question {
@@ -242,7 +250,7 @@ const ShopBoardBlock = styled.div`
           font-size: 1rem;
           font-weight: 500;
           td {
-            min-width: 10rem;
+            min-width: 8rem;
             height: 3rem;
           }
         }
@@ -252,9 +260,9 @@ const ShopBoardBlock = styled.div`
 
   select {
     width: 100%;
-    height: 4.5rem;
+    height: 4.25rem;
     border: solid 0.125rem ${palette.sub[0]};
-    padding: 0 2rem;
+    padding: 0 1rem;
     text-align-last: left;
     background: white;
     color: ${palette.gray[5]};
@@ -266,7 +274,7 @@ const ShopBoardBlock = styled.div`
   }
 `;
 
-const ShopBoard = () => {
+const ShopBoard = ({ history }) => {
   const refHeader = useRef();
   const [data, setData] = useState({
     company: '마이비펫',
@@ -275,17 +283,7 @@ const ShopBoard = () => {
     price: 10400,
     boardImageHead: '/images/sub/shop_board_head.png',
     boardImageMain: '/images/sub/shop_board_main.png',
-    review: [
-      {
-        nickname: '건이은채',
-        star: 4,
-        option: 'L',
-        petTitle: '푸들',
-        image: '/images',
-        description: '아기가 기절했어요. 기절방석 맞네요 강아지랑 싸워요',
-        like: 45,
-      },
-    ],
+    stockQuantity: 0,
   });
   const [fix, setFix] = useState(false);
   const [count, setCount] = useState(1);
@@ -296,10 +294,12 @@ const ShopBoard = () => {
   const onChange = (e) => {
     setCount(e.target.value);
   };
+  const onClickBuy = (e) => {
+    history.push('/shop/cart');
+  };
 
   useEffect(() => {
-    console.log(refHeader);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', throttle(onScroll, 100));
   });
 
   return (
@@ -342,8 +342,8 @@ const ShopBoard = () => {
             </span>
           </div>
           <div className="btn-area">
-            <Button>바로구매</Button>
-            <Button>장바구니</Button>
+            <Button onClick={onClickBuy}>바로구매</Button>
+            <Button>장바구니 추가</Button>
           </div>
         </div>
       </div>
@@ -378,7 +378,7 @@ const ShopBoard = () => {
           </div>
           <div className="btn-area">
             <Button>바로구매</Button>
-            <Button>장바구니</Button>
+            <Button>장바구니 추가</Button>
           </div>
         </div>
       </div>
@@ -420,4 +420,4 @@ const ShopBoard = () => {
   );
 };
 
-export default ShopBoard;
+export default withRouter(ShopBoard);
