@@ -63,7 +63,7 @@ const HeaderBlock = styled.div`
       }
     }
     .user-area {
-      margin-left: 3rem;
+      margin-left: 2rem;
       font-weight: bold;
       cursor: pointer;
 

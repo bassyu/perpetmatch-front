@@ -7,19 +7,20 @@ import palette from '../lib/styles/palette';
 import Slider from 'react-slick';
 import Button from '../components/common/Button';
 import { AiOutlineArrowRight } from 'react-icons/ai';
+import * as shopAPI from '../lib/api/shop';
 
 const headerLinks = [
   {
     text: '사료',
-    to: '/shop/list/feed',
+    to: '/shop/list/feeds',
   },
   {
     text: '간식',
-    to: '/shop/list/snack',
+    to: '/shop/list/snacks',
   },
   {
     text: '용품',
-    to: '/shop/list/toy',
+    to: '/shop/list/goods',
   },
 ];
 
@@ -56,8 +57,15 @@ const sliderItems = [
   },
 ];
 
+const titleMap = {
+  feeds: '베스트 사료',
+  snacks: '베스트 간식',
+  goods: '베스트 용품',
+};
+
 const ShopListBlock = styled.div`
   background: white;
+
   .header {
     z-index: 2;
     position: fixed;
@@ -74,6 +82,7 @@ const ShopListBlock = styled.div`
       padding: 0 3rem;
       display: flex;
       align-items: center;
+
       .link {
         border-bottom: solid 0.25rem ${palette.gray[0]};
         width: 8rem;
@@ -89,6 +98,7 @@ const ShopListBlock = styled.div`
     background: #a9f0fd;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
     text-align: center;
+
     img {
       height: 22rem;
     }
@@ -98,6 +108,7 @@ const ShopListBlock = styled.div`
     margin: 0 auto;
     padding: 0 2rem;
     background: white;
+
     p {
       margin-top: 3rem;
       margin-bottom: 1.5rem;
@@ -109,6 +120,7 @@ const ShopListBlock = styled.div`
       margin: 0;
       padding: 0;
       overflow: hidden;
+
       li {
         width: 24rem;
         height: 32rem;
@@ -153,12 +165,14 @@ const ShopListBlock = styled.div`
           font-family: Montserrat;
           font-size: 1.5rem;
           font-weight: 500;
+
           .sale {
             color: ${palette.sub[0]};
             font-weight: 700;
           }
           .sub {
             font-size: 1rem;
+
             &.price {
               text-decoration: line-through;
             }
@@ -176,6 +190,7 @@ const ShopListBlock = styled.div`
       width: 20rem;
       margin: 0 auto;
       margin-bottom: 5rem;
+
       button {
         border-radius: 4rem;
         padding: 0.75rem 0;
@@ -186,10 +201,12 @@ const ShopListBlock = styled.div`
   }
   .slider {
     background: #edf6f0;
+
     .wrapper {
       width: 80rem;
       margin: 0 auto;
       padding: 2rem 10rem;
+
       p {
         margin-top: 0;
         margin-bottom: 1rem;
@@ -203,6 +220,7 @@ const ShopListBlock = styled.div`
         overflow: hidden;
         border: solid 1.5rem #edf6f0;
         border-radius: 10rem;
+
         .text {
           position: absolute;
           width: 100%;
@@ -226,50 +244,12 @@ const Spacer = styled.div`
   height: 3.5rem;
 `;
 
-const ShopList = () => {
+const ShopList = ({ match }) => {
+  const category = match.params.category;
+  const isMain = category === 'main';
   const [bests, setBests] = useState([
     {
       id: 0,
-      image: '/images/sub/img_shopping1.png',
-      company: '마이비펫',
-      title: '플라밍고 우디 스타 나무모양의 고무 장난감',
-      sale: 15,
-      price: 10400,
-    },
-    {
-      id: 1,
-      image: '/images/sub/img_shopping1.png',
-      company: '마이비펫',
-      title: '플라밍고 우디 스타 나무모양의 고무 장난감',
-      sale: 15,
-      price: 10400,
-    },
-    {
-      id: 2,
-      image: '/images/sub/img_shopping1.png',
-      company: '마이비펫',
-      title: '플라밍고 우디 스타 나무모양의 고무 장난감',
-      sale: 15,
-      price: 10400,
-    },
-    {
-      id: 3,
-      image: '/images/sub/img_shopping1.png',
-      company: '마이비펫',
-      title: '플라밍고 우디 스타 나무모양의 고무 장난감',
-      sale: 15,
-      price: 10400,
-    },
-    {
-      id: 4,
-      image: '/images/sub/img_shopping1.png',
-      company: '마이비펫',
-      title: '플라밍고 우디 스타 나무모양의 고무 장난감',
-      sale: 15,
-      price: 10400,
-    },
-    {
-      id: 5,
       image: '/images/sub/img_shopping1.png',
       company: '마이비펫',
       title: '플라밍고 우디 스타 나무모양의 고무 장난감',
@@ -286,47 +266,38 @@ const ShopList = () => {
       sale: 15,
       price: 10400,
     },
-    {
-      id: 1,
-      image: '/images/sub/img_shopping1.png',
-      company: '마이비펫',
-      title: '플라밍고 우디 스타 나무모양의 고무 장난감',
-      sale: 15,
-      price: 10400,
-    },
-    {
-      id: 2,
-      image: '/images/sub/img_shopping1.png',
-      company: '마이비펫',
-      title: '플라밍고 우디 스타 나무모양의 고무 장난감',
-      sale: 15,
-      price: 10400,
-    },
-    {
-      id: 3,
-      image: '/images/sub/img_shopping1.png',
-      company: '마이비펫',
-      title: '플라밍고 우디 스타 나무모양의 고무 장난감',
-      sale: 15,
-      price: 10400,
-    },
-    {
-      id: 4,
-      image: '/images/sub/img_shopping1.png',
-      company: '마이비펫',
-      title: '플라밍고 우디 스타 나무모양의 고무 장난감',
-      sale: 15,
-      price: 10400,
-    },
-    {
-      id: 5,
-      image: '/images/sub/img_shopping1.png',
-      company: '마이비펫',
-      title: '플라밍고 우디 스타 나무모양의 고무 장난감',
-      sale: 15,
-      price: 10400,
-    },
   ]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+
+    async function callMainAPI() {
+      try {
+        const response = await shopAPI.getBests();
+        setBests(response.data.data.content);
+      } catch (e) {
+        console.log('Best 불러오기 오류');
+      }
+      try {
+        const response = await shopAPI.getNews();
+        setNews(response.data.data.content);
+      } catch (e) {
+        console.log('New 불러오기 오류');
+      }
+    }
+
+    async function callAPI() {
+      try {
+        console.log(category);
+        const response = await shopAPI.getItems({ category });
+        setBests(response.data.data);
+      } catch (e) {
+        console.log('Item 불러오기 오류');
+      }
+    }
+
+    isMain ? callMainAPI() : callAPI();
+  }, [isMain, category]);
 
   const settings = {
     className: 'center',
@@ -341,13 +312,6 @@ const ShopList = () => {
     cssEase: 'linear',
   };
 
-  useEffect(() => {
-    window.scrollTo({ top: 600 });
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1);
-  });
-
   return (
     <ShopListBlock>
       <HeaderContainer />
@@ -356,7 +320,7 @@ const ShopList = () => {
           {headerLinks.map((i) => (
             <NavLink
               className="link"
-              key={i.text}
+              key={i.to}
               to={i.to}
               activeStyle={{
                 borderBottom: `solid 0.25rem ${palette.sub[0]}`,
@@ -369,85 +333,118 @@ const ShopList = () => {
         </div>
       </div>
       <Spacer />
-      <div className="banner">
-        <img src="/images/sub/sub_visual3.png" alt="img" />
-      </div>
-      <div className="shop-list">
-        <p>BEST</p>
-        <ul>
-          {bests.map((i, index) => (
-            <li key={i.id}>
-              <Link to={`/shop/board/${i.id}`}>
-                <div className="ranking">{index + 1}</div>
-                <img src={i.image} alt="best" />
-                <div className="company">{i.company}</div>
-                <div className="title">{i.title}</div>
-                <div className="price-area">
-                  <span className="sale">
-                    {i.sale}
-                    <span className="sub">%</span>
-                  </span>
-                  <span className="sub price">{i.price}</span>
-                  <span className="price">
-                    {i.price * (1 - i.sale / 100)}
-                    <span className="sub">껌</span>
-                  </span>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="btn-area">
-          <Button fullWidth>
-            다른 상품 더 보기 <AiOutlineArrowRight size="1rem" />
-          </Button>
-        </div>
-      </div>
-      <div className="slider">
-        <div className="wrapper">
-          <p>인기 해시태그 용품</p>
-          <Slider {...settings}>
-            {sliderItems.map((i) => (
-              <div className="slider-item">
-                <div className="text" style={{ background: i.background }}>
-                  {i.text}
-                </div>
-                <img src={i.image} alt="slider-img" />
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
-      <div className="shop-list">
-        <p>NEW</p>
-        <ul>
-          {news.map((i, index) => (
-            <li key={i.id}>
-              <Link to={`/shop/board/${i.id}`}>
-                <img src={i.image} alt="best" />
-                <div className="company">{i.company}</div>
-                <div className="title">{i.title}</div>
-                <div className="price-area">
-                  <span className="sale">
-                    {i.sale}
-                    <span className="sub">%</span>
-                  </span>
-                  <span className="sub price">{i.price}</span>
-                  <span className="price">
-                    {i.price * (1 - i.sale / 100)}
-                    <span className="sub">껌</span>
-                  </span>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="btn-area">
-          <Button fullWidth>
-            다른 상품 더 보기 <AiOutlineArrowRight size="1rem" />
-          </Button>
-        </div>
-      </div>
+      {isMain ? (
+        <>
+          <div className="banner">
+            <img src="/images/sub/sub_visual3.png" alt="img" />
+          </div>
+          <div className="shop-list">
+            <p>BEST</p>
+            <ul>
+              {bests.map((i, index) => (
+                <li key={i.id}>
+                  <Link to={`/shop/board/${i.id}`}>
+                    <div className="ranking">{index + 1}</div>
+                    <img src={i.boardImageHead} alt="best-img" />
+                    <div className="company">{i.company}</div>
+                    <div className="title">{i.title}</div>
+                    <div className="price-area">
+                      <span className="sale">
+                        {i.sale}
+                        <span className="sub">%</span>
+                      </span>
+                      <span className="sub price">{i.price}</span>
+                      <span className="price">
+                        {i.price * (1 - i.sale / 100)}
+                        <span className="sub">원</span>
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="btn-area">
+              <Button fullWidth>
+                다른 상품 더 보기 <AiOutlineArrowRight size="1rem" />
+              </Button>
+            </div>
+          </div>
+          <div className="slider">
+            <div className="wrapper">
+              <p>인기 해시태그 용품</p>
+              <Slider {...settings}>
+                {sliderItems.map((i) => (
+                  <div className="slider-item">
+                    <div className="text" style={{ background: i.background }}>
+                      {i.text}
+                    </div>
+                    <img src={i.image} alt="slider-img" />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
+          <div className="shop-list">
+            <p>NEW</p>
+            <ul>
+              {news.map((i, index) => (
+                <li key={i.id}>
+                  <Link to={`/shop/board/${i.id}`}>
+                    <img src={i.boardImageHead} alt="new-img" />
+                    <div className="company">{i.company}</div>
+                    <div className="title">{i.title}</div>
+                    <div className="price-area">
+                      <span className="sale">
+                        {i.sale}
+                        <span className="sub">%</span>
+                      </span>
+                      <span className="sub price">{i.price}</span>
+                      <span className="price">
+                        {i.price * (1 - i.sale / 100)}
+                        <span className="sub">껌</span>
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="btn-area">
+              <Button fullWidth>
+                다른 상품 더 보기 <AiOutlineArrowRight size="1rem" />
+              </Button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="shop-list">
+            <p>{titleMap[category]}</p>
+            <ul>
+              {bests.map((i, index) => (
+                <li key={i.id}>
+                  <Link to={`/shop/board/${i.id}`}>
+                    <div className="ranking">{index + 1}</div>
+                    <img src={i.boardImageHead} alt="best-img" />
+                    <div className="company">{i.company}</div>
+                    <div className="title">{i.title}</div>
+                    <div className="price-area">
+                      <span className="sale">
+                        {i.sale}
+                        <span className="sub">%</span>
+                      </span>
+                      <span className="sub price">{i.price}</span>
+                      <span className="price">
+                        {i.price * (1 - i.sale / 100)}
+                        <span className="sub">원</span>
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
       <Footer />
     </ShopListBlock>
   );

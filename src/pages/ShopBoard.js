@@ -9,6 +9,7 @@ import Input from '../components/common/Input';
 import { Pagination } from 'antd';
 import throttle from '../lib/throttle';
 import { withRouter } from 'react-router-dom';
+import * as shopAPI from '../lib/api/shop';
 
 const headerTop = 640;
 const headerItem = [
@@ -25,10 +26,11 @@ const headerItem = [
     text: '교환/환불',
   },
 ];
-const options = ['옵션선택', '검정색', '하얀색'];
+const options = ['옵션선택'];
 
 const ShopBoardBlock = styled.div`
   background: white;
+
   .info {
     width: 80rem;
     height: 40rem;
@@ -38,6 +40,7 @@ const ShopBoardBlock = styled.div`
 
     .left {
       width: 50%;
+
       img {
         width: 100%;
       }
@@ -48,6 +51,7 @@ const ShopBoardBlock = styled.div`
 
       .title-area {
         border-bottom: 0.325rem solid black;
+
         .company {
           margin: 0;
           color: ${palette.sub[0]};
@@ -196,6 +200,7 @@ const ShopBoardBlock = styled.div`
         display: flex;
         font-size: 1.25rem;
         font-weight: 500;
+
         .price {
           margin-left: auto;
           font-size: 1.5rem;
@@ -204,6 +209,7 @@ const ShopBoardBlock = styled.div`
       .btn-area {
         margin-top: 1.5rem;
         display: flex;
+
         button {
           width: 48%;
           height: 3.5rem;
@@ -245,10 +251,12 @@ const ShopBoardBlock = styled.div`
       }
       .exchange {
         margin-bottom: 2rem;
+
         table {
           color: ${palette.main[0]};
           font-size: 1rem;
           font-weight: 500;
+
           td {
             min-width: 8rem;
             height: 3rem;
@@ -274,9 +282,10 @@ const ShopBoardBlock = styled.div`
   }
 `;
 
-const ShopBoard = ({ history }) => {
+const ShopBoard = ({ history, match }) => {
+  const id = match.params.id;
   const refHeader = useRef();
-  const [data, setData] = useState({
+  const [item, setItem] = useState({
     company: '마이비펫',
     title: '플라밍고 우디 스타 나무모양의 고무 장난감',
     sale: 15,
@@ -299,29 +308,40 @@ const ShopBoard = ({ history }) => {
   };
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     window.addEventListener('scroll', throttle(onScroll, 100));
-  });
+
+    async function callAPI() {
+      try {
+        const response = await shopAPI.getItem({ id });
+        setItem(response.data.data);
+      } catch (e) {
+        console.log('불러오기 오류');
+      }
+    }
+    callAPI();
+  }, [id]);
 
   return (
     <ShopBoardBlock>
       <HeaderContainer />
       <div className="info">
         <div className="left">
-          <img src={data.boardImageHead} alt="head-img" />
+          <img src={item.boardImageHead} alt="head-img" />
         </div>
         <div className="right">
           <div className="title-area">
-            <p className="company">{data.company}</p>
-            <p className="title">{data.title}</p>
+            <p className="company">{item.company}</p>
+            <p className="title">{item.title}</p>
           </div>
           <div className="price-area">
             <span className="sale">
-              {data.sale}
+              {item.sale}
               <span className="sub">%</span>
             </span>
-            <span className="sub price">{data.price}</span>
+            <span className="sub price">{item.price}</span>
             <span className="price">
-              {data.price * (1 - data.sale / 100)}
+              {item.price * (1 - item.sale / 100)}
               <span className="sub">원</span>
             </span>
           </div>
@@ -337,7 +357,7 @@ const ShopBoard = ({ history }) => {
             <span>수량</span>
             <Input type="number" value={count} onChange={onChange} />
             <span className="result">
-              {count * data.price * (1 - data.sale / 100)}
+              {count * item.price * (1 - item.sale / 100)}
               <span className="sub">원</span>
             </span>
           </div>
@@ -373,18 +393,18 @@ const ShopBoard = ({ history }) => {
           <div className="price-area">
             주문금액
             <span className="price">
-              {count * data.price * (1 - data.sale / 100)}원
+              {count * item.price * (1 - item.sale / 100)}원
             </span>
           </div>
           <div className="btn-area">
-            <Button>바로구매</Button>
+            <Button onClick={onClickBuy}>바로구매</Button>
             <Button>장바구니 추가</Button>
           </div>
         </div>
       </div>
       <div className="content">
         <div className="wrapper">
-          <img src={data.boardImageMain} alt="main-img" />
+          <img src={item.boardImageMain} alt="main-img" />
           <div className="review">
             <p>리뷰</p>
             <Pagination defaultCurrent={1} total={50} />

@@ -21,6 +21,7 @@ const PetBoardBlock = styled.div`
     left: 0;
     width: 80rem;
     margin: 0 auto;
+
     .box {
       float: right;
       height: 1rem;
@@ -43,6 +44,7 @@ const PetBoardBlock = styled.div`
         font-size: 1.125rem;
         font-weight: 500;
         color: ${palette.gray[6]};
+
         span + span {
           margin-left: 0.5rem;
         }
@@ -51,6 +53,7 @@ const PetBoardBlock = styled.div`
         font-family: Montserrat;
         font-size: 2rem;
         color: ${palette.sub[0]};
+
         .price {
           font-weight: 500;
           font-size: 2.5rem;
@@ -59,6 +62,7 @@ const PetBoardBlock = styled.div`
       }
       .btn-area {
         margin: 2rem 0;
+
         button {
           width: 9.75rem;
           height: 3rem;
@@ -79,8 +83,10 @@ const PetBoardBlock = styled.div`
     width: 80rem;
     margin: 0 auto;
     padding: 4rem 6rem;
+
     .wrapper {
       width: 42rem;
+
       img {
         width: 42rem;
         height: 30rem;
@@ -96,6 +102,7 @@ const PetBoardBlock = styled.div`
 `;
 
 const PetBoard = ({ match }) => {
+  const id = match.params.id;
   const [data, setData] = useState({
     id: null,
     manager: '',
@@ -120,14 +127,14 @@ const PetBoard = ({ match }) => {
     window.scrollTo({ top: 0 });
     async function getBoardAPI() {
       try {
-        const response = await petAPI.getBoard({ id: match.params.id });
+        const response = await petAPI.getBoard({ id });
         setData(response.data.data);
       } catch (e) {
         console.log('불러오기 오류');
       }
     }
     getBoardAPI();
-  }, [match]);
+  }, [id]);
 
   return (
     <PetBoardBlock>

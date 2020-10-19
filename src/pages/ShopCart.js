@@ -4,6 +4,7 @@ import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
+import { Checkbox } from 'antd';
 
 const ShopCartBlcok = styled.div`
   position: absolute;
@@ -12,14 +13,14 @@ const ShopCartBlcok = styled.div`
   left: 0;
   right: 0;
   overflow: auto;
+  padding-top: 7rem;
+  padding-bottom: 2rem;
   display: flex;
   justify-content: center;
-  padding-top: 7rem;
   background: ${palette.gray[2]};
 
   .content {
     width: 80rem;
-    height: 24rem;
     padding: 0 2rem;
     margin: 0 auto;
     display: flex;
@@ -30,14 +31,12 @@ const ShopCartBlcok = styled.div`
       background: white;
 
       .check-area {
-        height: 3rem;
+        height: 2.5rem;
         display: flex;
         justify-content: space-between;
         background: ${palette.gray[2]};
       }
       .cart-area {
-        overflow: scroll;
-        height: 21rem;
         padding: 1.25rem;
 
         .head {
@@ -53,7 +52,7 @@ const ShopCartBlcok = styled.div`
           justify-content: space-between;
 
           .item-content {
-            width: 96%;
+            width: 98%;
 
             .top {
               height: 5rem;
@@ -115,6 +114,7 @@ const ShopCartBlcok = styled.div`
     }
     .right {
       width: 32%;
+      height: 24rem;
       margin-top: 3rem;
       background: white;
 
@@ -191,17 +191,14 @@ const ShopCart = () => {
       <div className="content">
         <div className="left">
           <div className="check-area">
-            <label>
-              <input type="checkbox" />
-              모두선택
-            </label>
+            <Checkbox>모두선택</Checkbox>
             <div>선택삭제</div>
           </div>
           <div className="cart-area">
             <p className="head">장바구니</p>
             {items.map((item) => (
               <div className="item" key={item.id}>
-                <input type="checkbox" />
+                <Checkbox />
                 <div className="item-content">
                   <div className="top">
                     <img src={item.image} alt="item-img" />
