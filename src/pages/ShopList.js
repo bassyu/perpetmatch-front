@@ -288,7 +288,6 @@ const ShopList = ({ match }) => {
 
     async function callAPI() {
       try {
-        console.log(category);
         const response = await shopAPI.getItems({ category });
         setBests(response.data.data);
       } catch (e) {
@@ -373,8 +372,8 @@ const ShopList = ({ match }) => {
             <div className="wrapper">
               <p>인기 해시태그 용품</p>
               <Slider {...settings}>
-                {sliderItems.map((i) => (
-                  <div className="slider-item">
+                {sliderItems.map((i, index) => (
+                  <div className="slider-item" key={index}>
                     <div className="text" style={{ background: i.background }}>
                       {i.text}
                     </div>
@@ -387,7 +386,7 @@ const ShopList = ({ match }) => {
           <div className="shop-list">
             <p>NEW</p>
             <ul>
-              {news.map((i, index) => (
+              {news.map((i) => (
                 <li key={i.id}>
                   <Link to={`/shop/board/${i.id}`}>
                     <img src={i.boardImageHead} alt="new-img" />

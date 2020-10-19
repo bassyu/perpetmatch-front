@@ -37,12 +37,10 @@ const SigninContainer = ({ history }) => {
 
   useEffect(() => {
     if (authError) {
-      console.log('로그인 오류');
-      console.log(authError);
+      alert('아이디/비밀번호를 다시 확인해주세요');
       return;
     }
     if (accessToken) {
-      console.log('로그인 성공');
       client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
       history.push('/');
       try {

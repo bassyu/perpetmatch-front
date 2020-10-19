@@ -12,7 +12,7 @@ import { withRouter } from 'react-router-dom';
 import * as shopAPI from '../lib/api/shop';
 
 const headerTop = 640;
-const headerItem = [
+const headerItems = [
   {
     text: '상품정보',
   },
@@ -300,17 +300,38 @@ const ShopBoard = ({ history, match }) => {
   const onScroll = () => {
     setFix(headerTop < window.scrollY);
   };
-  const onChange = (e) => {
+  const onChangeCount = (e) => {
     setCount(e.target.value);
   };
   const onClickBuy = (e) => {
-    history.push('/shop/cart');
+    async function callAPI() {
+      try {
+        await shopAPI.addCart({ id, count });
+        history.push('/shop/cart');
+      } catch (e) {
+        console.log('장바구니 추가 오류');
+      }
+    }
+    callAPI();
+  };
+  const onClickCart = (e) => {
+    async function callAPI() {
+      try {
+        const response = await shopAPI.addCart({ id, count });
+        alert(response.data.message);
+      } catch (e) {
+        console.log('장바구니 추가 오류');
+      }
+    }
+    callAPI();
   };
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
     window.addEventListener('scroll', throttle(onScroll, 100));
+  }, []);
 
+  useEffect(() => {
     async function callAPI() {
       try {
         const response = await shopAPI.getItem({ id });
@@ -355,29 +376,26 @@ const ShopBoard = ({ history, match }) => {
           </div>
           <div className="result-area">
             <span>수량</span>
-            <Input type="number" value={count} onChange={onChange} />
+            <Input type="number" value={count} onChange={onChangeCount} />
             <span className="result">
               {count * item.price * (1 - item.sale / 100)}
               <span className="sub">원</span>
             </span>
           </div>
           <div className="btn-area">
-            <Button onClick={onClickBuy}>바로구매</Button>
-            <Button>장바구니 추가</Button>
+            <Button name="buy" onClick={onClickBuy}>
+              바로구매
+            </Button>
+            <Button name="cart" onClick={onClickCart}>
+              장바구니 추가
+            </Button>
           </div>
         </div>
       </div>
       <div className={cn('header', { fix })} ref={refHeader}>
         <div className="wrapper">
-          {headerItem.map((i) => (
-            <div
-              className="item"
-              key={i.text}
-              activeStyle={{
-                borderBottom: `solid 0.375rem ${palette.sub[0]}`,
-                color: palette.sub[0],
-              }}
-            >
+          {headerItems.map((i) => (
+            <div className="item" key={i.text}>
               {i.text}
             </div>
           ))}
@@ -416,21 +434,23 @@ const ShopBoard = ({ history, match }) => {
           <div className="exchange">
             <p>교환/환불</p>
             <table>
-              <tr>
-                <td>반품배송비</td>
-                <td>3,000원 (최초 배송비가 무료인 경우 6,000원 부과)</td>
-              </tr>
-              <tr>
-                <td>교환배송비</td>
-                <td>6,000원</td>
-              </tr>
-              <tr>
-                <td>보내실 곳</td>
-                <td>
-                  (13025) 경기 하남시 성산곡동 173-1 (선산곡동) 강동 B터미널
-                  명일우진
-                </td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td>반품배송비</td>
+                  <td>3,000원 (최초 배송비가 무료인 경우 6,000원 부과)</td>
+                </tr>
+                <tr>
+                  <td>교환배송비</td>
+                  <td>6,000원</td>
+                </tr>
+                <tr>
+                  <td>보내실 곳</td>
+                  <td>
+                    (13025) 경기 하남시 성산곡동 173-1 (선산곡동) 강동 B터미널
+                    명일우진
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>

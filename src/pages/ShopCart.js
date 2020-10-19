@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 import { Checkbox } from 'antd';
+import * as shopAPI from '../lib/api/shop';
 
 const ShopCartBlcok = styled.div`
   position: absolute;
@@ -21,6 +22,7 @@ const ShopCartBlcok = styled.div`
 
   .content {
     width: 80rem;
+    height: 24rem;
     padding: 0 2rem;
     margin: 0 auto;
     display: flex;
@@ -37,6 +39,8 @@ const ShopCartBlcok = styled.div`
         background: ${palette.gray[2]};
       }
       .cart-area {
+        overflow: scroll;
+        height: 21.5rem;
         padding: 1.25rem;
 
         .head {
@@ -57,12 +61,13 @@ const ShopCartBlcok = styled.div`
             .top {
               height: 5rem;
               display: flex;
+              justify-content: space-between;
 
               img {
                 width: 5rem;
               }
               .title {
-                margin-left: 1rem;
+                width: 36rem;
 
                 p {
                   margin: 0.25rem 0;
@@ -75,13 +80,25 @@ const ShopCartBlcok = styled.div`
                   color: ${palette.gray[6]};
                 }
               }
+              button {
+                width: 1.125rem;
+                height: 1.125rem;
+                border: none;
+                padding: 0;
+                background: none;
+
+                &:hover {
+                  color: red;
+                  cursor: pointer;
+                }
+              }
             }
             .bottom {
               width: 100%;
               height: 5.5rem;
               margin-top: 0.5rem;
               padding: 0.75rem 1.25rem;
-              background: ${palette.gray[2]};
+              background: ${palette.gray[1]};
 
               p {
                 margin-bottom: 0.5rem;
@@ -114,8 +131,7 @@ const ShopCartBlcok = styled.div`
     }
     .right {
       width: 32%;
-      height: 24rem;
-      margin-top: 3rem;
+      margin-top: 2.5rem;
       background: white;
 
       .calc {
@@ -125,10 +141,11 @@ const ShopCartBlcok = styled.div`
         table {
           width: 100%;
           color: ${palette.gray[8]};
+          font-size: 1.125rem;
           font-weight: 700;
 
           tr {
-            height: 2.5rem;
+            height: 3rem;
           }
           .price {
             text-align: right;
@@ -141,7 +158,7 @@ const ShopCartBlcok = styled.div`
               padding-top: 1rem;
             }
             .price {
-              font-size: 1.75rem;
+              font-size: 2rem;
             }
           }
         }
@@ -155,7 +172,7 @@ const ShopCartBlcok = styled.div`
 `;
 
 const ShopCart = () => {
-  const [items, setItems] = useState([
+  const [cartItems, setCartItems] = useState([
     {
       id: 321,
       image:
@@ -165,25 +182,47 @@ const ShopCart = () => {
       company: '벨리스',
       count: 3,
     },
-    {
-      id: 322,
-      image:
-        'https://shopbucket.s3.ap-northeast-2.amazonaws.com/%EB%B2%85%EC%8A%A41.jpg',
-      title: '벅스펫 국내산 유기농 베지믹스 관절건강 사료',
-      price: 51990,
-      company: '벨리스',
-      count: 3,
-    },
-    {
-      id: 322,
-      image:
-        'https://shopbucket.s3.ap-northeast-2.amazonaws.com/%EB%B2%85%EC%8A%A41.jpg',
-      title: '벅스펫 국내산 유기농 베지믹스 관절건강 사료',
-      price: 51990,
-      company: '벨리스',
-      count: 3,
-    },
   ]);
+  const [total, setTotal] = useState(0);
+  const [shipping, setShipping] = useState(2500);
+  const [sale, setSale] = useState(2500);
+  const [result, setResult] = useState(0);
+
+  const onRemove = (e) => {
+    e.persist();
+    async function callAPI() {
+      try {
+        await shopAPI.removeCart({ id: e.target.name });
+        const response = await shopAPI.getCartItems();
+        setCartItems(response.data.data.bags);
+      } catch (e) {
+        console.log('장바구니 삭제 오류');
+      }
+    }
+    callAPI();
+  };
+
+  useEffect(() => {
+    async function callAPI() {
+      try {
+        const response = await shopAPI.getCartItems();
+        setCartItems(response.data.data.bags);
+      } catch (e) {
+        console.log('불러오기 오류');
+      }
+    }
+    callAPI();
+  }, []);
+
+  useEffect(() => {
+    setTotal(
+      cartItems.map((i) => i.count * i.price).reduce((p, c) => p + c, 0),
+    );
+  }, [cartItems]);
+
+  useEffect(() => {
+    setResult(total + shipping - sale);
+  }, [total, shipping, sale]);
 
   return (
     <ShopCartBlcok>
@@ -196,7 +235,7 @@ const ShopCart = () => {
           </div>
           <div className="cart-area">
             <p className="head">장바구니</p>
-            {items.map((item) => (
+            {cartItems.map((item) => (
               <div className="item" key={item.id}>
                 <Checkbox />
                 <div className="item-content">
@@ -206,15 +245,18 @@ const ShopCart = () => {
                       <p>{item.title}</p>
                       <p className="company">{item.company}</p>
                     </div>
+                    <button name={item.id} onClick={onRemove}>
+                      X
+                    </button>
                   </div>
                   <div className="bottom">
                     <p>옵션내용</p>
                     <div className="result-area">
                       <div>
-                        <Input type="number" value={item.count} />
+                        <Input type="number" value={item.count} readOnly />
                         <Button>변경</Button>
                       </div>
-                      <div className="result">{item.price}원</div>
+                      <div className="result">{item.count * item.price}원</div>
                     </div>
                   </div>
                 </div>
@@ -225,22 +267,24 @@ const ShopCart = () => {
         <div className="right">
           <div className="calc">
             <table>
-              <tr>
-                <td>총 상품금액</td>
-                <td className="price">78000원</td>
-              </tr>
-              <tr>
-                <td>총 배송비</td>
-                <td className="price">+2500원</td>
-              </tr>
-              <tr>
-                <td>총 할인금액</td>
-                <td className="price">-26000원</td>
-              </tr>
-              <tr className="result">
-                <td>결재금액</td>
-                <td className="price">66000원</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td>총 상품금액</td>
+                  <td className="price">{total}</td>
+                </tr>
+                <tr>
+                  <td>총 배송비</td>
+                  <td className="price">+{shipping}</td>
+                </tr>
+                <tr>
+                  <td>총 할인금액</td>
+                  <td className="price">-{sale}</td>
+                </tr>
+                <tr className="result">
+                  <td>결재금액</td>
+                  <td className="price">{result}</td>
+                </tr>
+              </tbody>
             </table>
           </div>
           <Button fullWidth>상품 구매하기</Button>
