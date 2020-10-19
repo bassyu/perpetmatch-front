@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../lib/styles/palette';
 import { GoSearch } from 'react-icons/go';
+import { Menu, Dropdown } from 'antd';
 
 const headerLinks = [
   {
@@ -18,7 +19,7 @@ const headerLinks = [
   {
     key: 'shoplist',
     text: '쇼핑하기',
-    to: '/shop/list',
+    to: '/shop/list/main',
   },
 ];
 
@@ -66,8 +67,21 @@ const HeaderBlock = styled.div`
       font-weight: bold;
       cursor: pointer;
 
-      &:hover {
-        color: ${palette.gray[4]};
+      a {
+        color: ${palette.gray[1]};
+
+        &:hover {
+          color: ${palette.gray[4]};
+        }
+      }
+      .user {
+        margin-left: 1rem;
+        font-size: 1rem;
+        text-decoration: underline;
+
+        &:hover {
+          color: ${palette.gray[4]};
+        }
       }
     }
   }
@@ -102,6 +116,18 @@ const Spacer = styled.div`
 `;
 
 const Header = ({ nickname, onSignout }) => {
+  const menu = (
+    <Menu>
+      <Menu.Item key="0">
+        <Link to="/profile/user">프로필</Link>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="2" onClick={onSignout}>
+        로그아웃
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <>
       <HeaderBlock>
@@ -129,7 +155,11 @@ const Header = ({ nickname, onSignout }) => {
           </div>
           <div className="user-area">
             {nickname ? (
-              <span onClick={onSignout}>{nickname + '님'}</span>
+              <Dropdown overlay={menu} placement="bottomRight">
+                <span>
+                  환영합니다!<span className="user">{nickname}님</span>
+                </span>
+              </Dropdown>
             ) : (
               <Link to="/signin">회원가입 / 로그인</Link>
             )}
