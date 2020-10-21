@@ -13,9 +13,11 @@ const Footer = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   text-align: center;
+
   a {
     font-size: 0.8rem;
     color: black;
+
     &:hover {
       color: ${palette.gray[6]};
     }

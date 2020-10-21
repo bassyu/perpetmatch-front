@@ -1,7 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ListHeader from '../../components/pet/ListHeader';
-import { changeField, getBoards, searchBoards } from '../../modules/pet';
+import {
+  changeField,
+  changeForm,
+  getBoards,
+  searchBoards,
+} from '../../modules/pet';
+import * as profileAPI from '../../lib/api/profile';
 
 const ListHeaderContainer = () => {
   const dispatch = useDispatch();
@@ -16,7 +22,7 @@ const ListHeaderContainer = () => {
     wantCheckUp,
     wantLineAge,
     wantNeutered,
-    credit,
+    expectedFeeForMonth,
   } = searchForm;
 
   const onChange = (e) => {
@@ -25,7 +31,6 @@ const ListHeaderContainer = () => {
     if (['wantCheckUp', 'wantLineAge', 'wantNeutered'].includes(name)) {
       value = e.target.checked;
     }
-    console.log(name, value, searchForm);
     dispatch(
       changeField({
         form: 'searchForm',
@@ -36,8 +41,44 @@ const ListHeaderContainer = () => {
   };
 
   useEffect(() => {
-    const parse = (value) =>
-      value ? JSON.parse(value).map((i) => i.value) : [];
+    async function callAPI() {
+      try {
+        const response = await profileAPI.getUser();
+        const {
+          zones,
+          petTitles,
+          petAges,
+          wantCheckUp,
+          wantLineAge,
+          wantNeutered,
+          expectedFeeForMonth,
+        } = response.data.data;
+
+        const parse = (value) =>
+          value.length ? JSON.stringify(value.map((i) => ({ value: i }))) : '';
+
+        const form = {
+          zones: parse(zones),
+          petTitles: parse(petTitles),
+          petAges: parse(petAges),
+          wantCheckUp,
+          wantLineAge,
+          wantNeutered,
+          expectedFeeForMonth: parseInt(expectedFeeForMonth),
+        };
+        console.log(response, form);
+        dispatch(changeForm({ form }));
+      } catch (e) {
+        console.log('프로필 로딩 오류');
+        console.log(e);
+      }
+    }
+    callAPI();
+  }, [dispatch]);
+
+  useEffect(() => {
+    const parse = (string) =>
+      string ? JSON.parse(string).map((i) => i.value) : [];
 
     const form = {
       zones: parse(zones),
@@ -46,18 +87,18 @@ const ListHeaderContainer = () => {
       wantCheckUp,
       wantLineAge,
       wantNeutered,
-      credit: parseInt(credit),
+      expectedFeeForMonth: parseInt(expectedFeeForMonth),
     };
 
     dispatch(
       [
-        zones,
-        petTitles,
-        petAges,
+        parse(zones).length,
+        parse(petTitles).length,
+        parse(petAges).length,
         wantCheckUp,
         wantLineAge,
         wantNeutered,
-        credit,
+        expectedFeeForMonth,
       ]
         .map((i) => Boolean(i))
         .includes(true)
@@ -72,7 +113,7 @@ const ListHeaderContainer = () => {
     wantCheckUp,
     wantLineAge,
     wantNeutered,
-    credit,
+    expectedFeeForMonth,
   ]);
 
   return (

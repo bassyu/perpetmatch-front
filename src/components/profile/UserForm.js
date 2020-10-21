@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as profileAPI from '../../lib/api/profile';
 import { whiteLocations } from '../../constants/index';
 import styled from 'styled-components';
@@ -49,7 +49,9 @@ const UserForm = ({ history }) => {
     description: '',
     profileImage: '',
   });
+
   const onChange = (e) => {
+    console.log(e.target.value);
     const { value, name } = e.target;
     setForm({ ...form, [name]: value });
   };
@@ -57,18 +59,33 @@ const UserForm = ({ history }) => {
     const { checked, name } = e.target;
     setForm({ ...form, [name]: checked });
   };
-
   const onSubmit = async (e) => {
     e.preventDefault();
-    setForm({ ...form, age: Number(form.age) });
     try {
-      const response = await profileAPI.writeUser(form);
+      console.log({ ...form, age: Number(form.age) });
+      const response = await profileAPI.writeUser({
+        ...form,
+        age: Number(form.age),
+      });
       alert(response.data.message);
       history.push('/profile/taste-form');
-    } catch {
+    } catch (e) {
       alert('프로필 등록 오류');
     }
   };
+
+  useEffect(() => {
+    async function callAPI() {
+      try {
+        const response = await profileAPI.getUser();
+        console.log({ ...response.data.data });
+        setForm({ ...response.data.data });
+      } catch (e) {
+        console.log('프로필 불러오기 오류');
+      }
+    }
+    callAPI();
+  }, []);
 
   return (
     <UserFormBlock>
@@ -81,6 +98,7 @@ const UserForm = ({ history }) => {
               type="number"
               textAlign="center"
               width="12rem"
+              value={form.age}
               onChange={onChange}
             />
           </div>
@@ -90,6 +108,7 @@ const UserForm = ({ history }) => {
               name="occupation"
               textAlign="center"
               width="16rem"
+              value={form.occupation}
               onChange={onChange}
             />
           </div>
@@ -99,6 +118,7 @@ const UserForm = ({ history }) => {
           name="phoneNumber"
           textAlign="center"
           placeholder="숫자만 입력"
+          value={form.phoneNumber}
           onChange={onChange}
         />
         <Comment>
@@ -107,8 +127,13 @@ const UserForm = ({ history }) => {
         </Comment>
         <Row>
           <div>
-            <p>지역</p>
-            <Select name="location" width="7rem" onChange={onChange}>
+            <p>사는 곳</p>
+            <Select
+              name="location"
+              width="7rem"
+              onChange={onChange}
+              value={form.location}
+            >
               {whiteLocations.map((i) => (
                 <option key={i} value={i}>
                   {i}
@@ -124,6 +149,7 @@ const UserForm = ({ history }) => {
                 type="checkbox"
                 width="7rem"
                 onChange={onChangeCheckbox}
+                checked={form.liveAlone}
               />
               <span>#1인가구</span>
             </label>
@@ -136,6 +162,7 @@ const UserForm = ({ history }) => {
                 type="checkbox"
                 width="7rem"
                 onChange={onChangeCheckbox}
+                checked={form.hasPet}
               />
               <span>#보호자</span>
             </label>
@@ -148,12 +175,13 @@ const UserForm = ({ history }) => {
                 type="checkbox"
                 width="7rem"
                 onChange={onChangeCheckbox}
+                checked={form.experience}
               />
               <span>#경험</span>
             </label>
           </div>
         </Row>
-        <p>주택</p>
+        <p>주거형태</p>
         <Row>
           <label>
             <Input
@@ -161,7 +189,8 @@ const UserForm = ({ history }) => {
               name="houseType"
               value="apartment"
               width="9rem"
-              onClick={onChange}
+              onChange={onChange}
+              checked={form.houseType === 'apartment'}
             />
             <span>#공동주택</span>
           </label>
@@ -171,7 +200,8 @@ const UserForm = ({ history }) => {
               name="houseType"
               value="house"
               width="9rem"
-              onClick={onChange}
+              onChange={onChange}
+              checked={form.houseType === 'house'}
             />
             <span>#단독주택</span>
           </label>
@@ -181,7 +211,8 @@ const UserForm = ({ history }) => {
               name="houseType"
               value="etc"
               width="9rem"
-              onClick={onChange}
+              onChange={onChange}
+              checked={form.houseType === 'etc'}
             />
             <span>#비주택</span>
           </label>
@@ -190,7 +221,11 @@ const UserForm = ({ history }) => {
           <Comment>&#8251;{commentMap[form.houseType]}</Comment>
         )}
         <p>한줄소개</p>
-        <Textarea name="description" onChange={onChange} />
+        <Textarea
+          name="description"
+          onChange={onChange}
+          value={form.description}
+        />
         <ButtonWithMarginTop fullWidth>저장</ButtonWithMarginTop>
       </form>
     </UserFormBlock>

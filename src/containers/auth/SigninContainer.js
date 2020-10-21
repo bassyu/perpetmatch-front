@@ -38,6 +38,7 @@ const SigninContainer = ({ history }) => {
   useEffect(() => {
     if (authError) {
       alert('아이디/비밀번호를 다시 확인해주세요');
+      dispatch(initializeForm('authError'));
       return;
     }
     if (accessToken) {
@@ -49,7 +50,7 @@ const SigninContainer = ({ history }) => {
         console.log('localStorage 오류');
       }
     }
-  }, [history, user, accessToken, tokenType, authError]);
+  }, [dispatch, history, user, accessToken, tokenType, authError]);
 
   return <SigninForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };

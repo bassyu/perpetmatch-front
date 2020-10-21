@@ -11,7 +11,7 @@ export const searchBoards = ({
   wantCheckUp,
   wantLineAge,
   wantNeutered,
-  credit,
+  expectedFeeForMonth,
 }) =>
   client.post('/api/boards/profile/search', {
     zones,
@@ -20,5 +20,5 @@ export const searchBoards = ({
     wantCheckUp,
     wantLineAge,
     wantNeutered,
-    credit,
+    expectedFeeForMonth,
   });

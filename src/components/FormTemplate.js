@@ -33,13 +33,11 @@ const WhiteBox = styled.div`
     font-size: 1.25rem;
     letter-spacing: 2px;
   }
-  form {
-    p {
-      font-size: 0.875rem;
-      font-weight: 500;
-      margin-top: 1.75rem;
-      margin-bottom: 0.5rem;
-    }
+  p {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
   }
 `;
 

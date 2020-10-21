@@ -13,19 +13,23 @@ import Tags from '../common/Tags';
 const ListHeaderBlock = styled.div`
   background-color: #c8e0e0;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+
   .wrapper {
     width: 80rem;
     margin: 0 auto;
     padding: 0.125rem 0;
     background: url('/images/sub/sub_visual1.png') no-repeat center;
     background-size: cover;
+
     .top {
       padding-left: 4rem;
+
       p {
         margin-top: 1.5rem;
         color: ${palette.main[0]};
         font-size: 2rem;
         font-weight: 700;
+
         .count {
           font-size: 3rem;
         }
@@ -37,6 +41,7 @@ const ListHeaderBlock = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       p {
         margin-top: 1rem;
         color: ${palette.gray[7]};
@@ -50,6 +55,7 @@ const ListHeaderBlock = styled.div`
 const StyledTags = styled(Tags)`
   width: 14rem;
   margin-right: 1rem;
+
   .tagify__input {
     height: 2.5rem;
     border: none;
@@ -80,8 +86,9 @@ const ListHeader = ({ searchForm, boards, onChange }) => {
     wantCheckUp,
     wantLineAge,
     wantNeutered,
-    credit,
+    expectedFeeForMonth,
   } = searchForm;
+
   const settings = {
     enforceWhitelist: true,
     dropdown: {
@@ -89,6 +96,7 @@ const ListHeader = ({ searchForm, boards, onChange }) => {
       enabled: 0,
     },
   };
+
   return (
     <ListHeaderBlock>
       <div className="wrapper">
@@ -159,8 +167,8 @@ const ListHeader = ({ searchForm, boards, onChange }) => {
           </label>
           <StyledInput
             type="number"
-            name="credit"
-            value={credit}
+            name="expectedFeeForMonth"
+            value={expectedFeeForMonth}
             placeholder="최대 껌"
             onChange={onChange}
           />

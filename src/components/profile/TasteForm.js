@@ -9,26 +9,23 @@ import {
 import * as profileAPI from '../../lib/api/profile';
 import Button from '../common/Button';
 import Input from '../common/Input';
-import Tags from '../common/Tags';
+import { Select } from 'antd';
 
-const apiMap = {
-  add: {
-    location: profileAPI.addZone,
-    petTitle: profileAPI.addPetTitle,
-    petAge: profileAPI.addPetAge,
-  },
-  remove: {
-    location: profileAPI.removeZone,
-    petTitle: profileAPI.removePetTitle,
-    petAge: profileAPI.removePetAge,
-  },
-};
+const { Option } = Select;
 
-const TasteFormBlock = styled.div``;
+const TasteFormBlock = styled.div`
+  .ant-select {
+    width: 100%;
+  }
+  .ant-select-selector {
+    min-height: 4rem;
+  }
+`;
 
 const Row = styled.div`
   display: flex;
   justify-content: space-between;
+
   input + input {
     margin-left: 1rem;
   }
@@ -40,54 +37,27 @@ const ButtonWithMarginTop = styled(Button)`
 
 const TasteForm = ({ history }) => {
   const [form, setForm] = useState({
-    age: 0,
-    occupation: '',
-    location: '강원도',
-    houseType: '',
-    experience: false,
-    liveAlone: false,
-    hasPet: false,
-    phoneNumber: '',
-    description: '',
-    profileImage: '',
+    zones: [],
+    petTitles: [],
+    petAges: [],
+    wantCheckUp: false,
+    wantLineAge: false,
+    wantNeutered: false,
   });
 
-  useEffect(() => {
-    async function setFormAPI() {
-      try {
-        const response = await profileAPI.getUser();
-        setForm(response.data.data);
-        console.log('프로필 불러오기 성공');
-      } catch (e) {
-        console.log('프로필 불러오기 오류');
-      }
+  const onChangeSelect = (value) => {
+    if (value.filter((x) => whiteLocations.includes(x)).length) {
+      setForm({ ...form, zones: value });
+    } else if (value.filter((x) => whitePetTitles.includes(x)).length) {
+      setForm({ ...form, petTitles: value });
+    } else if (value.filter((x) => whitePetAges.includes(x)).length) {
+      setForm({ ...form, petAges: value });
     }
-    setFormAPI();
-  }, []);
-
-  const onChangeTags = (e) => {
-    console.log(e);
-    console.log(e.detail.data.value);
-    async function callAPI(e) {
-      try {
-        const response = await apiMap[e.type][e.detail.tagify.settings.name](
-          e.detail.data.value,
-        );
-        console.log(response);
-      } catch (e) {
-        console.log('failure');
-        console.log(e.response);
-      }
-    }
-    callAPI(e);
   };
-
   const onChangeCheckbox = (e) => {
-    e.persist();
-    const { checked, name } = e.target;
+    let { name, checked } = e.target;
     setForm({ ...form, [name]: checked });
   };
-
   const onSubmit = async (e) => {
     e.preventDefault();
     setForm({ ...form, age: Number(form.age) });
@@ -101,44 +71,55 @@ const TasteForm = ({ history }) => {
     }
   };
 
-  const settings = {
-    enforceWhitelist: true,
-    dropdown: {
-      position: 'input',
-      enabled: 0,
-    },
-    callbacks: {
-      add: onChangeTags,
-      remove: onChangeTags,
-    },
-  };
+  useEffect(() => {
+    async function callAPI() {
+      try {
+        const response = await profileAPI.getUser();
+        console.log(response);
+        const {
+          zones,
+          petTitles,
+          petAges,
+          wantCheckUp,
+          wantLineAge,
+          wantNeutered,
+        } = response.data.data;
+
+        setForm({
+          zones,
+          petTitles,
+          petAges,
+          wantCheckUp,
+          wantLineAge,
+          wantNeutered,
+        });
+      } catch (e) {
+        console.log('프로필 불러오기 오류');
+      }
+    }
+    callAPI();
+  }, []);
 
   return (
     <TasteFormBlock>
-      <p>거래 지역</p>
-      <Tags
-        settings={{
-          ...settings,
-          name: 'location',
-          whitelist: whiteLocations,
-        }}
-      />
-      <p>품종</p>
-      <Tags
-        settings={{
-          ...settings,
-          name: 'petTitle',
-          whitelist: whitePetTitles,
-        }}
-      />
-      <p>나이</p>
-      <Tags
-        settings={{
-          ...settings,
-          name: 'petAge',
-          whitelist: whitePetAges,
-        }}
-      />
+      <p>원하는 거래 지역</p>
+      <Select mode="multiple" value={form.zones} onChange={onChangeSelect}>
+        {whiteLocations.map((i) => (
+          <Option key={i}>{i}</Option>
+        ))}
+      </Select>
+      <p>원하는 품종</p>
+      <Select mode="multiple" value={form.petTitles} onChange={onChangeSelect}>
+        {whitePetTitles.map((i) => (
+          <Option key={i}>{i}</Option>
+        ))}
+      </Select>
+      <p>원하는 나이</p>
+      <Select mode="multiple" value={form.petAges} onChange={onChangeSelect}>
+        {whitePetAges.map((i) => (
+          <Option key={i}>{i}</Option>
+        ))}
+      </Select>
       <p>기타 희망 내용</p>
       <form onSubmit={onSubmit}>
         <Row>
@@ -148,6 +129,7 @@ const TasteForm = ({ history }) => {
               type="checkbox"
               width="9rem"
               onChange={onChangeCheckbox}
+              checked={form.wantCheckUp}
             />
             <span>#건강검진</span>
           </label>
@@ -157,6 +139,7 @@ const TasteForm = ({ history }) => {
               type="checkbox"
               width="9rem"
               onChange={onChangeCheckbox}
+              checked={form.wantLineAge}
             />
             <span>#혈통서</span>
           </label>
@@ -166,6 +149,7 @@ const TasteForm = ({ history }) => {
               type="checkbox"
               width="9rem"
               onChange={onChangeCheckbox}
+              checked={form.wantNeutered}
             />
             <span>#중성화</span>
           </label>

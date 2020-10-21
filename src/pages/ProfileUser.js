@@ -115,7 +115,7 @@ const ProfileUser = () => {
             <div className="brief">
               <div className="top">
                 <span className="username">유강현님</span>
-                <Link>프로필수정</Link>
+                <Link to="/profile/user-form">프로필수정</Link>
               </div>
               <div className="tags">태구</div>
             </div>

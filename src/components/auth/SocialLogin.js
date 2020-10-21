@@ -48,7 +48,7 @@ const SocialButton = styled.button`
 
 const SocialLogin = () => {
   const onClick = (e) => {
-    window.location.href = socialMap[e.target.name]['url'];
+    window.location.href = GOOGLE_AUTH_URL;
     //window.open(GOOGLE_AUTH_URL);
   };
 

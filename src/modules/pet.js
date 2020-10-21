@@ -7,6 +7,7 @@ import * as petAPI from '../lib/api/pet';
 
 // constants
 const CHANGE_FILED = 'pet/CHANGE_FILED';
+const CHANGE_FORM = 'pet/CHANGE_FORM';
 const [
   GET_BOARDS,
   GET_BOARDS_SUCCESS,
@@ -27,6 +28,7 @@ export const changeField = createAction(
     value,
   }),
 );
+export const changeForm = createAction(CHANGE_FORM, ({ form }) => ({ form }));
 export const getBoards = createAction(GET_BOARDS, () => {});
 export const searchBoards = createAction(
   SEARCH_BOARDS,
@@ -37,7 +39,7 @@ export const searchBoards = createAction(
     wantCheckUp,
     wantLineAge,
     wantNeutered,
-    credit,
+    expectedFeeForMonth,
   }) => ({
     zones,
     petTitles,
@@ -45,7 +47,7 @@ export const searchBoards = createAction(
     wantCheckUp,
     wantLineAge,
     wantNeutered,
-    credit,
+    expectedFeeForMonth,
   }),
 );
 
@@ -67,7 +69,7 @@ const initialState = {
     wantCheckUp: false,
     wantLineAge: false,
     wantNeutered: false,
-    credi: 150000,
+    expectedFeeForMonth: 150000,
   },
   boards: [
     {
@@ -100,9 +102,13 @@ const pet = handleActions(
         [key]: value,
       },
     }),
+    [CHANGE_FORM]: (state, { payload: { form } }) => ({
+      ...state,
+      searchForm: form,
+    }),
     [GET_BOARDS_SUCCESS]: (state, { payload: response }) => ({
       ...state,
-      boards: response.data.data.content,
+      boards: response.data.data,
     }),
     [GET_BOARDS_FAILURE]: (state, { payload: error }) => ({
       ...state,
@@ -110,7 +116,7 @@ const pet = handleActions(
     }),
     [SEARCH_BOARDS_SUCCESS]: (state, { payload: response }) => ({
       ...state,
-      boards: response.data.data.content,
+      boards: response.data.data,
     }),
     [SEARCH_BOARDS_FAILURE]: (state, { payload: error }) => ({
       ...state,
