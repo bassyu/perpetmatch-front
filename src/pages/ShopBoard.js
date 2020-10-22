@@ -119,6 +119,7 @@ const ShopBoardBlock = styled.div`
           font-family: Montserrat;
           font-size: 3rem;
           font-weight: 700;
+
           .sub {
             font-size: 2rem;
             font-weight: 500;
@@ -128,6 +129,7 @@ const ShopBoardBlock = styled.div`
       .btn-area {
         margin-top: 1.5rem;
         display: flex;
+
         button {
           width: 48%;
           height: 4rem;
@@ -297,9 +299,6 @@ const ShopBoard = ({ history, match }) => {
   const [fix, setFix] = useState(false);
   const [count, setCount] = useState(1);
 
-  const onScroll = () => {
-    setFix(headerTop < window.scrollY);
-  };
   const onChangeCount = (e) => {
     setCount(e.target.value);
   };
@@ -328,7 +327,16 @@ const ShopBoard = ({ history, match }) => {
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
-    window.addEventListener('scroll', throttle(onScroll, 100));
+
+    const onScroll = () => {
+      setFix(headerTop < window.scrollY);
+    };
+    const onScrollThrottle = throttle(onScroll, 100);
+
+    window.addEventListener('scroll', onScrollThrottle);
+    return () => {
+      window.removeEventListener('scroll', onScrollThrottle);
+    };
   }, []);
 
   useEffect(() => {
