@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import palette from '../lib/styles/palette';
+import { FaFacebook, FaYoutube, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const FooterLine = styled.hr`
   border: 0;
@@ -15,7 +16,7 @@ const FooterBlock = styled.div`
   top: fixed;
   left: 0;
   right: 0;
-  background-color: ${palette.main[0]};
+  background-color: ${palette.main};
   color: #204030;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
   .wrapper {
@@ -53,6 +54,9 @@ const FooterBlock = styled.div`
         padding-right: 7px;
         padding-bottom: 45px;
       }
+      a + a {
+        margin-left: 1rem;
+      }
     }
   }
 `;
@@ -80,12 +84,18 @@ const Footer = () => {
             </p>
           </div>
           <div className="footer-sns">
-            <img src="/images/common/footer_sns1.png" alt="sns-img" />
-            <img src="/images/common/footer_sns2.png" alt="sns-img" />
-            <img src="/images/common/footer_sns3.png" alt="sns-img" />
-            <img src="/images/common/footer_sns4.png" alt="sns-img" />
-            <img src="/images/common/footer_sns5.png" alt="sns-img" />
-            <img src="/images/common/footer_sns6.png" alt="sns-img" />
+            <a href="http://www.youtube.com">
+              <FaYoutube size="2.5rem" color="red" />
+            </a>
+            <a href="http://www.facebook.com">
+              <FaFacebook size="2.5rem" color={palette.facebook} />
+            </a>
+            <a href="http://www.instagram.com">
+              <FaInstagram size="2.5rem" color={palette.instagram} />
+            </a>
+            <a href="http://www.twitter.com">
+              <FaTwitter size="2.5rem" color={palette.twitter} />
+            </a>
           </div>
         </div>
         <FooterLine></FooterLine>

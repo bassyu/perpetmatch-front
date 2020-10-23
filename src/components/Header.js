@@ -29,7 +29,7 @@ const HeaderBlock = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  background-color: ${palette.main[0]};
+  background-color: ${palette.main};
   color: #204030;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 
@@ -97,7 +97,7 @@ const HeaderLink = styled(NavLink)`
   text-decoration: none;
 
   &:hover {
-    color: ${palette.main[1]};
+    color: ${palette.hover};
   }
   & + & {
     margin-left: 3rem;
@@ -142,7 +142,7 @@ const Header = ({ nickname, onSignout }) => {
               key={i.key}
               to={i.to}
               activeStyle={{
-                color: palette.main[1],
+                color: palette.hover,
               }}
             >
               {i.text}

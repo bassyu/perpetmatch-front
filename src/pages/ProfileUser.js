@@ -66,7 +66,7 @@ const ProfileUserBlock = styled.div`
             }
             a {
               padding-top: 0.5rem;
-              color: ${palette.sub[0]};
+              color: ${palette.sub};
             }
           }
         }
@@ -127,8 +127,8 @@ const ProfileUser = () => {
                 key={i.to}
                 to={i.to}
                 activeStyle={{
-                  borderBottom: `solid 0.25rem ${palette.sub[0]}`,
-                  color: palette.sub[0],
+                  borderBottom: `solid 0.25rem ${palette.sub}`,
+                  color: palette.sub,
                 }}
               >
                 {i.text}

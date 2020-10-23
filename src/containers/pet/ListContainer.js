@@ -19,15 +19,13 @@ const ListContainer = () => {
     const onScroll = () => {
       if (
         window.scrollY + document.documentElement.clientHeight >
-        document.documentElement.scrollHeight - 600
+        document.documentElement.scrollHeight - 400
       ) {
-        console.log('loading ');
         dispatch(searchBoards(searchForm));
       }
     };
     const onScrollThrottle = throttle(onScroll, 100);
 
-    console.log(searchForm);
     window.addEventListener('scroll', onScrollThrottle);
     return () => {
       window.removeEventListener('scroll', onScrollThrottle);

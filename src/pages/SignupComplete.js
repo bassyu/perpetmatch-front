@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/common/Button';
@@ -6,7 +6,7 @@ import FormTemplate from '../components/FormTemplate';
 import palette from '../lib/styles/palette';
 
 const Content = styled.div`
-  color: ${palette.main[0]};
+  color: ${palette.main};
   font-size: 1.25rem;
   text-align: center;
   padding: 0 3rem;

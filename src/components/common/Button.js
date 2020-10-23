@@ -6,7 +6,7 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 4px;
   padding: 0.25rem 1rem;
-  background: ${(props) => props.background || palette.sub[0]};
+  background: ${(props) => props.background || palette.sub};
   font-size: 0.75rem;
   font-weight: bold;
   color: white;
@@ -27,7 +27,7 @@ const StyledButton = styled.button`
   ${(props) =>
     props.main &&
     css`
-      background: ${palette.main[0]};
+      background: ${palette.main};
       &:hover {
         opacity: 0.8;
       }

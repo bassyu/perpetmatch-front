@@ -91,6 +91,10 @@ const ShopListBlock = styled.div`
         color: ${palette.gray[6]};
         font-size: 1.125rem;
         font-weight: 700;
+
+        &:hover {
+          color: ${palette.sub};
+        }
       }
     }
   }
@@ -112,7 +116,7 @@ const ShopListBlock = styled.div`
     p {
       margin-top: 3rem;
       margin-bottom: 1.5rem;
-      color: ${palette.main[0]};
+      color: ${palette.main};
       font-size: 2rem;
       font-weight: 700;
     }
@@ -151,7 +155,7 @@ const ShopListBlock = styled.div`
         }
         .company {
           margin-top: 0.5rem;
-          color: ${palette.sub[0]};
+          color: ${palette.sub};
           font-weight: 700;
         }
         .title {
@@ -167,7 +171,7 @@ const ShopListBlock = styled.div`
           font-weight: 500;
 
           .sale {
-            color: ${palette.sub[0]};
+            color: ${palette.sub};
             font-weight: 700;
           }
           .sub {
@@ -211,7 +215,7 @@ const ShopListBlock = styled.div`
         margin-top: 0;
         margin-bottom: 1rem;
         text-align: center;
-        color: ${palette.main[0]};
+        color: ${palette.main};
         font-size: 2rem;
         font-weight: 700;
       }
@@ -322,8 +326,8 @@ const ShopList = ({ match }) => {
               key={i.to}
               to={i.to}
               activeStyle={{
-                borderBottom: `solid 0.25rem ${palette.sub[0]}`,
-                color: palette.sub[0],
+                borderBottom: `solid 0.25rem ${palette.sub}`,
+                color: palette.sub,
               }}
             >
               {i.text}
@@ -363,9 +367,11 @@ const ShopList = ({ match }) => {
               ))}
             </ul>
             <div className="btn-area">
-              <Button fullWidth>
-                다른 상품 더 보기 <AiOutlineArrowRight size="1rem" />
-              </Button>
+              <Link to="/shop/list/feeds">
+                <Button fullWidth>
+                  다른 상품 더 보기 <AiOutlineArrowRight size="1rem" />
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="slider">
@@ -408,9 +414,11 @@ const ShopList = ({ match }) => {
               ))}
             </ul>
             <div className="btn-area">
-              <Button fullWidth>
-                다른 상품 더 보기 <AiOutlineArrowRight size="1rem" />
-              </Button>
+              <Link to="/shop/list/feeds">
+                <Button fullWidth>
+                  다른 상품 더 보기 <AiOutlineArrowRight size="1rem" />
+                </Button>
+              </Link>
             </div>
           </div>
         </>

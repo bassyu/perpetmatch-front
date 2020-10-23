@@ -10,8 +10,8 @@ const StyledSelect = styled.select`
   outline: none;
   width: ${({ width }) => width || '100%'};
   text-align-last: center;
-  border: solid 0.08rem ${palette.sub[0]};
-  background: ${palette.sub[0]};
+  border: solid 0.08rem ${palette.sub};
+  background: ${palette.sub};
   -webkit-appearance: none;
 `;
 

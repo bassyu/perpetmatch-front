@@ -6,6 +6,12 @@ import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 import * as petAPI from '../lib/api/pet';
 import { Tag } from 'antd';
+import { Link } from 'react-router-dom';
+import {
+  FaFacebookSquare,
+  FaTwitterSquare,
+  FaInstagramSquare,
+} from 'react-icons/fa';
 
 const genderMap = {
   MALE: '남아',
@@ -39,9 +45,11 @@ const PetBoardBlock = styled.div`
         font-weight: 700;
       }
       p {
+        margin-bottom: 0.5rem;
         border-bottom: solid 0.125rem ${palette.gray[4]};
-        padding-bottom: 0.5rem;
+        padding: 0.5rem 0;
         font-size: 1rem;
+        font-weight: 500;
       }
       .tags {
         margin: 1.5rem 0;
@@ -56,7 +64,7 @@ const PetBoardBlock = styled.div`
       .price-area {
         font-family: Montserrat;
         font-size: 2rem;
-        color: ${palette.sub[0]};
+        color: ${palette.sub};
 
         .price {
           font-weight: 500;
@@ -72,8 +80,8 @@ const PetBoardBlock = styled.div`
           height: 3rem;
           font-size: 1.125rem;
         }
-        button + button {
-          margin-left: 0.5rem;
+        a + button {
+          margin-left: 1rem;
         }
       }
       .share-area {
@@ -155,7 +163,7 @@ const PetBoard = ({ match }) => {
           {board.closed ? (
             <Tag color="red">입양완료</Tag>
           ) : (
-            <Tag color="green">입양가능</Tag>
+            <Tag color="blue">입양가능</Tag>
           )}
           <div className="title">{board.title}</div>
           <div className="tags">
@@ -170,14 +178,22 @@ const PetBoard = ({ match }) => {
             <span className="price">{board.credit}</span>껌
           </div>
           <div className="btn-area">
-            <Button background={'#8164ae'}>신 청</Button>
+            <Link to={`/pet/board/${board.id}/apply`}>
+              <Button background={'#8164ae'}>신 청</Button>
+            </Link>
             <Button>관심글 등록</Button>
           </div>
           <div className="share-area">
             <p>공유하기</p>
-            <img src="/images/sub/btn_share1.png" alt="페이스북" />
-            <img src="/images/sub/btn_share2.png" alt="카카오톡" />
-            <img src="/images/sub/btn_share3.png" alt="공유하기" />
+            <a href="http://www.facebook.com">
+              <FaFacebookSquare size="3rem" color={palette.facebook} />
+            </a>
+            <a href="http://www.twitter.com">
+              <FaTwitterSquare size="3rem" color={palette.twitter} />
+            </a>
+            <a href="http://www.instagram.com">
+              <FaInstagramSquare size="3rem" color={palette.instagram} />
+            </a>
           </div>
         </div>
       </div>

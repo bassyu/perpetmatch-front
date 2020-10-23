@@ -26,7 +26,7 @@ const ListHeaderBlock = styled.div`
 
       p {
         margin-top: 1.5rem;
-        color: ${palette.main[0]};
+        color: ${palette.main};
         font-size: 2rem;
         font-weight: 700;
 

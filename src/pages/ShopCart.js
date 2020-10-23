@@ -47,7 +47,7 @@ const ShopCartBlcok = styled.div`
           border-bottom: solid 0.01rem ${palette.gray[6]};
           padding-bottom: 1.25rem;
           text-align: center;
-          color: ${palette.main[0]};
+          color: ${palette.main};
           font-size: 1.125rem;
           font-weight: 700;
         }

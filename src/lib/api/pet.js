@@ -23,3 +23,5 @@ export const searchBoards = ({
     wantNeutered,
     expectedFeeForMonth,
   });
+
+export const applyBoard = ({ id }) => client.post(`/api/boards/${id}/apply`);

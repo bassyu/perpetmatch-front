@@ -54,7 +54,7 @@ const ShopBoardBlock = styled.div`
 
         .company {
           margin: 0;
-          color: ${palette.sub[0]};
+          color: ${palette.sub};
           font-size: 1.25rem;
           font-weight: 700;
         }
@@ -72,7 +72,7 @@ const ShopBoardBlock = styled.div`
         font-weight: 500;
 
         .sale {
-          color: ${palette.sub[0]};
+          color: ${palette.sub};
           font-weight: 700;
         }
         .price {
@@ -115,7 +115,7 @@ const ShopBoardBlock = styled.div`
         }
         .result {
           margin-left: auto;
-          color: ${palette.sub[0]};
+          color: ${palette.sub};
           font-family: Montserrat;
           font-size: 3rem;
           font-weight: 700;
@@ -267,7 +267,7 @@ const ShopBoardBlock = styled.div`
         margin-bottom: 2rem;
 
         table {
-          color: ${palette.main[0]};
+          color: ${palette.main};
           font-size: 1rem;
           font-weight: 500;
 
@@ -283,7 +283,7 @@ const ShopBoardBlock = styled.div`
   select {
     width: 100%;
     height: 4.25rem;
-    border: solid 0.125rem ${palette.sub[0]};
+    border: solid 0.125rem ${palette.sub};
     padding: 0 1rem;
     text-align-last: left;
     background: white;

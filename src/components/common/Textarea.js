@@ -13,7 +13,7 @@ const StyledTextarea = styled.textarea`
   resize: none;
   &:focus {
     color: $oc-teal-7;
-    border: solid 0.08rem ${palette.main[0]};
+    border: solid 0.08rem ${palette.main};
   }
   &::placeholder {
     font-size: 0.75rem;

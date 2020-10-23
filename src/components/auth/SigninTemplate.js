@@ -9,7 +9,7 @@ const SigninTemplateBlock = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background: ${palette.main[0]};
+  background: ${palette.main};
 
   display: fixed;
   flex-direction: column;

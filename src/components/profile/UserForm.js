@@ -30,7 +30,7 @@ const ButtonWithMarginTop = styled(Button)`
 `;
 
 const Comment = styled.div`
-  color: ${palette.main[0]};
+  color: ${palette.main};
   font-size: 0.75rem;
   margin-top: 0.5rem;
   padding-left: 0.2rem;
@@ -48,6 +48,7 @@ const UserForm = ({ history }) => {
     phoneNumber: '',
     description: '',
     profileImage: '',
+    expectedFeeForMonth: 150000,
   });
 
   const onChange = (e) => {

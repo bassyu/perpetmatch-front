@@ -13,7 +13,7 @@ const ListBlock = styled.div`
   p {
     margin-top: 4rem;
     margin-bottom: 2rem;
-    color: ${palette.main[0]};
+    color: ${palette.main};
     font-size: 2rem;
     font-weight: 700;
 
@@ -44,7 +44,7 @@ const ListBlock = styled.div`
       .title {
         border-bottom: 0.01rem solid ${palette.gray[4]};
         padding: 0.5rem 0;
-        color: ${palette.main[0]};
+        color: ${palette.main};
         font-size: 1.25rem;
         font-weight: 500;
       }
@@ -59,7 +59,7 @@ const ListBlock = styled.div`
         }
       }
       .price-area {
-        color: ${palette.sub[0]};
+        color: ${palette.sub};
         font-family: Montserrat;
         font-size: 2rem;
 
@@ -91,7 +91,7 @@ const List = ({ boards }) => {
                 {board.closed ? (
                   <Tag color="red">입양완료</Tag>
                 ) : (
-                  <Tag color="green">입양가능</Tag>
+                  <Tag color="blue">입양가능</Tag>
                 )}
                 {board.title.substr(0, 16)}...
               </div>
