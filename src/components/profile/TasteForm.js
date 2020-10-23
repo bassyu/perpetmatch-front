@@ -10,7 +10,7 @@ import * as profileAPI from '../../lib/api/profile';
 import Button from '../common/Button';
 import Input from '../common/Input';
 import { Select } from 'antd';
-
+import palette from '../../lib/styles/palette';
 const { Option } = Select;
 
 const TasteFormBlock = styled.div`
@@ -35,6 +35,13 @@ const ButtonWithMarginTop = styled(Button)`
   margin-top: 3rem;
 `;
 
+const Comment = styled.div`
+  color: ${palette.main[0]};
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  padding-left: 0.2rem;
+`;
+
 const TasteForm = ({ history }) => {
   const [form, setForm] = useState({
     zones: [],
@@ -46,13 +53,18 @@ const TasteForm = ({ history }) => {
   });
 
   const onChangeSelect = (value) => {
-    if (value.filter((x) => whiteLocations.includes(x)).length) {
-      setForm({ ...form, zones: value });
-    } else if (value.filter((x) => whitePetTitles.includes(x)).length) {
-      setForm({ ...form, petTitles: value });
-    } else if (value.filter((x) => whitePetAges.includes(x)).length) {
-      setForm({ ...form, petAges: value });
+    if (!value.length) {
+      return;
     }
+    let newForm = { ...form };
+    if (value.filter((i) => whiteLocations.includes(i)).length) {
+      newForm = { ...form, zones: value };
+    } else if (value.filter((i) => whitePetTitles.includes(i)).length) {
+      newForm = { ...form, petTitles: value };
+    } else if (value.filter((i) => whitePetAges.includes(i)).length) {
+      newForm = { ...form, petAges: value };
+    }
+    setForm(newForm);
   };
   const onChangeCheckbox = (e) => {
     let { name, checked } = e.target;
@@ -60,7 +72,7 @@ const TasteForm = ({ history }) => {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    setForm({ ...form, age: Number(form.age) });
+    console.log(form);
     try {
       const response = await profileAPI.writeUser(form);
       alert(response.data.message);
@@ -75,23 +87,43 @@ const TasteForm = ({ history }) => {
     async function callAPI() {
       try {
         const response = await profileAPI.getUser();
-        console.log(response);
         const {
-          zones,
-          petTitles,
-          petAges,
+          age,
+          occupation,
+          location,
+          houseType,
+          experience,
+          liveAlone,
+          hasPet,
+          expectedFeeForMonth,
+          phoneNumber,
+          description,
+          profileImage,
           wantCheckUp,
           wantLineAge,
           wantNeutered,
+          zones,
+          petTitles,
+          petAges,
         } = response.data.data;
-
         setForm({
-          zones,
-          petTitles,
-          petAges,
+          age,
+          occupation,
+          location,
+          houseType,
+          experience,
+          liveAlone,
+          hasPet,
+          expectedFeeForMonth,
+          phoneNumber,
+          description,
+          profileImage,
           wantCheckUp,
           wantLineAge,
           wantNeutered,
+          zones,
+          petTitles,
+          petAges,
         });
       } catch (e) {
         console.log('프로필 불러오기 오류');
@@ -102,26 +134,39 @@ const TasteForm = ({ history }) => {
 
   return (
     <TasteFormBlock>
-      <p>원하는 거래 지역</p>
-      <Select mode="multiple" value={form.zones} onChange={onChangeSelect}>
-        {whiteLocations.map((i) => (
-          <Option key={i}>{i}</Option>
-        ))}
-      </Select>
-      <p>원하는 품종</p>
-      <Select mode="multiple" value={form.petTitles} onChange={onChangeSelect}>
-        {whitePetTitles.map((i) => (
-          <Option key={i}>{i}</Option>
-        ))}
-      </Select>
-      <p>원하는 나이</p>
-      <Select mode="multiple" value={form.petAges} onChange={onChangeSelect}>
-        {whitePetAges.map((i) => (
-          <Option key={i}>{i}</Option>
-        ))}
-      </Select>
-      <p>기타 희망 내용</p>
       <form onSubmit={onSubmit}>
+        <p>원하는 거래 지역</p>
+        <Select mode="multiple" value={form.zones} onChange={onChangeSelect}>
+          {whiteLocations.map((i) => (
+            <Option key={i}>{i}</Option>
+          ))}
+        </Select>
+        {form.zones.length ? null : (
+          <Comment>&#8251; 최소 1개 이상 적어주세요!</Comment>
+        )}
+        <p>원하는 품종</p>
+        <Select
+          mode="multiple"
+          value={form.petTitles}
+          onChange={onChangeSelect}
+        >
+          {whitePetTitles.map((i) => (
+            <Option key={i}>{i}</Option>
+          ))}
+        </Select>
+        {form.petTitles.length ? null : (
+          <Comment>&#8251; 최소 1개 이상 적어주세요!</Comment>
+        )}
+        <p>원하는 나이</p>
+        <Select mode="multiple" value={form.petAges} onChange={onChangeSelect}>
+          {whitePetAges.map((i) => (
+            <Option key={i}>{i}</Option>
+          ))}
+        </Select>
+        {form.petAges.length ? null : (
+          <Comment>&#8251; 최소 1개 이상 적어주세요!</Comment>
+        )}
+        <p>기타 희망 내용</p>
         <Row>
           <label>
             <Input

@@ -8,6 +8,7 @@ import * as petAPI from '../lib/api/pet';
 // constants
 const CHANGE_FILED = 'pet/CHANGE_FILED';
 const CHANGE_FORM = 'pet/CHANGE_FORM';
+const INIT_BOARDS = 'pet/INIT_BOARDS';
 const [
   GET_BOARDS,
   GET_BOARDS_SUCCESS,
@@ -29,10 +30,12 @@ export const changeField = createAction(
   }),
 );
 export const changeForm = createAction(CHANGE_FORM, ({ form }) => ({ form }));
+export const initBoards = createAction(INIT_BOARDS, () => {});
 export const getBoards = createAction(GET_BOARDS, () => {});
 export const searchBoards = createAction(
   SEARCH_BOARDS,
   ({
+    page,
     zones,
     petTitles,
     petAges,
@@ -41,6 +44,7 @@ export const searchBoards = createAction(
     wantNeutered,
     expectedFeeForMonth,
   }) => ({
+    page,
     zones,
     petTitles,
     petAges,
@@ -63,33 +67,17 @@ export function* petSaga() {
 // reducer
 const initialState = {
   searchForm: {
-    zones: '',
-    petTitles: '',
-    petAges: '',
+    page: 1,
+    zones: [],
+    petTitles: [],
+    petAges: [],
     wantCheckUp: false,
     wantLineAge: false,
     wantNeutered: false,
     expectedFeeForMonth: 150000,
   },
-  boards: [
-    {
-      id: 286,
-      title: '버려진 포메 보호하고 있습니다',
-      credit: 150000,
-      year: 1,
-      month: 11,
-      tags: [
-        '서울특별시',
-        '치와와',
-        '1년~7년',
-        '건강검진증',
-        '혈통서',
-        '중성화',
-      ],
-      boardImage1: '/images/sub/img_adopt1.png',
-      createdAt: '2020-09-25',
-    },
-  ],
+  boards: [],
+  boardsLength: 0,
   petError: null,
 };
 
@@ -99,16 +87,22 @@ const pet = handleActions(
       ...state,
       [form]: {
         ...state[form],
+        page: 0,
         [key]: value,
       },
     }),
     [CHANGE_FORM]: (state, { payload: { form } }) => ({
       ...state,
-      searchForm: form,
+      searchForm: { ...form, page: 0 },
+    }),
+    [INIT_BOARDS]: (state) => ({
+      ...state,
+      boards: [],
     }),
     [GET_BOARDS_SUCCESS]: (state, { payload: response }) => ({
       ...state,
-      boards: response.data.data,
+      searchForm: { ...state.searchForm, page: state.searchForm.page + 1 },
+      boards: state.boards.concat(response.data.data.content),
     }),
     [GET_BOARDS_FAILURE]: (state, { payload: error }) => ({
       ...state,
@@ -116,7 +110,9 @@ const pet = handleActions(
     }),
     [SEARCH_BOARDS_SUCCESS]: (state, { payload: response }) => ({
       ...state,
-      boards: response.data.data,
+      searchForm: { ...state.searchForm, page: state.searchForm.page + 1 },
+      boards: state.boards.concat(response.data.data.content),
+      boardsLength: response.data.data.totalElements,
     }),
     [SEARCH_BOARDS_FAILURE]: (state, { payload: error }) => ({
       ...state,

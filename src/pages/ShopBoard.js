@@ -247,9 +247,21 @@ const ShopBoardBlock = styled.div`
       ul {
         padding-left: 15rem;
       }
-      .review {
+      .reviews {
+        .review {
+          margin: 1rem 0;
+          border-bottom: solid 0.01rem ${palette.gray[5]};
+          padding: 1rem 0;
+
+          .title {
+            margin: 0.25rem;
+          }
+          img {
+            width: 8rem;
+          }
+        }
       }
-      .question {
+      .questions {
       }
       .exchange {
         margin-bottom: 2rem;
@@ -431,11 +443,24 @@ const ShopBoard = ({ history, match }) => {
       <div className="content">
         <div className="wrapper">
           <img src={item.boardImageMain} alt="main-img" />
-          <div className="review">
+          <div className="reviews">
             <p>리뷰</p>
+            <div className="review">
+              <div className="title">건이은채</div>
+              <div className="title">옵션 : L / 품종 : 포메라니안</div>
+              <img src="/images/sub/review.png" alt="review-img" />
+              <div className="description">
+                아기가 기절했어요. 기절방석 맞네요 강아지랑 싸워요{' '}
+              </div>
+            </div>
+            <div className="review">
+              <div className="title">강강술래</div>
+              <div className="title">옵션 : M / 품종 : 푸들</div>
+              <div className="description">빠른배송 만족합니다!</div>
+            </div>
             <Pagination defaultCurrent={1} total={50} />
           </div>
-          <div className="question">
+          <div className="questions">
             <p>문의</p>
             <Pagination defaultCurrent={1} total={50} />
           </div>

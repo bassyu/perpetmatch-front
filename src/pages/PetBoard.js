@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 import * as petAPI from '../lib/api/pet';
+import { Tag } from 'antd';
 
 const genderMap = {
   MALE: '남아',
@@ -26,11 +27,14 @@ const PetBoardBlock = styled.div`
       float: right;
       height: 1rem;
       margin-right: 8rem;
-      width: 20rem;
+      width: 21rem;
 
+      .ant-tag {
+        margin-top: 0.5rem;
+      }
       .title {
         border-bottom: solid 0.25rem;
-        padding-bottom: 1.5rem;
+        padding: 1rem 0;
         font-size: 1.5rem;
         font-weight: 700;
       }
@@ -61,7 +65,7 @@ const PetBoardBlock = styled.div`
         }
       }
       .btn-area {
-        margin: 2rem 0;
+        margin: 1rem 0;
 
         button {
           width: 9.75rem;
@@ -94,6 +98,12 @@ const PetBoardBlock = styled.div`
       img + img {
         margin-top: 1rem;
       }
+      p {
+        border-bottom: solid 0.125rem ${palette.gray[4]};
+        padding: 1rem 0;
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
       .description {
         font-size: 1.25rem;
       }
@@ -103,7 +113,7 @@ const PetBoardBlock = styled.div`
 
 const PetBoard = ({ match }) => {
   const id = match.params.id;
-  const [data, setData] = useState({
+  const [board, setBoard] = useState({
     id: null,
     manager: '',
     title: '.',
@@ -121,6 +131,7 @@ const PetBoard = ({ match }) => {
     boardImage1: '/images/sub/img_adopt1.png',
     boardImage2: '',
     boardImage3: '',
+    closed: false,
   });
 
   useEffect(() => {
@@ -128,7 +139,7 @@ const PetBoard = ({ match }) => {
     async function getBoardAPI() {
       try {
         const response = await petAPI.getBoard({ id });
-        setData(response.data.data);
+        setBoard(response.data.data);
       } catch (e) {
         console.log('불러오기 오류');
       }
@@ -141,17 +152,22 @@ const PetBoard = ({ match }) => {
       <HeaderContainer />
       <div className="menu">
         <div className="box">
-          <div className="title">{data.title}</div>
+          {board.closed ? (
+            <Tag color="red">입양완료</Tag>
+          ) : (
+            <Tag color="green">입양가능</Tag>
+          )}
+          <div className="title">{board.title}</div>
           <div className="tags">
             {[
-              data.zone,
-              data.gender && genderMap[data.gender],
-              data.petTitle,
-              data.petAge,
+              board.zone,
+              board.gender && genderMap[board.gender],
+              board.petTitle,
+              board.petAge,
             ].map((i) => i && <span>#{i}</span>)}
           </div>
           <div className="price-area">
-            <span className="price">{data.credit}</span>껌
+            <span className="price">{board.credit}</span>껌
           </div>
           <div className="btn-area">
             <Button background={'#8164ae'}>신 청</Button>
@@ -167,10 +183,11 @@ const PetBoard = ({ match }) => {
       </div>
       <div className="context">
         <div className="wrapper">
-          <img src={data.boardImage1} alt="boardImage1" />
-          <img src={data.boardImage2} alt="boardImage2" />
-          <img src={data.boardImage3} alt="boardImage3" />
-          <p className="description">{data.description}</p>
+          <img src={board.boardImage1} alt="boardImage1" />
+          <img src={board.boardImage2} alt="boardImage2" />
+          <img src={board.boardImage3} alt="boardImage3" />
+          <p>아이 설명</p>
+          <div className="description">{board.description}</div>
         </div>
       </div>
       <Footer />

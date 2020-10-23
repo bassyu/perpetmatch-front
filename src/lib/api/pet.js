@@ -5,6 +5,7 @@ export const getBoard = ({ id }) => client.get(`/api/boards/${id}`);
 export const getBoards = () => client.get('/api/boards');
 
 export const searchBoards = ({
+  page,
   zones,
   petTitles,
   petAges,
@@ -13,7 +14,7 @@ export const searchBoards = ({
   wantNeutered,
   expectedFeeForMonth,
 }) =>
-  client.post('/api/boards/profile/search', {
+  client.post(`/api/boards/profile/search?page=${page}`, {
     zones,
     petTitles,
     petAges,

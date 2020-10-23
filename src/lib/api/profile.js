@@ -9,9 +9,15 @@ export const writeUser = ({
   houseType,
   experience,
   liveAlone,
-  howManyPets,
+  hasPet,
   phoneNumber,
   description,
+  wantCheckUp,
+  wantLineAge,
+  wantNeutered,
+  zones,
+  petTitles,
+  petAges,
 }) =>
   client.post('/api/profiles', {
     age,
@@ -20,9 +26,15 @@ export const writeUser = ({
     houseType,
     experience,
     liveAlone,
-    howManyPets,
+    hasPet,
     phoneNumber,
     description,
+    wantCheckUp,
+    wantLineAge,
+    wantNeutered,
+    zones,
+    petTitles,
+    petAges,
   });
 
 export const addPetTitle = ({ petTitle }) =>

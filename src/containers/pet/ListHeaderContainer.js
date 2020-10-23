@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable no-restricted-globals */
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ListHeader from '../../components/pet/ListHeader';
 import {
   changeField,
   changeForm,
   getBoards,
+  initBoards,
   searchBoards,
 } from '../../modules/pet';
 import * as profileAPI from '../../lib/api/profile';
+import {
+  whiteLocations,
+  whitePetAges,
+  whitePetTitles,
+} from '../../constants/index';
 
 const ListHeaderContainer = () => {
   const dispatch = useDispatch();
-  const { searchForm, boards } = useSelector(({ pet }) => ({
+  const { searchForm, boardsLength } = useSelector(({ pet }) => ({
     searchForm: pet.searchForm,
-    boards: pet.boards,
+    boardsLength: pet.boardsLength,
   }));
   const {
+    page,
     zones,
     petTitles,
     petAges,
@@ -27,17 +35,31 @@ const ListHeaderContainer = () => {
 
   const onChange = (e) => {
     e.persist();
-    let { name, value } = e.target;
-    if (['wantCheckUp', 'wantLineAge', 'wantNeutered'].includes(name)) {
-      value = e.target.checked;
-    }
+    const { name, checked } = e.target;
+    dispatch(initBoards());
     dispatch(
       changeField({
         form: 'searchForm',
         key: name,
-        value: value,
+        value: checked,
       }),
     );
+  };
+
+  const onChangeSelect = (value) => {
+    if (!value.length) {
+      return;
+    }
+    let form = { ...searchForm };
+    if (value.filter((i) => whiteLocations.includes(i)).length) {
+      form = { ...searchForm, zones: value };
+    } else if (value.filter((i) => whitePetTitles.includes(i)).length) {
+      form = { ...searchForm, petTitles: value };
+    } else if (value.filter((i) => whitePetAges.includes(i)).length) {
+      form = { ...searchForm, petAges: value };
+    }
+    dispatch(initBoards());
+    dispatch(changeForm({ form }));
   };
 
   useEffect(() => {
@@ -54,47 +76,39 @@ const ListHeaderContainer = () => {
           expectedFeeForMonth,
         } = response.data.data;
 
-        const parse = (value) =>
-          value.length ? JSON.stringify(value.map((i) => ({ value: i }))) : '';
-
         const form = {
-          zones: parse(zones),
-          petTitles: parse(petTitles),
-          petAges: parse(petAges),
+          zones,
+          petTitles,
+          petAges,
           wantCheckUp,
           wantLineAge,
           wantNeutered,
-          expectedFeeForMonth: parseInt(expectedFeeForMonth),
+          expectedFeeForMonth,
         };
-        console.log(response, form);
         dispatch(changeForm({ form }));
       } catch (e) {
         console.log('프로필 로딩 오류');
-        console.log(e);
       }
     }
     callAPI();
   }, [dispatch]);
 
   useEffect(() => {
-    const parse = (string) =>
-      string ? JSON.parse(string).map((i) => i.value) : [];
-
     const form = {
-      zones: parse(zones),
-      petTitles: parse(petTitles),
-      petAges: parse(petAges),
+      page,
+      zones,
+      petTitles,
+      petAges,
       wantCheckUp,
       wantLineAge,
       wantNeutered,
-      expectedFeeForMonth: parseInt(expectedFeeForMonth),
+      expectedFeeForMonth,
     };
-
     dispatch(
       [
-        parse(zones).length,
-        parse(petTitles).length,
-        parse(petAges).length,
+        zones.length,
+        petTitles.length,
+        petAges.length,
         wantCheckUp,
         wantLineAge,
         wantNeutered,
@@ -117,7 +131,12 @@ const ListHeaderContainer = () => {
   ]);
 
   return (
-    <ListHeader searchForm={searchForm} boards={boards} onChange={onChange} />
+    <ListHeader
+      searchForm={searchForm}
+      boardsLength={boardsLength}
+      onChange={onChange}
+      onChangeSelect={onChangeSelect}
+    />
   );
 };
 
