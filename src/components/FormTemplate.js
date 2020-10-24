@@ -15,6 +15,10 @@ const FormTemplateBlock = styled.div`
   justify-content: center;
   align-items: center;
   overflow: auto;
+
+  img {
+    width: 20rem;
+  }
 `;
 
 const WhiteBox = styled.div`

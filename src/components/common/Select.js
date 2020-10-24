@@ -13,6 +13,7 @@ const StyledSelect = styled.select`
   border: solid 0.08rem ${palette.sub};
   background: ${palette.sub};
   -webkit-appearance: none;
+  cursor: pointer;
 `;
 
 const Select = (props) => <StyledSelect {...props} />;
