@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 import * as petAPI from '../lib/api/pet';
-import { Tag } from 'antd';
+import { Tag, message } from 'antd';
 import { Link } from 'react-router-dom';
 import {
   FaFacebookSquare,
@@ -139,20 +139,40 @@ const PetBoard = ({ match }) => {
     boardImage1: '/images/sub/img_adopt1.png',
     boardImage2: '',
     boardImage3: '',
-    closed: false,
+    closed: true,
   });
+  const [applied, setApplied] = useState(false);
+
+  const onClickApply = () => {
+    async function callAPI() {
+      try {
+        await petAPI.applyBoard({ id });
+        await message.info('신청이 취소되었습니다.', 1);
+        window.location.reload();
+      } catch (e) {
+        console.log('신청취소 오류');
+      }
+    }
+    callAPI();
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
-    async function getBoardAPI() {
+    async function callAPI() {
       try {
         const response = await petAPI.getBoard({ id });
         setBoard(response.data.data);
       } catch (e) {
         console.log('불러오기 오류');
       }
+      try {
+        const response = await petAPI.getApplyed({ id });
+        setApplied(response.data.success);
+      } catch (e) {
+        console.log('불러오기 오류');
+      }
     }
-    getBoardAPI();
+    callAPI();
   }, [id]);
 
   return (
@@ -172,27 +192,37 @@ const PetBoard = ({ match }) => {
               board.gender && genderMap[board.gender],
               board.petTitle,
               board.petAge,
-            ].map((i) => i && <span>#{i}</span>)}
+            ].map((i) => i && <span key={i}>#{i}</span>)}
           </div>
           <div className="price-area">
             <span className="price">{board.credit}</span>껌
           </div>
-          <div className="btn-area">
-            <Link to={`/pet/board/${board.id}/apply`}>
-              <Button background={'#8164ae'}>신 청</Button>
-            </Link>
-            <Button>관심글 등록</Button>
-          </div>
+          {board.closed || (
+            <div className="btn-area">
+              {applied ? (
+                <a>
+                  <Button background={palette.gray[6]} onClick={onClickApply}>
+                    신청취소
+                  </Button>
+                </a>
+              ) : (
+                <Link to={`/pet/board/${board.id}/apply`}>
+                  <Button background="#8164ae">신 청</Button>
+                </Link>
+              )}
+              <Button>관심글 등록</Button>
+            </div>
+          )}
           <div className="share-area">
             <p>공유하기</p>
             <a href="http://www.facebook.com">
               <FaFacebookSquare size="3rem" color={palette.facebook} />
             </a>
-            <a href="http://www.twitter.com">
-              <FaTwitterSquare size="3rem" color={palette.twitter} />
-            </a>
             <a href="http://www.instagram.com">
               <FaInstagramSquare size="3rem" color={palette.instagram} />
+            </a>
+            <a href="http://www.twitter.com">
+              <FaTwitterSquare size="3rem" color={palette.twitter} />
             </a>
           </div>
         </div>

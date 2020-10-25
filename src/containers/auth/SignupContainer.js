@@ -45,13 +45,11 @@ const SignupContainer = ({ history }) => {
 
   useEffect(() => {
     if (failure) {
-      console.log('회원가입 오류');
       alert(message);
       dispatch(initializeForm('signupResult'));
       return;
     }
     if (success) {
-      console.log('회원가입 성공');
       alert(message);
       dispatch(signin({ usernameOrEmail: email, password })); // 회원가입 후 자동 로그인
       dispatch(initializeForm('signupResult'));

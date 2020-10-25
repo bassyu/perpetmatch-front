@@ -9,7 +9,7 @@ import {
 import * as profileAPI from '../../lib/api/profile';
 import Button from '../common/Button';
 import Input from '../common/Input';
-import { Select } from 'antd';
+import { Select, message } from 'antd';
 import palette from '../../lib/styles/palette';
 const { Option } = Select;
 
@@ -75,10 +75,10 @@ const TasteForm = ({ history }) => {
     console.log(form);
     try {
       const response = await profileAPI.writeUser(form);
-      alert(response.data.message);
+      await message.success(response.data.message, 1);
       history.push('/pet/list');
     } catch (e) {
-      alert('프로필 등록 오류');
+      await message.error('프로필 등록 오류', 1);
       console.log(e);
     }
   };

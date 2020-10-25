@@ -25,3 +25,6 @@ export const searchBoards = ({
   });
 
 export const applyBoard = ({ id }) => client.post(`/api/boards/${id}/apply`);
+
+export const getApplyed = ({ id }) =>
+  client.get(`/api/boards/${id}/applied_me`);

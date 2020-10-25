@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import SigninForm from '../../components/auth/SigninForm';
 import client from '../../lib/api/client';
 import { changeField, initializeForm, signin } from '../../modules/auth';
+import { message } from 'antd';
 
 const SigninContainer = ({ history }) => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const SigninContainer = ({ history }) => {
 
   useEffect(() => {
     if (authError) {
-      alert('아이디/비밀번호를 다시 확인해주세요');
+      message.warning('아이디/비밀번호를 다시 확인해주세요', 1);
       dispatch(initializeForm('authError'));
       return;
     }

@@ -5,6 +5,7 @@ import Button from '../components/common/Button';
 import FormTemplate from '../components/FormTemplate';
 import palette from '../lib/styles/palette';
 import * as petAPI from '../lib/api/pet';
+import { message } from 'antd';
 
 const StyledBox = styled.div`
   background: white;
@@ -24,22 +25,24 @@ const StyledBox = styled.div`
 `;
 
 const PetBoardApply = ({ match, history }) => {
+  const id = match.params.id;
+
   const onClickApply = () => {
     async function callAPI() {
       try {
-        const response = await petAPI.applyBoard({ id });
-        alert(response.data.message);
+        await petAPI.applyBoard({ id });
+        await message.success('신청이 완료되었습니다!', 1);
         history.goBack();
       } catch (e) {
         console.log('신청하기 오류');
       }
     }
+    callAPI();
   };
   const onClickBack = () => {
     history.goBack();
   };
 
-  const id = match.params.id;
   return (
     <FormTemplate title="신청은 신중하게!">
       <StyledBox>

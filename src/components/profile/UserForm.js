@@ -8,6 +8,7 @@ import Input from '../common/Input';
 import Select from '../common/Select';
 import Textarea from '../common/Textarea';
 import { withRouter } from 'react-router-dom';
+import { message } from 'antd';
 
 const commentMap = {
   apartment: ' 아파트, 연립주택, 대세대주택, 기숙사',
@@ -68,10 +69,10 @@ const UserForm = ({ history }) => {
         ...form,
         age: Number(form.age),
       });
-      alert(response.data.message);
+      await message.success(response.data.message, 1);
       history.push('/profile/taste-form');
     } catch (e) {
-      alert('프로필 등록 오류');
+      await message.error('프로필 등록 오류', 1);
     }
   };
 

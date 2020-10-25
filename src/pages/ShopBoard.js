@@ -6,7 +6,7 @@ import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 import cn from 'classnames';
 import Input from '../components/common/Input';
-import { Pagination } from 'antd';
+import { Pagination, message } from 'antd';
 import throttle from '../lib/throttle';
 import { withRouter } from 'react-router-dom';
 import * as shopAPI from '../lib/api/shop';
@@ -329,7 +329,7 @@ const ShopBoard = ({ history, match }) => {
     async function callAPI() {
       try {
         const response = await shopAPI.addCart({ id, count });
-        alert(response.data.message);
+        message.success(response.data.message);
       } catch (e) {
         console.log('장바구니 추가 오류');
       }

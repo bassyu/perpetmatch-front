@@ -186,7 +186,7 @@ const Form = () => {
           >
             {form.checkUpImage ? null : (
               <div>
-                <PlusOutlined />
+                <UploadOutlined />
                 <div style={{ marginTop: '0.5rem' }}>#건강검진</div>
               </div>
             )}
@@ -202,7 +202,7 @@ const Form = () => {
           >
             {form.lineAgeImage ? null : (
               <div>
-                <PlusOutlined />
+                <UploadOutlined />
                 <div style={{ marginTop: '0.5rem' }}>#혈통서</div>
               </div>
             )}
