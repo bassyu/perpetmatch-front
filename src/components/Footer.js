@@ -11,14 +11,10 @@ const FooterLine = styled.hr`
 `;
 
 const FooterBlock = styled.div`
-  z-index: 3;
-  position: 0;
-  top: fixed;
-  left: 0;
-  right: 0;
   background-color: ${palette.main};
   color: #204030;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+
   .wrapper {
     padding: 0 2rem;
     position: relative;

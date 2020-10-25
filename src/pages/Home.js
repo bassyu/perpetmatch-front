@@ -5,14 +5,6 @@ import Fade from 'react-reveal/Fade';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import Footer from '../components/Footer';
 
-const getDummy = (n = 30) => {
-  const l = [];
-  for (let i = 0; i < n; i++) {
-    l.push(i);
-  }
-  return l.map((i) => <h1 key={i}>{i}</h1>);
-};
-
 const arrowMap = {
   prev: '/images/home/btn_prev.png',
   next: '/images/home/btn_next.png',
@@ -29,10 +21,13 @@ const Arrow = ({ className, onClick, type }) => {
 const HomeBlock = styled.div``;
 
 const SliderWrapper = styled.div`
-  /*.slick-list,
+  .slick-list,
   .slick-track {
-    height: 100%;
-  }*/
+    display: flex !important;
+  }
+  .slick-slide {
+    height: inherit !important;
+  }
   .slick-prev {
     left: 4% !important;
     z-index: 1;
@@ -58,20 +53,29 @@ const SliderWrapper = styled.div`
 `;
 
 const SliderItem = styled.div`
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url(${({ background }) => background});
+  height: ${document.documentElement.scrollHeight - 4.5 * 16 - 10 * 16}px;
   display: flex !important;
   justify-content: center;
   align-items: center;
-
-  //height: 100%;
-  height: 60rem;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+    url(${({ background }) => background});
   background-size: cover;
   background-position: center 20%;
-  color: #fff;
-  .img {
+  color: white;
+
+  div {
+    text-align: center;
+    font-weight: 500;
+
     img {
       width: 32rem;
+    }
+    .head {
+      font-size: 5rem;
+      text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    p {
+      font-size: 1.25rem;
     }
   }
 `;
@@ -94,20 +98,34 @@ const Home = () => {
       <SliderWrapper>
         <Slider {...settings}>
           <SliderItem background="/images/home/bg_visual1.png">
-            <Fade top>
-              <span className="img">
-                <img
-                  src="/images/home/img_visual1.png"
-                  alt="완벽한 만남 완벽한 이별"
-                />
-              </span>
-            </Fade>
+            <div>
+              <Fade top>
+                <img src="/images/home/img_visual1.png" alt="home-img" />
+              </Fade>
+            </div>
           </SliderItem>
           <SliderItem background="/images/home/bg_visual2.png">
-            <span className="title">Love & belif</span>
+            <div>
+              <span className="head">Love & Belif</span>
+              <p>
+                A place where we can acopt only when we have faith in each
+                other.
+              </p>
+              <p>서로의 믿음이 있어야 입양할 수 있는 곳</p>
+            </div>
           </SliderItem>
           <SliderItem background="/images/home/bg_visual3.png">
-            <span className="title">Deposit</span>
+            <div>
+              <span className="head">Point</span>
+              <p>
+                The PERPET MATCH will secure trust through point. All these
+                points will be used for pets.
+              </p>
+              <p>
+                퍼펫매치는 포인트를 통해 신뢰를 확보하고, 이 포인트는 반려동물을
+                위해서 사용됩니다.
+              </p>
+            </div>
           </SliderItem>
         </Slider>
       </SliderWrapper>
