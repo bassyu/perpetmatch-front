@@ -7,7 +7,6 @@ import palette from '../lib/styles/palette';
 import { Checkbox } from 'antd';
 import * as shopAPI from '../lib/api/shop';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Footer';
 
 const ShopCartBlcok = styled.div`
   position: absolute;
@@ -186,8 +185,8 @@ const ShopCart = () => {
     },
   ]);
   const [total, setTotal] = useState(0);
-  const [shipping, setShipping] = useState(2500);
-  const [sale, setSale] = useState(2500);
+  const [shipping] = useState(2500);
+  const [sale] = useState(2500);
   const [result, setResult] = useState(0);
 
   const onRemove = (e) => {

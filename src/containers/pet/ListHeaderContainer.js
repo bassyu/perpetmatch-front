@@ -35,6 +35,18 @@ const ListHeaderContainer = () => {
 
   const onChange = (e) => {
     e.persist();
+    const { name, value } = e.target;
+    dispatch(initBoards());
+    dispatch(
+      changeField({
+        form: 'searchForm',
+        key: name,
+        value,
+      }),
+    );
+  };
+  const onChangeCheckbox = (e) => {
+    e.persist();
     const { name, checked } = e.target;
     dispatch(initBoards());
     dispatch(
@@ -45,7 +57,6 @@ const ListHeaderContainer = () => {
       }),
     );
   };
-
   const onChangeSelect = (value) => {
     if (!value.length) {
       return;
@@ -77,6 +88,7 @@ const ListHeaderContainer = () => {
         } = response.data.data;
 
         const form = {
+          page: 0,
           zones,
           petTitles,
           petAges,
@@ -95,7 +107,7 @@ const ListHeaderContainer = () => {
 
   useEffect(() => {
     const form = {
-      page,
+      page: 0,
       zones,
       petTitles,
       petAges,
@@ -104,23 +116,23 @@ const ListHeaderContainer = () => {
       wantNeutered,
       expectedFeeForMonth,
     };
-    dispatch(
-      [
-        zones.length,
-        petTitles.length,
-        petAges.length,
-        wantCheckUp,
-        wantLineAge,
-        wantNeutered,
-        expectedFeeForMonth,
-      ]
-        .map((i) => Boolean(i))
-        .includes(true)
-        ? searchBoards(form)
-        : getBoards(),
-    );
+    const action = [
+      zones.length,
+      petTitles.length,
+      petAges.length,
+      wantCheckUp,
+      wantLineAge,
+      wantNeutered,
+      expectedFeeForMonth,
+    ]
+      .map((i) => Boolean(i))
+      .includes(true)
+      ? searchBoards(form)
+      : getBoards();
+
+    dispatch(action);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    dispatch,
     zones,
     petTitles,
     petAges,
@@ -135,6 +147,7 @@ const ListHeaderContainer = () => {
       searchForm={searchForm}
       boardsLength={boardsLength}
       onChange={onChange}
+      onChangeCheckbox={onChangeCheckbox}
       onChangeSelect={onChangeSelect}
     />
   );

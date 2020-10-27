@@ -67,7 +67,7 @@ export function* petSaga() {
 // reducer
 const initialState = {
   searchForm: {
-    page: 1,
+    page: 0,
     zones: [],
     petTitles: [],
     petAges: [],
@@ -87,13 +87,12 @@ const pet = handleActions(
       ...state,
       [form]: {
         ...state[form],
-        page: 0,
         [key]: value,
       },
     }),
     [CHANGE_FORM]: (state, { payload: { form } }) => ({
       ...state,
-      searchForm: { ...form, page: 0 },
+      searchForm: form,
     }),
     [INIT_BOARDS]: (state) => ({
       ...state,
@@ -101,7 +100,6 @@ const pet = handleActions(
     }),
     [GET_BOARDS_SUCCESS]: (state, { payload: response }) => ({
       ...state,
-      searchForm: { ...state.searchForm, page: state.searchForm.page + 1 },
       boards: state.boards.concat(response.data.data.content),
     }),
     [GET_BOARDS_FAILURE]: (state, { payload: error }) => ({
@@ -110,7 +108,10 @@ const pet = handleActions(
     }),
     [SEARCH_BOARDS_SUCCESS]: (state, { payload: response }) => ({
       ...state,
-      searchForm: { ...state.searchForm, page: state.searchForm.page + 1 },
+      searchForm: {
+        ...state.searchForm,
+        page: state.searchForm.page + 1,
+      },
       boards: state.boards.concat(response.data.data.content),
       boardsLength: response.data.data.totalElements,
     }),

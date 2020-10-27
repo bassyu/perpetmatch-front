@@ -16,14 +16,25 @@ const FormTemplateBlock = styled.div`
   align-items: center;
   overflow: auto;
 
-  img {
+  .img-area {
+    z-index: 1;
     position: fixed;
-    right: 24%;
-    width: 14rem;
+    left: 0;
+    right: 0;
+    width: 60rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      width: 14rem;
+    }
   }
 `;
 
 const WhiteBox = styled.div`
+  z-index: 2;
+  position: relative;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.125);
   padding: 3rem 2rem;
   margin: 2rem;
@@ -50,11 +61,14 @@ const WhiteBox = styled.div`
 const FormTemplate = ({ children, title }) => {
   return (
     <FormTemplateBlock>
+      <div className="img-area">
+        <div />
+        <img src="/images/sub/form_puppy.png" alt="form-img" />
+      </div>
       <WhiteBox>
         <div className="title-area">{title}</div>
         {children}
       </WhiteBox>
-      <img src="/images/sub/form_puppy.png" alt="form-img" />
     </FormTemplateBlock>
   );
 };

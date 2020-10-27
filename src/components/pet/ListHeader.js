@@ -74,7 +74,13 @@ const StyledInput = styled(Input)`
   border: white;
 `;
 
-const ListHeader = ({ searchForm, boardsLength, onChange, onChangeSelect }) => {
+const ListHeader = ({
+  searchForm,
+  boardsLength,
+  onChange,
+  onChangeCheckbox,
+  onChangeSelect,
+}) => {
   const {
     zones,
     petTitles,
@@ -118,7 +124,7 @@ const ListHeader = ({ searchForm, boardsLength, onChange, onChangeSelect }) => {
               name="wantCheckUp"
               type="checkbox"
               checked={wantCheckUp}
-              onChange={onChange}
+              onChange={onChangeCheckbox}
             />
             <StyledSpan>#건강검진</StyledSpan>
           </label>
@@ -127,7 +133,7 @@ const ListHeader = ({ searchForm, boardsLength, onChange, onChangeSelect }) => {
               name="wantLineAge"
               type="checkbox"
               checked={wantLineAge}
-              onChange={onChange}
+              onChange={onChangeCheckbox}
             />
             <StyledSpan>#혈통서</StyledSpan>
           </label>
@@ -136,7 +142,7 @@ const ListHeader = ({ searchForm, boardsLength, onChange, onChangeSelect }) => {
               name="wantNeutered"
               type="checkbox"
               checked={wantNeutered}
-              onChange={onChange}
+              onChange={onChangeCheckbox}
             />
             <StyledSpan>#중성화</StyledSpan>
           </label>

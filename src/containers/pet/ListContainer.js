@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import List from '../../components/pet/List';
 import throttle from '../../lib/throttle';
+import { changeField } from '../../modules/pet';
 import { initBoards, searchBoards } from '../../modules/pet';
 
 const ListContainer = () => {
@@ -14,6 +15,16 @@ const ListContainer = () => {
   useEffect(() => {
     window.scrollTo({ top: 0 });
     dispatch(initBoards());
+    return () => {
+      console.log('init page');
+      dispatch(
+        changeField({
+          form: 'searchForm',
+          key: 'page',
+          value: 0,
+        }),
+      );
+    };
   }, [dispatch]);
 
   useEffect(() => {
@@ -32,6 +43,7 @@ const ListContainer = () => {
       window.removeEventListener('scroll', onScrollThrottle);
     };
   }, [dispatch, searchForm]);
+
   return <List boards={boards} />;
 };
 

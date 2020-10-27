@@ -249,7 +249,7 @@ const PetBoard = ({ match }) => {
           {board.closed || (
             <div className="btn-area">
               {applied ? (
-                <a>
+                <a href>
                   <Button background={palette.gray[6]} onClick={onClickApply}>
                     신청취소
                   </Button>

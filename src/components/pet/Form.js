@@ -55,9 +55,9 @@ const Form = ({ history }) => {
   const [form, setForm] = useState({
     title: '',
     credit: 150000,
-    zone: '',
+    zone: '서울특별시',
     gender: 'MALE',
-    year: 0,
+    year: 1,
     month: 1,
     petTitle: '고든 세터',
     checkUpImage: '',
@@ -115,7 +115,7 @@ const Form = ({ history }) => {
         await message.success('성공적으로 게시글이 작성되었습니다!', 2);
         history.push('/pet/list');
       } catch (e) {
-        console.log('피양하기 오류');
+        message.error('항목을 채워주세요!', 2);
       }
     }
     callAPI();
