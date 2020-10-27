@@ -39,7 +39,6 @@ const ListBlock = styled.div`
 
       img {
         height: 24rem;
-        margin-left: -20%;
       }
       .title {
         border-bottom: 0.01rem solid ${palette.gray[4]};
@@ -86,7 +85,10 @@ const List = ({ boards }) => {
         {boards.map((board) => (
           <li key={board.id} className="board">
             <Link to={`/pet/board/${board.id}`}>
-              <img src={board.boardImage1} alt="pet-img" />
+              <img
+                src={board.boardImage1 || '/images/sub/no_img.png'}
+                alt="pet-img"
+              />
               <div className="title">
                 {board.closed ? (
                   <Tag color="red">입양완료</Tag>

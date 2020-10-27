@@ -6,6 +6,8 @@ import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 import { Checkbox } from 'antd';
 import * as shopAPI from '../lib/api/shop';
+import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 const ShopCartBlcok = styled.div`
   position: absolute;
@@ -287,7 +289,9 @@ const ShopCart = () => {
               </tbody>
             </table>
           </div>
-          <Button fullWidth>상품 구매하기</Button>
+          <Link to="/shop/checkout">
+            <Button fullWidth>상품 구매하기</Button>
+          </Link>
         </div>
       </div>
     </ShopCartBlcok>

@@ -51,7 +51,7 @@ const FooterBlock = styled.div`
         padding-bottom: 45px;
       }
       a + a {
-        margin-left: 1rem;
+        margin-left: 1.5rem;
       }
     }
   }

@@ -12,6 +12,7 @@ const ListContainer = () => {
   }));
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     dispatch(initBoards());
   }, [dispatch]);
 

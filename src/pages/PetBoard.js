@@ -5,7 +5,8 @@ import Footer from '../components/Footer';
 import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 import * as petAPI from '../lib/api/pet';
-import { Tag, message } from 'antd';
+import { Tag, Avatar, message } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import {
   FaFacebookSquare,
@@ -44,7 +45,7 @@ const PetBoardBlock = styled.div`
         font-size: 1.5rem;
         font-weight: 700;
       }
-      p {
+      .sub-title {
         margin-bottom: 0.5rem;
         border-bottom: solid 0.125rem ${palette.gray[4]};
         padding: 0.5rem 0;
@@ -85,14 +86,41 @@ const PetBoardBlock = styled.div`
         }
       }
       .share-area {
-        img + img {
-          margin-left: 0.5rem;
+        a + a {
+          margin-left: 0.25rem;
+        }
+      }
+      .manager-area {
+        overflow: scroll;
+        height: 10rem;
+
+        .user {
+          height: 4rem;
+
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-weight: 700;
+
+          p {
+            width: 12rem;
+            margin: 0;
+            font-size: 1rem;
+            color: black;
+          }
+          .phone-number {
+            font-size: 0.75rem;
+          }
+        }
+        .user + .user {
+          margin-top: 1rem;
         }
       }
     }
   }
   .context {
     width: 80rem;
+    min-height: 50rem;
     margin: 0 auto;
     padding: 4rem 6rem;
 
@@ -101,7 +129,7 @@ const PetBoardBlock = styled.div`
 
       img {
         width: 42rem;
-        height: 30rem;
+        height: 42rem;
       }
       img + img {
         margin-top: 1rem;
@@ -134,7 +162,7 @@ const PetBoard = ({ match }) => {
     petAge: '',
     checkUpImage: '',
     lineAgeImage: '',
-    neuteredImage: '',
+    hasNeutered: false,
     description: '반려동물 설명',
     boardImage1: '/images/sub/img_adopt1.png',
     boardImage2: '',
@@ -142,6 +170,7 @@ const PetBoard = ({ match }) => {
     closed: true,
   });
   const [applied, setApplied] = useState(false);
+  const [applyList, setApplyList] = useState(null);
 
   const onClickApply = () => {
     async function callAPI() {
@@ -151,6 +180,19 @@ const PetBoard = ({ match }) => {
         window.location.reload();
       } catch (e) {
         console.log('신청취소 오류');
+      }
+    }
+    callAPI();
+  };
+  const onClickAccept = (e) => {
+    e.persist();
+    async function callAPI() {
+      try {
+        const nickname = e.target.name;
+        await petAPI.acceptBoard({ id, nickname });
+        await message.success('신청이 성공적으로 수락되었습니다!', 1);
+      } catch (e) {
+        console.log('신청수락 오류');
       }
     }
     callAPI();
@@ -170,6 +212,12 @@ const PetBoard = ({ match }) => {
         setApplied(response.data.success);
       } catch (e) {
         console.log('불러오기 오류');
+      }
+      try {
+        const response = await petAPI.getApplyList({ id });
+        setApplyList(response.data.data.users);
+      } catch (e) {
+        setApplyList(null);
       }
     }
     callAPI();
@@ -192,7 +240,8 @@ const PetBoard = ({ match }) => {
               board.gender && genderMap[board.gender],
               board.petTitle,
               board.petAge,
-            ].map((i) => i && <span key={i}>#{i}</span>)}
+              board.hasNeutered && '중성화',
+            ].map((i, index) => i && <span key={index}>#{i}</span>)}
           </div>
           <div className="price-area">
             <span className="price">{board.credit}</span>껌
@@ -213,8 +262,8 @@ const PetBoard = ({ match }) => {
               <Button>관심글 등록</Button>
             </div>
           )}
+          <p className="sub-title">공유하기</p>
           <div className="share-area">
-            <p>공유하기</p>
             <a href="http://www.facebook.com">
               <FaFacebookSquare size="3rem" color={palette.facebook} />
             </a>
@@ -225,13 +274,46 @@ const PetBoard = ({ match }) => {
               <FaTwitterSquare size="3rem" color={palette.twitter} />
             </a>
           </div>
+          {!board.closed && applyList && (
+            <>
+              <p className="sub-title">받은 신청</p>
+              <div className="manager-area">
+                {applyList.map((user) => (
+                  <div className="user" key={user.id}>
+                    <Avatar
+                      shape="square"
+                      size={4 * 16}
+                      icon={<UserOutlined />}
+                    />
+                    <div>
+                      <Link to={`/profile/user/${user.id}`}>
+                        <p>{user.nickname}</p>
+                      </Link>
+                      <span className="phone-number">
+                        전화번호 : {user.phoneNumber}
+                      </span>
+                    </div>
+                    <div>
+                      <Button
+                        name={user.nickname}
+                        fullWidth
+                        onClick={onClickAccept}
+                      >
+                        수락
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
       <div className="context">
         <div className="wrapper">
-          <img src={board.boardImage1} alt="boardImage1" />
-          <img src={board.boardImage2} alt="boardImage2" />
-          <img src={board.boardImage3} alt="boardImage3" />
+          {[board.boardImage1, board.boardImage2, board.boardImage3].map(
+            (i, index) => i && <img key={index} src={i} alt="board-img" />,
+          )}
           <p>아이 설명</p>
           <div className="description">{board.description}</div>
         </div>

@@ -45,18 +45,21 @@ const HeaderBlock = styled.div`
 
     .logo-area {
       margin-right: 4rem;
+
       img {
         width: 10rem;
       }
     }
     .search-area {
       margin-left: auto;
+
       button {
         background: none;
         outline: none;
         border: none;
         color: ${palette.gray[0]};
         cursor: pointer;
+
         &:hover {
           color: ${palette.gray[4]};
         }
@@ -82,6 +85,8 @@ const HeaderBlock = styled.div`
         &:hover {
           color: ${palette.gray[4]};
         }
+      }
+      .credit {
       }
     }
   }
@@ -115,16 +120,21 @@ const Spacer = styled.div`
   height: 4.5rem;
 `;
 
-const Header = ({ nickname, onSignout }) => {
+const Header = ({ nickname, credit, onSignout }) => {
   const menu = (
     <Menu>
-      <Menu.Item key="0">
+      <Menu.Item key="1">
         <Link to="/profile/user">프로필</Link>
       </Menu.Item>
-      <Menu.Divider />
       <Menu.Item key="2" onClick={onSignout}>
         로그아웃
       </Menu.Item>
+      <Menu.Divider />
+      <Menu.ItemGroup title="보유 껌">
+        <Menu.Item key="0">
+          <span className="credit">{credit} 껌</span>
+        </Menu.Item>
+      </Menu.ItemGroup>
     </Menu>
   );
 

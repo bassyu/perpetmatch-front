@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { whitePetTitles } from '../../constants/index';
+import { whiteLocations, whitePetTitles } from '../../constants/index';
 import Input from '../common/Input';
 import Select from '../common/Select';
 import Textarea from '../common/Textarea';
@@ -10,6 +10,9 @@ import getBase64 from '../../lib/getBase64';
 import ImgCrop from 'antd-img-crop';
 import Button from '../common/Button';
 import palette from '../../lib/styles/palette';
+import * as petAPI from '../../lib/api/pet';
+import { message } from '../../../node_modules/antd/lib/index';
+import { withRouter } from 'react-router-dom';
 
 const FormBlock = styled.div`
   p {
@@ -48,18 +51,18 @@ const Comment = styled.div`
   padding-left: 0.2rem;
 `;
 
-const Form = () => {
+const Form = ({ history }) => {
   const [form, setForm] = useState({
     title: '',
     credit: 150000,
     zone: '',
     gender: 'MALE',
-    year: 1,
-    month: 11,
-    petTitle: '',
+    year: 0,
+    month: 1,
+    petTitle: '고든 세터',
     checkUpImage: '',
     lineAgeImage: '',
-    neutered: false,
+    hasNeutered: false,
     description: '',
     boardImage1: '',
     boardImage2: '',
@@ -106,24 +109,57 @@ const Form = () => {
     });
   }
   const onClick = (e) => {
-    console.log(form);
+    async function callAPI() {
+      try {
+        await petAPI.writeBoard(form);
+        await message.success('성공적으로 게시글이 작성되었습니다!', 2);
+        history.push('/pet/list');
+      } catch (e) {
+        console.log('피양하기 오류');
+      }
+    }
+    callAPI();
   };
 
   return (
     <FormBlock>
       <p>제목</p>
       <Input name="title" value={form.title} onChange={onChange} />
-      <p>입양조건</p>
-      <Input
-        type="number"
-        name="credit"
-        value={form.credit}
-        onChange={onChange}
-      />
+      <div className="row">
+        <div>
+          <p>입양조건</p>
+          <Input
+            type="number"
+            name="credit"
+            value={form.credit}
+            onChange={onChange}
+          />
+        </div>
+        <div>
+          <p>파양 지역</p>
+          <Select
+            name="zone"
+            onChange={onChange}
+            value={form.zone}
+            style={{ background: '#d1a848', border: 'none' }}
+          >
+            {whiteLocations.map((i) => (
+              <option key={i} value={i}>
+                {i}
+              </option>
+            ))}
+          </Select>
+        </div>
+      </div>
       <div className="row">
         <div className="col">
           <p>견종</p>
-          <Select name="petTitles" onChange={onChange} value={form.location}>
+          <Select
+            name="petTitle"
+            onChange={onChange}
+            value={form.petTitle}
+            style={{ background: '#8164ae', border: 'none' }}
+          >
             {whitePetTitles.map((i) => (
               <option key={i} value={i}>
                 {i}
@@ -146,10 +182,10 @@ const Form = () => {
           <p>중성화 여부</p>
           <label>
             <Input
-              name="neutered"
+              name="hasNeutered"
               type="checkbox"
               onChange={onChangeCheckbox}
-              checked={form.neutered}
+              checked={form.hasNeutered}
             />
             <span>#중성화</span>
           </label>
@@ -241,4 +277,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default withRouter(Form);
