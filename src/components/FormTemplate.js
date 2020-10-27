@@ -17,7 +17,9 @@ const FormTemplateBlock = styled.div`
   overflow: auto;
 
   img {
-    width: 20rem;
+    position: fixed;
+    right: 24%;
+    width: 14rem;
   }
 `;
 
@@ -52,6 +54,7 @@ const FormTemplate = ({ children, title }) => {
         <div className="title-area">{title}</div>
         {children}
       </WhiteBox>
+      <img src="/images/sub/form_puppy.png" alt="form-img" />
     </FormTemplateBlock>
   );
 };
