@@ -13,7 +13,6 @@ const FooterLine = styled.hr`
 const FooterBlock = styled.div`
   background-color: ${palette.main};
   color: #204030;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 
   .wrapper {
     padding: 0 2rem;
