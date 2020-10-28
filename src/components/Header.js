@@ -33,7 +33,7 @@ const HeaderBlock = styled.div`
   color: #204030;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 
-  .wrapper {
+  .header-wrapper {
     position: relative;
     width: 80rem;
     height: 4.5rem;
@@ -141,7 +141,7 @@ const Header = ({ nickname, credit, onSignout }) => {
   return (
     <>
       <HeaderBlock>
-        <div className="wrapper">
+        <div className="header-wrapper">
           <div className="logo-area">
             <Link to="/">
               <img src="/images/common/logo_w.png" alt="logo" />

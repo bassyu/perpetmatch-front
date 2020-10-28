@@ -246,7 +246,7 @@ const PetBoard = ({ match }) => {
           <div className="price-area">
             <span className="price">{board.credit}</span>껌
           </div>
-          {board.closed || (
+          {!board.closed && !applyList && (
             <div className="btn-area">
               {applied ? (
                 <a href>

@@ -23,7 +23,6 @@ const ListHeaderContainer = () => {
     boardsLength: pet.boardsLength,
   }));
   const {
-    page,
     zones,
     petTitles,
     petAges,

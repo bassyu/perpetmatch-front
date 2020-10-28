@@ -42,7 +42,7 @@ const UserForm = ({ history }) => {
     age: 0,
     occupation: '',
     location: '강원도',
-    houseType: '',
+    houseType: 'apartment',
     experience: false,
     liveAlone: false,
     hasPet: false,

@@ -71,7 +71,6 @@ const StyledInput = styled(Input)`
   width: 6rem;
   height: 2.5rem;
   margin-left: 1rem;
-  border: white;
 `;
 
 const ListHeader = ({

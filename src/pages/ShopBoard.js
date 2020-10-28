@@ -12,20 +12,6 @@ import { withRouter } from 'react-router-dom';
 import * as shopAPI from '../lib/api/shop';
 
 const headerTop = 640;
-const headerItems = [
-  {
-    text: '상품정보',
-  },
-  {
-    text: '리뷰',
-  },
-  {
-    text: '문의',
-  },
-  {
-    text: '교환/환불',
-  },
-];
 const options = ['옵션선택'];
 
 const ShopBoardBlock = styled.div`
@@ -298,7 +284,9 @@ const ShopBoardBlock = styled.div`
 
 const ShopBoard = ({ history, match }) => {
   const id = match.params.id;
-  const refHeader = useRef();
+  const refImg = useRef();
+  const refReviews = useRef();
+  const refQuestions = useRef();
   const [item, setItem] = useState({
     company: '마이비펫',
     title: '플라밍고 우디 스타 나무모양의 고무 장난감',
@@ -341,6 +329,7 @@ const ShopBoard = ({ history, match }) => {
     window.scrollTo({ top: 0 });
 
     const onScroll = () => {
+      console.log(window.scrollY, refImg.current.offsetTop);
       setFix(headerTop < window.scrollY);
     };
     const onScrollThrottle = throttle(onScroll, 100);
@@ -362,6 +351,26 @@ const ShopBoard = ({ history, match }) => {
     }
     callAPI();
   }, [id]);
+
+  const headerSize = 8 * 16;
+  const headerItems = [
+    {
+      text: '상품정보',
+      top: refImg.current && refImg.current.offsetTop - headerSize,
+    },
+    {
+      text: '리뷰',
+      top: refReviews.current && refReviews.current.offsetTop - headerSize,
+    },
+    {
+      text: '문의',
+      top: refQuestions.current && refQuestions.current.offsetTop - headerSize,
+    },
+    {
+      text: '교환/환불',
+      top: refQuestions.current && refQuestions.current.offsetTop - headerSize,
+    },
+  ];
 
   return (
     <ShopBoardBlock>
@@ -412,10 +421,16 @@ const ShopBoard = ({ history, match }) => {
           </div>
         </div>
       </div>
-      <div className={cn('header', { fix })} ref={refHeader}>
+      <div className={cn('header', { fix })}>
         <div className="wrapper">
           {headerItems.map((i) => (
-            <div className="item" key={i.text}>
+            <div
+              className="item"
+              key={i.text}
+              onClick={() => {
+                window.scrollTo({ top: i.top });
+              }}
+            >
               {i.text}
             </div>
           ))}
@@ -442,15 +457,15 @@ const ShopBoard = ({ history, match }) => {
       </div>
       <div className="content">
         <div className="wrapper">
-          <img src={item.boardImageMain} alt="main-img" />
-          <div className="reviews">
+          <img src={item.boardImageMain} alt="main-img" ref={refImg} />
+          <div className="reviews" ref={refReviews}>
             <p>리뷰</p>
             <div className="review">
               <div className="title">건이은채</div>
               <div className="title">옵션 : L / 품종 : 포메라니안</div>
               <img src="/images/sub/review.png" alt="review-img" />
               <div className="description">
-                아기가 기절했어요. 기절방석 맞네요 강아지랑 싸워요{' '}
+                아기가 기절했어요. 기절방석 맞네요 강아지랑 싸워요
               </div>
             </div>
             <div className="review">
@@ -460,7 +475,7 @@ const ShopBoard = ({ history, match }) => {
             </div>
             <Pagination defaultCurrent={1} total={50} />
           </div>
-          <div className="questions">
+          <div className="questions" ref={refQuestions}>
             <p>문의</p>
             <Pagination defaultCurrent={1} total={50} />
           </div>

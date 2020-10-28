@@ -16,7 +16,6 @@ const ListContainer = () => {
     window.scrollTo({ top: 0 });
     dispatch(initBoards());
     return () => {
-      console.log('init page');
       dispatch(
         changeField({
           form: 'searchForm',

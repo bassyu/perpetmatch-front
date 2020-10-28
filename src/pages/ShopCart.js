@@ -255,7 +255,6 @@ const ShopCart = () => {
                     <div className="result-area">
                       <div>
                         <Input type="number" value={item.count} readOnly />
-                        <Button>변경</Button>
                       </div>
                       <div className="result">{item.count * item.price}원</div>
                     </div>
