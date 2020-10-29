@@ -7,6 +7,8 @@ import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Pet from './pages/Pet';
 import SignupComplete from './pages/SignupComplete';
+import Check from './pages/Check';
+import Commu from './pages/Commu';
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
         <Route path="/profile" component={Profile} />
         <Route path="/pet" component={Pet} />
         <Route path="/shop" component={Shop} />
+        <Route path="/commu" component={Commu} />
+        <Route path="/check" component={Check} />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} exact />
         <Route path="/signup/complete" component={SignupComplete} />

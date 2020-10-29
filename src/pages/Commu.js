@@ -1,8 +1,10 @@
-import React from 'reaact';
+import React from 'react';
 import styled from 'styled-components';
 import HeaderContainer from '../containers/common/HeaderContainer';
 
-const CommuBlock = styled.div``;
+const CommuBlock = styled.div`
+  // add your css
+`;
 
 const Commu = () => {
   return (

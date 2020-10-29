@@ -4,14 +4,13 @@ import { whiteLocations, whitePetTitles } from '../../constants/index';
 import Input from '../common/Input';
 import Select from '../common/Select';
 import Textarea from '../common/Textarea';
-import { Upload } from 'antd';
+import { Upload, message } from 'antd';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import getBase64 from '../../lib/getBase64';
 import ImgCrop from 'antd-img-crop';
 import Button from '../common/Button';
 import palette from '../../lib/styles/palette';
 import * as petAPI from '../../lib/api/pet';
-import { message } from '../../../node_modules/antd/lib/index';
 import { withRouter } from 'react-router-dom';
 
 const FormBlock = styled.div`
