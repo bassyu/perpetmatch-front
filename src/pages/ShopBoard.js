@@ -275,8 +275,8 @@ const ShopBoardBlock = styled.div`
       }
       .questions {
         min-height: 20rem;
-
-        .questions{
+        
+        .question-box{
           margin: 1rem 0;
           border-bottom: solid 0.01rem ${palette.gray[5]};
           padding: 1rem 0;
@@ -569,7 +569,7 @@ const ShopBoard = ({ history, match }) => {
           </div>
           <div className="questions" ref={refQuestions}>
             <p>문의</p>
-            <div className="questions">
+            <div className="question-box">
               <div className="question" style={{display:'inline-flex'}}>
               <div className="qtitle">Q</div>
                 <div>비밀글 입니다.</div>
@@ -582,13 +582,12 @@ const ShopBoard = ({ history, match }) => {
                 <LockOutlined className="lockOutLined" /> 비밀글 입니다.
               </div>
             </div>
-            <div className="questions">
+            <div className="question-box">
               <div className="question" style={{display:'inline-flex'}}>
                 <div className="qtitle">Q</div>
                 <div>질문이 있어요</div>
               </div>
               <div className="title">
-                
                 <div>멈무있** | 2020년 8월 12일 23시 54분</div>
               </div>
               <div className="answer" style={{display:'inline-flex'}}>
