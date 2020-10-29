@@ -10,6 +10,9 @@ import { Pagination, message } from 'antd';
 import throttle from '../lib/throttle';
 import { withRouter } from 'react-router-dom';
 import * as shopAPI from '../lib/api/shop';
+import { Rate, Layout } from 'antd';
+import {LockOutlined} from '@ant-design/icons'
+
 
 const headerTop = 640;
 const headerSize = 8 * 16;
@@ -247,15 +250,75 @@ const ShopBoardBlock = styled.div`
           padding: 1rem 0;
 
           .title {
+            color: gray;
             margin: 0.25rem;
+            font-weight:bold;
+          }
+          .rate{
+            padding-left:0rem;
+            margin-top:-1rem;
+            size:-1;
+            color: gray;
           }
           img {
             width: 8rem;
+          }
+          button{
+            height:3rem;
+            color: black;
+            background-color:white;
+            border: solid 0.2rem ${palette.sub[0]};
+            font-size: 1rem;
+            margin-top:1rem;
           }
         }
       }
       .questions {
         min-height: 20rem;
+
+        .questions{
+          margin: 1rem 0;
+          border-bottom: solid 0.01rem ${palette.gray[5]};
+          padding: 1rem 0;
+
+          .question{
+            font-size: 1rem;
+
+            .qtitle{
+              color:${palette.sub[0]};
+              width:1.5rem;
+              font-weight:bold;
+            }
+            .qname{
+              width:1.5rem;
+            }
+          }
+          .lockOutLined{
+            margin-top:0.25rem;
+          }
+          .title {
+            margin: 0.25rem;
+            font-size: 0.75rem;
+            margin-left:1.5rem;
+            color: lightgray;
+          }
+
+          .answer{
+            font-size: 1rem;
+            
+            .qa{
+              color:${palette.sub[0]};
+              width:1.5rem;
+              font-weight:bold;
+            }
+            .qanswer{
+              background-color:#F3F3F3;
+              height: 10rem;
+              width: 46rem;
+            }
+          }
+        }
+
       }
       .exchange {
         margin-bottom: 2rem;
@@ -439,7 +502,7 @@ const ShopBoard = ({ history, match }) => {
             <Button name="cart" onClick={onClickCart}>
               장바구니 추가
             </Button>
-          </div>
+          </div>  
         </div>
       </div>
       <div className={cn('header', { fix })}>
@@ -483,21 +546,56 @@ const ShopBoard = ({ history, match }) => {
             <p>리뷰</p>
             <div className="review">
               <div className="title">건이은채</div>
+              <span>
+              <Rate className="rate" allowHalf />2020.07.18
+              </span>
               <div className="title">옵션 : L / 품종 : 포메라니안</div>
               <img src="/images/sub/review.png" alt="review-img" />
               <div className="description">
                 아기가 기절했어요. 기절방석 맞네요 강아지랑 싸워요
               </div>
+              <Button>도움이 돼요</Button>
             </div>
             <div className="review">
               <div className="title">강강술래</div>
+              <span>
+              <Rate className="rate" allowHalf />2020.07.22
+              </span>
               <div className="title">옵션 : M / 품종 : 푸들</div>
-              <div className="description">빠른배송 만족합니다!</div>
+              <div className="description"> 빠른배송 만족합니다!</div>
+              <Button>도움이 돼요</Button>
             </div>
             <Pagination defaultCurrent={1} total={50} />
           </div>
           <div className="questions" ref={refQuestions}>
             <p>문의</p>
+            <div className="questions">
+              <div className="question" style={{display:'inline-flex'}}>
+              <div className="qtitle">Q</div>
+                <div>비밀글 입니다.</div>
+              </div>
+              <div className="title">
+                <div>멈무있** | 2020년 8월 12일 23시 54분</div>
+              </div>
+              <div className="answer" style={{display:'inline-flex'}}>
+                <div className="qa">A</div>
+                <LockOutlined className="lockOutLined" /> 비밀글 입니다.
+              </div>
+            </div>
+            <div className="questions">
+              <div className="question" style={{display:'inline-flex'}}>
+                <div className="qtitle">Q</div>
+                <div>질문이 있어요</div>
+              </div>
+              <div className="title">
+                
+                <div>멈무있** | 2020년 8월 12일 23시 54분</div>
+              </div>
+              <div className="answer" style={{display:'inline-flex'}}>
+                <div className="qa">A</div>
+                <div className="qanswer">가나다라</div>
+              </div>
+            </div>
             <Pagination defaultCurrent={1} total={50} />
           </div>
           <div className="exchange" ref={refExchange}>
