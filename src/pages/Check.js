@@ -26,7 +26,7 @@ const Check = () => {
   }
 
   return (
-    <FormTemplate title="사진으로 인증하고 보상받자!">
+    <FormTemplate title="사진으로 인증하고 보상받기!">
       <CheckBlock>
         <ImgCrop rotate>
           <Upload
