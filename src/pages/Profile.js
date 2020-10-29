@@ -9,7 +9,7 @@ const Profile = () => {
   return (
     <>
       <Switch>
-        <Route path="/profile/user" component={ProfileUser} />
+        <Route path="/profile/user/:id" component={ProfileUser} />
         <Route path="/profile/user-form" component={ProfileUserForm} />
         <Route path="/profile/taste-form" component={ProfileTasteForm} />
       </Switch>

@@ -12,6 +12,8 @@ import { withRouter } from 'react-router-dom';
 import * as shopAPI from '../lib/api/shop';
 
 const headerTop = 640;
+const headerSize = 8 * 16;
+
 const options = ['옵션선택'];
 
 const ShopBoardBlock = styled.div`
@@ -156,6 +158,11 @@ const ShopBoardBlock = styled.div`
         color: ${palette.gray[7]};
         font-size: 1.125rem;
         font-weight: 700;
+        cursor: pointer;
+
+        &.active {
+          color: ${palette.sub};
+        }
       }
     }
   }
@@ -248,6 +255,7 @@ const ShopBoardBlock = styled.div`
         }
       }
       .questions {
+        min-height: 20rem;
       }
       .exchange {
         margin-bottom: 2rem;
@@ -287,6 +295,7 @@ const ShopBoard = ({ history, match }) => {
   const refImg = useRef();
   const refReviews = useRef();
   const refQuestions = useRef();
+  const refExchange = useRef();
   const [item, setItem] = useState({
     company: '마이비펫',
     title: '플라밍고 우디 스타 나무모양의 고무 장난감',
@@ -297,6 +306,7 @@ const ShopBoard = ({ history, match }) => {
     stockQuantity: 0,
   });
   const [fix, setFix] = useState(false);
+  const [active, setActive] = useState('');
   const [count, setCount] = useState(1);
 
   const onChangeCount = (e) => {
@@ -329,8 +339,20 @@ const ShopBoard = ({ history, match }) => {
     window.scrollTo({ top: 0 });
 
     const onScroll = () => {
-      console.log(window.scrollY, refImg.current.offsetTop);
-      setFix(headerTop < window.scrollY);
+      const y = window.scrollY + headerSize + 1;
+      setFix(headerTop < y);
+
+      let newActive = '';
+      if (refExchange.current.offsetTop < y) {
+        newActive = '교환/환불';
+      } else if (refQuestions.current.offsetTop < y) {
+        newActive = '문의';
+      } else if (refReviews.current.offsetTop < y) {
+        newActive = '리뷰';
+      } else if (refImg.current.offsetTop < y) {
+        newActive = '상품정보';
+      }
+      setActive(newActive);
     };
     const onScrollThrottle = throttle(onScroll, 100);
 
@@ -352,7 +374,6 @@ const ShopBoard = ({ history, match }) => {
     callAPI();
   }, [id]);
 
-  const headerSize = 8 * 16;
   const headerItems = [
     {
       text: '상품정보',
@@ -368,7 +389,7 @@ const ShopBoard = ({ history, match }) => {
     },
     {
       text: '교환/환불',
-      top: refQuestions.current && refQuestions.current.offsetTop - headerSize,
+      top: refExchange.current && refExchange.current.offsetTop - headerSize,
     },
   ];
 
@@ -425,7 +446,7 @@ const ShopBoard = ({ history, match }) => {
         <div className="wrapper">
           {headerItems.map((i) => (
             <div
-              className="item"
+              className={cn('item', { active: i.text === active })}
               key={i.text}
               onClick={() => {
                 window.scrollTo({ top: i.top });
@@ -479,7 +500,7 @@ const ShopBoard = ({ history, match }) => {
             <p>문의</p>
             <Pagination defaultCurrent={1} total={50} />
           </div>
-          <div className="exchange">
+          <div className="exchange" ref={refExchange}>
             <p>교환/환불</p>
             <table>
               <tbody>

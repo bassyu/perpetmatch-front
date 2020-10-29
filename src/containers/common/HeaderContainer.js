@@ -11,6 +11,7 @@ const HeaderContainer = ({ history }) => {
     nickname: auth.user.nickname,
   }));
   const [credit, setCredit] = useState(0);
+  const [id, setId] = useState(0);
 
   const onSignout = () => {
     localStorage.removeItem('user');
@@ -24,13 +25,21 @@ const HeaderContainer = ({ history }) => {
         const response = await profileAPI.getCredit();
         setCredit(response.data.data.credit);
       } catch (e) {
-        console.log('껌 로딩 오류');
+        console.log('껌 불러오기 오류');
+      }
+      try {
+        const response = await profileAPI.getUser();
+        setId(response.data.data.id);
+      } catch (e) {
+        console.log('ID 불러오기 오류');
       }
     }
     callAPI();
   }, []);
 
-  return <Header nickname={nickname} credit={credit} onSignout={onSignout} />;
+  return (
+    <Header nickname={nickname} id={id} credit={credit} onSignout={onSignout} />
+  );
 };
 
 export default withRouter(HeaderContainer);

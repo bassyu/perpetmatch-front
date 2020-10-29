@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import Order from '../components/profile/Order';
@@ -6,25 +6,7 @@ import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-
-const headerLinks = [
-  {
-    text: '주문내역',
-    to: '/profile/user/order',
-  },
-  {
-    text: '관심글',
-    to: '/profile/user/like',
-  },
-  {
-    text: '신청한글',
-    to: '/profile/user/apply',
-  },
-  {
-    text: '파양관리',
-    to: '/profile/user/board',
-  },
-];
+import * as profileAPI from '../lib/api/profile';
 
 const ProfileUserBlock = styled.div`
   position: absolute;
@@ -70,15 +52,31 @@ const ProfileUserBlock = styled.div`
             }
           }
         }
+        .tags {
+          margin-top: 0.5rem;
+
+          .tag + .tag {
+            margin-left: 0.5rem;
+          }
+        }
         .description {
           width: 32rem;
           border: solid 0.125rem ${palette.gray[2]};
           padding: 1rem;
         }
       }
+      .credit-area {
+        padding: 1rem 0;
+        display: flex;
+        justify-content: space-between;
+        color: ${palette.sub};
+        font-family: Montserrat;
+        font-size: 2rem;
+        font-weight: 500;
+      }
       .link-area {
         height: 4rem;
-        margin-top: 2.5rem;
+        margin-bottom: 2rem;
         border-top: solid 0.125rem ${palette.gray[1]};
         border-bottom: solid 0.125rem ${palette.gray[1]};
         display: flex;
@@ -99,7 +97,47 @@ const ProfileUserBlock = styled.div`
   }
 `;
 
-const ProfileUser = () => {
+const ProfileUser = ({ match }) => {
+  const id = match.params.id;
+  const [user, setUser] = useState({
+    tags: [],
+    profileImage: '',
+    nickname: '',
+    description: '',
+    credit: 0,
+  });
+
+  useEffect(() => {
+    async function callAPI() {
+      try {
+        const response = await profileAPI.getUserBreif({ id });
+        setUser(response.data.data);
+      } catch (e) {
+        console.log('불러오기 오류');
+      }
+    }
+    callAPI();
+  }, [id]);
+
+  const headerLinks = [
+    {
+      text: '주문내역',
+      to: `/profile/user/${id}/order`,
+    },
+    {
+      text: '관심글',
+      to: `/profile/user/${id}/like`,
+    },
+    {
+      text: '신청한글',
+      to: `/profile/user/${id}/apply`,
+    },
+    {
+      text: '파양관리',
+      to: `/profile/user/${id}/write`,
+    },
+  ];
+
   return (
     <ProfileUserBlock>
       <HeaderContainer />
@@ -110,16 +148,26 @@ const ProfileUser = () => {
               shape="square"
               size={7 * 16}
               icon={<UserOutlined />}
-              src="/images/sub/img_receive1.png"
+              src={user.profileImage}
             />
             <div className="brief">
               <div className="top">
-                <span className="username">유강현님</span>
+                <span className="username">{user.nickname}님</span>
                 <Link to="/profile/user-form">프로필수정</Link>
               </div>
-              <div className="tags">태구</div>
+              <div className="tags">
+                {user.tags.map((tag, index) => (
+                  <span key={index} className="tag">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div className="description">설명설명</div>
+            <div className="description">{user.description}</div>
+          </div>
+          <div className="credit-area">
+            <div />
+            <div>{user.credit}껌</div>
           </div>
           <div className="link-area">
             {headerLinks.map((i) => (
@@ -137,7 +185,7 @@ const ProfileUser = () => {
           </div>
         </div>
         <Switch>
-          <Route to="/profile/user/order" component={Order} />
+          <Route to={`/profile/user/:id/order`} component={Order} exact />
         </Switch>
       </div>
     </ProfileUserBlock>

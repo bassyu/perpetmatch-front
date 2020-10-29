@@ -37,4 +37,10 @@ export const writeUser = ({
     petAges,
   });
 
-export const getCredit = () => client.get(`/api/profiles/credit`);
+export const getCredit = () => client.get('/api/profiles/credit');
+
+export const getUserBreif = ({ id }) =>
+  client.get(`/api/profiles/mypage/${id}`);
+
+export const getOrders = ({ id }) =>
+  client.get(`/api/profiles/mypage/orders/${id}`);

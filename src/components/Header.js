@@ -21,6 +21,16 @@ const headerLinks = [
     text: '쇼핑하기',
     to: '/shop/list/main',
   },
+  {
+    key: 'commu',
+    text: '소통하기',
+    to: '/commu',
+  },
+  {
+    key: 'check',
+    text: '인증하기',
+    to: '/check',
+  },
 ];
 
 const HeaderBlock = styled.div`
@@ -120,11 +130,11 @@ const Spacer = styled.div`
   height: 4.5rem;
 `;
 
-const Header = ({ nickname, credit, onSignout }) => {
+const Header = ({ nickname, id, credit, onSignout }) => {
   const menu = (
     <Menu>
       <Menu.Item key="1">
-        <Link to="/profile/user">프로필</Link>
+        <Link to={`/profile/user/${id}`}>프로필</Link>
       </Menu.Item>
       <Menu.Item key="2" onClick={onSignout}>
         로그아웃
