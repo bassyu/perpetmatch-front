@@ -129,6 +129,7 @@ const Home = () => {
           </SliderItem>
         </Slider>
       </SliderWrapper>
+
       <Footer />
     </HomeBlock>
   );
