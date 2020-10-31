@@ -87,7 +87,7 @@ const Order = ({ match }) => {
       }
     }
     callAPI();
-  });
+  }, []);
 
   return (
     <OrderBlcok>
