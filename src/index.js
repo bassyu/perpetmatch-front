@@ -27,7 +27,6 @@ function loadAuth() {
     const { nickname, accessToken, tokenType } = JSON.parse(user);
     store.dispatch(tempSetUser({ nickname, accessToken, tokenType }));
     client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
-    console.log(client.defaults.headers.Authorization);
   } catch (e) {
     console.log('loadAuth() 오류');
   }

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Header from '../../components/Header';
 import { signout } from '../../modules/auth';
 import * as profileAPI from '../../lib/api/profile';
+import client from '../../lib/api/client';
 
 const HeaderContainer = ({ history }) => {
   const dispatch = useDispatch();
@@ -34,7 +35,9 @@ const HeaderContainer = ({ history }) => {
         console.log('ID 불러오기 오류');
       }
     }
-    callAPI();
+    if (client.defaults.headers.Authorization) {
+      callAPI();
+    }
   }, []);
 
   return (
