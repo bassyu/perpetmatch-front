@@ -32,7 +32,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "aws s3 sync ./build s3://perpet-match-front --profile=perpet-match",
+    "invalidate": "aws cloudfront create-invalidation --profile=perpet-match --distribution-id EYG5N892KH822 --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
   },
   "eslintConfig": {
     "extends": "react-app"
