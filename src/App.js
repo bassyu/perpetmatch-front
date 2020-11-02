@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
+import About from './pages/About';
 import Shop from './pages/Shop';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
@@ -14,11 +14,11 @@ const App = () => {
   return (
     <div className="App">
       <Switch>
-        <Route path={['/', '/@:username']} component={Home} exact />
+        <Route path={['/', '/commu']} component={Commu} exact />
+        <Route path="/about" component={About} />
         <Route path="/profile" component={Profile} />
         <Route path="/pet" component={Pet} />
         <Route path="/shop" component={Shop} />
-        <Route path="/commu" component={Commu} />
         <Route path="/check" component={Check} />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} exact />

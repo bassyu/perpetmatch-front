@@ -17,7 +17,7 @@ const HeaderContainer = ({ history }) => {
   const onSignout = () => {
     localStorage.removeItem('user');
     dispatch(signout());
-    history.push('/');
+    history.push('/commu');
   };
 
   useEffect(() => {

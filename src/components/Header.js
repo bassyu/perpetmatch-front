@@ -155,7 +155,7 @@ const Header = ({ nickname, id, credit, onSignout }) => {
       <HeaderBlock>
         <div className="header-wrapper">
           <div className="logo-area">
-            <Link to="/">
+            <Link to="/commu">
               <img src="/images/common/logo_w.png" alt="logo" />
             </Link>
           </div>

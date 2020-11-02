@@ -44,7 +44,7 @@ const SigninContainer = ({ history }) => {
     }
     if (accessToken) {
       client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
-      history.push('/');
+      history.push('/commu');
       try {
         localStorage.setItem('user', JSON.stringify(user));
       } catch (e) {
