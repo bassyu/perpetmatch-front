@@ -69,11 +69,15 @@ const Form = ({ history }) => {
   });
 
   const onChange = (e) => {
-    const { value, name } = e.target;
+    const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
+  const onChangeNumber = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value && parseInt(value) });
+  };
   const onChangeCheckbox = (e) => {
-    const { checked, name } = e.target;
+    const { name, checked } = e.target;
     setForm({ ...form, [name]: checked });
   };
 
@@ -98,7 +102,6 @@ const Form = ({ history }) => {
     for (let i = 0; i < fileList.length; i++) {
       boardImages[i] = await getBase64(fileList[i].originFileObj);
     }
-    console.log(boardImages);
 
     setForm({
       ...form,
@@ -197,7 +200,7 @@ const Form = ({ history }) => {
             type="number"
             name="year"
             value={form.year}
-            onChange={onChange}
+            onChange={onChangeNumber}
           />
         </div>
         <div>
@@ -205,7 +208,7 @@ const Form = ({ history }) => {
             type="number"
             name="month"
             value={form.month}
-            onChange={onChange}
+            onChange={onChangeNumber}
           />
         </div>
         <div />
