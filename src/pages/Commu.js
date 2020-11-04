@@ -7,6 +7,7 @@ import palette from '../lib/styles/palette';
 import Button from '../components/common/Button';
 import { Link } from 'react-router-dom';
 import { FaBone, FaCommentDots } from 'react-icons/fa';
+import getCommaNumber from '../lib/getCommaNumber';
 const { Meta } = Card;
 
 const CommuBlock = styled.div`
@@ -187,7 +188,8 @@ const Commu = ({ history, location }) => {
           </div>
           <Button className="btn-write">글쓰기</Button>
           <p className="check-info">
-            이번달은 총 <span className="count">109</span>분께서 인증하셨습니다!
+            이번달은 총 <span className="count">{getCommaNumber(109)}</span>
+            분께서 인증하셨습니다!
           </p>
           <Button className="btn-check" fullWidth>
             나도 인증하기

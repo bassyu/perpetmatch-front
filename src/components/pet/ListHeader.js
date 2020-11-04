@@ -8,6 +8,7 @@ import {
 import palette from '../../lib/styles/palette';
 import Input from '../common/Input';
 import { Select } from 'antd';
+import getCommaNumber from '../../lib/getCommaNumber';
 const { Option } = Select;
 
 const ListHeaderBlock = styled.div`
@@ -95,8 +96,8 @@ const ListHeader = ({
       <div className="wrapper">
         <div className="top">
           <p>
-            총 <span className="count">{boardsLength}</span> 아이들이 기다리고
-            있어요!
+            총 <span className="count">{getCommaNumber(boardsLength)}</span>
+            아이들이 기다리고 있어요!
           </p>
           <Input width="32rem" />
         </div>
