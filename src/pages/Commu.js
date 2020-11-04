@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import HeaderContainer from '../containers/common/HeaderContainer';
-import { Card, Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Card, Modal, Avatar, Tag } from 'antd';
+import { UserOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import palette from '../lib/styles/palette';
 import Button from '../components/common/Button';
 import { Link } from 'react-router-dom';
+import { FaBone, FaCommentDots } from 'react-icons/fa';
 const { Meta } = Card;
 
 const CommuBlock = styled.div`
@@ -37,6 +38,7 @@ const CommuBlock = styled.div`
           justify-content: center;
 
           .nickname {
+            font-size: 1.125rem;
             font-weight: 500;
           }
           .tags {
@@ -94,7 +96,6 @@ const CommuBlock = styled.div`
       }
     }
   }
-
   .wrapper {
     width: 80rem;
     margin: 0 auto;
@@ -106,21 +107,65 @@ const CommuBlock = styled.div`
       .ant-card + .ant-card {
         margin-top: 4rem;
       }
+      .tag {
+        margin-bottom: 1rem;
+      }
       .ant-avatar {
         margin-right: 1rem;
+      }
+      .action-icon {
+        padding-top: 0.25rem;
+        margin-right: 0.5rem;
       }
     }
   }
 `;
 
-const Commu = () => {
+const Commu = ({ history, location }) => {
   const [user, setUser] = useState({
-    tags: ['태그', '태그'],
+    tags: ['태그'],
     profileImage: '',
     nickname: '',
     description: '',
     credit: 0,
   });
+  const [cards, setCards] = useState([
+    {
+      id: 1,
+      checked: false,
+      nickname: '제니',
+      image: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
+      likes: 107208,
+      description: '셀카한번 올려봤어요',
+      comments: ['우왕..', '여기서 왜 셀카를?'],
+    },
+    {
+      id: 2,
+      checked: false,
+      nickname: '김재민',
+      image: '',
+      likes: 0,
+      description: '이거뭐임',
+      comments: [],
+    },
+    {
+      id: 3,
+      checked: true,
+      nickname: '제니',
+      image: '',
+      likes: 9,
+      description: '',
+      comments: [],
+    },
+  ]);
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      history.push('/commu');
+    }
+  }, []);
+
+  useEffect(() => {}, []);
 
   return (
     <CommuBlock>
@@ -142,8 +187,7 @@ const Commu = () => {
           </div>
           <Button className="btn-write">글쓰기</Button>
           <p className="check-info">
-            이번달은 총 <span className="count">109</span>분께서 인증
-            하셨습니다!
+            이번달은 총 <span className="count">109</span>분께서 인증하셨습니다!
           </p>
           <Button className="btn-check" fullWidth>
             나도 인증하기
@@ -160,60 +204,44 @@ const Commu = () => {
       </div>
       <div className="wrapper">
         <div className="cards">
-          <Card
-            title={
-              <div>
-                <Avatar size={2 * 16} icon={<UserOutlined />} />
-                안뇽
-              </div>
-            }
-            hoverable
-            cover={
-              <img
-                alt="example"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+          {cards.map((card) => (
+            <Card
+              hoverable
+              key={card.id}
+              title={
+                <div>
+                  {card.checked && (
+                    <div className="tag">
+                      <Tag icon={<CheckCircleOutlined />} color="success">
+                        AI 인증글
+                      </Tag>
+                    </div>
+                  )}
+                  <Avatar size={2 * 16} icon={<UserOutlined />} />
+                  {card.nickname}
+                </div>
+              }
+              cover={card.image && <img alt="card-img" src={card.image} />}
+              actions={[
+                <div key="like">
+                  <FaBone className="action-icon" />
+                  좋아요
+                </div>,
+                <div key="comment">
+                  <FaCommentDots className="action-icon" />
+                  댓글달기
+                </div>,
+              ]}
+            >
+              <Meta
+                title={`좋아요 ${card.likes}개`}
+                description={card.description}
               />
-            }
-          >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
-          </Card>
-          <Card
-            title={
-              <div>
-                <Avatar size={2 * 16} icon={<UserOutlined />} />
-                안뇽
-              </div>
-            }
-            hoverable
-            cover={
-              <img
-                alt="example"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
-            }
-          >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
-          </Card>
-          <Card
-            title={
-              <div>
-                <Avatar size={2 * 16} icon={<UserOutlined />} />
-                안뇽
-              </div>
-            }
-            hoverable
-            cover={
-              <img
-                alt="example"
-                src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-              />
-            }
-          >
-            <Meta title="Europe Street beat" description="www.instagram.com" />
-          </Card>
+            </Card>
+          ))}
         </div>
-        <div className="box" />
       </div>
+      <div className="modal"></div>
     </CommuBlock>
   );
 };
