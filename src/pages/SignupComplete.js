@@ -7,10 +7,13 @@ import palette from '../lib/styles/palette';
 
 const Content = styled.div`
   color: ${palette.main};
-  font-size: 1.25rem;
   text-align: center;
   padding: 0 3rem;
   margin-bottom: 5rem;
+
+  p {
+    font-size: 1.25rem;
+  }
 `;
 
 const StyledButton = styled(Button)`

@@ -6,13 +6,13 @@ import HeaderContainer from '../containers/common/HeaderContainer';
 import palette from '../lib/styles/palette';
 import cn from 'classnames';
 import Input from '../components/common/Input';
-import { Pagination, message } from 'antd';
+import { Pagination, message, Rate } from 'antd';
 import throttle from '../lib/throttle';
 import { withRouter } from 'react-router-dom';
 import * as shopAPI from '../lib/api/shop';
-import { Rate, Layout } from 'antd';
 import { LockOutlined } from '@ant-design/icons';
 import getCommaNumber from '../lib/getCommaNumber';
+import client from '../lib/api/client';
 
 const headerTop = 640;
 const headerSize = 8 * 16;
@@ -375,6 +375,11 @@ const ShopBoard = ({ history, match }) => {
     setCount(e.target.value);
   };
   const onClickBuy = (e) => {
+    if (!client.defaults.headers.Authrization) {
+      message.info('로그인이 필요한 서비스입니다.', 1);
+      history.push('/signin');
+      return;
+    }
     async function callAPI() {
       try {
         await shopAPI.addCart({ id, count });
@@ -386,6 +391,11 @@ const ShopBoard = ({ history, match }) => {
     callAPI();
   };
   const onClickCart = (e) => {
+    if (!client.defaults.headers.Authrization) {
+      message.info('로그인이 필요한 서비스입니다.', 1);
+      history.push('/signin');
+      return;
+    }
     async function callAPI() {
       try {
         const response = await shopAPI.addCart({ id, count });
@@ -534,7 +544,7 @@ const ShopBoard = ({ history, match }) => {
           </div>
           <div className="btn-area">
             <Button onClick={onClickBuy}>바로구매</Button>
-            <Button>장바구니 추가</Button>
+            <Button onClick={onClickCart}>장바구니 추가</Button>
           </div>
         </div>
       </div>

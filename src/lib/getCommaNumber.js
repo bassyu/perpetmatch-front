@@ -1,4 +1,5 @@
 export default function getCommaNumber(number) {
+  const floor = Math.floor(number);
   const formater = new Intl.NumberFormat();
-  return formater.format(number);
+  return formater.format(floor);
 }

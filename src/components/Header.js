@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import palette from '../lib/styles/palette';
 import { GoSearch } from 'react-icons/go';
 import { Menu, Dropdown } from 'antd';
+import client from '../lib/api/client';
 
 const headerLinks = [
   {
@@ -24,7 +25,7 @@ const headerLinks = [
   {
     key: 'petform',
     text: '파양하기',
-    to: '/pet/form',
+    to: client.defaults.headers.Authorization ? '/pet/form' : '/signin',
   },
   {
     key: 'shoplist',
