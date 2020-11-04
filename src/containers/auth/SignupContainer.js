@@ -12,15 +12,15 @@ import {
 
 const SignupContainer = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, signupResult, user, authError } = useSelector(({ auth }) => ({
+  const { form, signupResult, auth, authError } = useSelector(({ auth }) => ({
     form: auth.signup,
     signupResult: auth.signupResult,
-    user: auth.user,
+    auth: auth.auth,
     authError: auth.authError,
   }));
   const { nickname, email, password } = form;
   const { success, failure, message } = signupResult;
-  const { accessToken, tokenType } = user;
+  const { accessToken, tokenType } = auth;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -67,12 +67,12 @@ const SignupContainer = ({ history }) => {
       client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
       history.push('/signup/complete');
       try {
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('auth', JSON.stringify(auth));
       } catch (e) {
         console.log('localStorage 오류');
       }
     }
-  }, [history, user, accessToken, tokenType, authError]);
+  }, [history, auth, accessToken, tokenType, authError]);
 
   return <SignupForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };

@@ -8,6 +8,7 @@ import Button from '../components/common/Button';
 import { Link } from 'react-router-dom';
 import { FaBone, FaCommentDots } from 'react-icons/fa';
 import getCommaNumber from '../lib/getCommaNumber';
+import client from '../lib/api/client';
 const { Meta } = Card;
 
 const CommuBlock = styled.div`
@@ -123,6 +124,7 @@ const CommuBlock = styled.div`
 `;
 
 const Commu = ({ history, location }) => {
+  console.log(localStorage, client.defaults);
   const [user, setUser] = useState({
     tags: ['태그'],
     profileImage: '',

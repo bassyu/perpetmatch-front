@@ -6,36 +6,8 @@ import { GoSearch } from 'react-icons/go';
 import { Menu, Dropdown } from 'antd';
 import client from '../lib/api/client';
 
-const headerLinks = [
-  {
-    key: 'commu',
-    text: '소통하기',
-    to: '/commu',
-  },
-  {
-    key: 'check',
-    text: '인증하기',
-    to: '/check',
-  },
-  {
-    key: 'petlist',
-    text: '입양하기',
-    to: '/pet/list',
-  },
-  {
-    key: 'petform',
-    text: '파양하기',
-    to: client.defaults.headers.Authorization ? '/pet/form' : '/signin',
-  },
-  {
-    key: 'shoplist',
-    text: '쇼핑하기',
-    to: '/shop/list/main',
-  },
-];
-
 const HeaderBlock = styled.div`
-  z-index: 2;
+  z-index: 3;
   position: fixed;
   top: 0;
   left: 0;
@@ -133,7 +105,9 @@ const Spacer = styled.div`
   height: 4.5rem;
 `;
 
-const Header = ({ nickname, id, credit, onSignout }) => {
+const Header = ({ user, onSignout }) => {
+  const { nickname, id, credit } = user;
+
   const menu = (
     <Menu>
       <Menu.Item key="1">
@@ -150,6 +124,34 @@ const Header = ({ nickname, id, credit, onSignout }) => {
       </Menu.ItemGroup>
     </Menu>
   );
+
+  const headerLinks = [
+    {
+      key: 'commu',
+      text: '소통하기',
+      to: '/commu',
+    },
+    {
+      key: 'check',
+      text: '인증하기',
+      to: '/check',
+    },
+    {
+      key: 'petlist',
+      text: '입양하기',
+      to: '/pet/list',
+    },
+    {
+      key: 'petform',
+      text: '파양하기',
+      to: client.defaults.headers.Authorization ? '/pet/form' : '/signin',
+    },
+    {
+      key: 'shoplist',
+      text: '쇼핑하기',
+      to: '/shop/list/main',
+    },
+  ];
 
   return (
     <>

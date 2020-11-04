@@ -9,7 +9,7 @@ import * as authAPI from '../lib/api/auth';
 // constants
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
-const TEMP_SET_USER = 'auth/TEMP_SET_USER';
+const TEMP_SET_AUTH = 'auth/TEMP_SET_AUTH';
 const SIGNOUT = 'auth/SIGNOUT';
 
 const [SIGNIN, SIGNIN_SUCCESS, SIGNIN_FAILURE] = createRequestActionTypes(
@@ -25,7 +25,7 @@ export const changeField = createAction(
   ({ form, key, value }) => ({ form, key, value }),
 );
 export const initializeForm = createAction(INITIALIZE_FORM, (form) => form);
-export const tempSetUser = createAction(TEMP_SET_USER, (user) => user);
+export const tempSetAuth = createAction(TEMP_SET_AUTH, (auth) => auth);
 export const signout = createAction(SIGNOUT);
 
 export const signin = createAction(SIGNIN, ({ usernameOrEmail, password }) => ({
@@ -62,8 +62,7 @@ const initialState = {
     usernameOrEmail: '',
     password: '',
   },
-  user: {
-    nickname: '',
+  auth: {
     accessToken: '',
     tokenType: '',
   },
@@ -80,18 +79,18 @@ const auth = handleActions(
       ...state,
       [form]: initialState[form],
     }),
-    [TEMP_SET_USER]: (state, { payload: user }) => ({
+    [TEMP_SET_AUTH]: (state, { payload: auth }) => ({
       ...state,
-      user,
+      auth: auth,
     }),
     [SIGNOUT]: (state) => ({
       ...state,
-      user: {},
+      auth: initialState.auth,
     }),
     [SIGNIN_SUCCESS]: (state, { payload: response }) => ({
       ...state,
       authError: null,
-      user: response.data,
+      auth: response.data,
     }),
     [SIGNIN_FAILURE]: (state, { payload: error }) => ({
       ...state,

@@ -9,6 +9,7 @@ import Pet from './pages/Pet';
 import SignupComplete from './pages/SignupComplete';
 import Check from './pages/Check';
 import Commu from './pages/Commu';
+import OAuth2Redirection from './components/auth/OAuth2Redirection';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} exact />
         <Route path="/signup/complete" component={SignupComplete} />
+        <Route path="/oauth2" component={OAuth2Redirection} />
         <Route
           render={({ location }) => (
             <div>

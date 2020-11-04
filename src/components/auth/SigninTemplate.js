@@ -18,6 +18,13 @@ const SigninTemplateBlock = styled.div`
 `;
 
 const WhiteBox = styled.div`
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
+  border: solid 1.2rem ${palette.gray[2]};
+  padding: 3rem;
+  width: 480px;
+  background: white;
+  border-radius: 2px;
+
   .logo-area {
     display: block;
     margin-top: 1.5rem;
@@ -25,16 +32,11 @@ const WhiteBox = styled.div`
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
+
     img {
       width: 10rem;
     }
   }
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
-  border: solid 1.2rem ${palette.gray[2]};
-  padding: 3rem;
-  width: 480px;
-  background: white;
-  border-radius: 2px;
 `;
 
 const SigninTemplate = ({ children }) => {

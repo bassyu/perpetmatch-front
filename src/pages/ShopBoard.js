@@ -375,7 +375,7 @@ const ShopBoard = ({ history, match }) => {
     setCount(e.target.value);
   };
   const onClickBuy = (e) => {
-    if (!client.defaults.headers.Authrization) {
+    if (!client.defaults.headers.Authorization) {
       message.info('로그인이 필요한 서비스입니다.', 1);
       history.push('/signin');
       return;
@@ -391,7 +391,7 @@ const ShopBoard = ({ history, match }) => {
     callAPI();
   };
   const onClickCart = (e) => {
-    if (!client.defaults.headers.Authrization) {
+    if (!client.defaults.headers.Authorization) {
       message.info('로그인이 필요한 서비스입니다.', 1);
       history.push('/signin');
       return;
