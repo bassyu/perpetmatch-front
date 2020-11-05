@@ -124,7 +124,6 @@ const CommuBlock = styled.div`
 `;
 
 const Commu = ({ history, location }) => {
-  console.log(localStorage, client.defaults);
   const [user, setUser] = useState({
     tags: ['태그'],
     profileImage: '',
