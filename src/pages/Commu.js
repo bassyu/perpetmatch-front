@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import HeaderContainer from '../containers/common/HeaderContainer';
-import { Card, Modal, Avatar, Tag } from 'antd';
-import { UserOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { Card, Upload, Avatar, Tag } from 'antd';
+import {
+  UserOutlined,
+  CheckCircleOutlined,
+  UploadOutlined,
+} from '@ant-design/icons';
 import palette from '../lib/styles/palette';
 import Button from '../components/common/Button';
 import { Link } from 'react-router-dom';
 import { FaBone, FaCommentDots } from 'react-icons/fa';
 import getCommaNumber from '../lib/getCommaNumber';
-import client from '../lib/api/client';
+import cn from 'classnames';
+import Input from '../components/common/Input';
+import Textarea from '../components/common/Textarea';
+import Comment from '../components/Comment';
 const { Meta } = Card;
 
 const CommuBlock = styled.div`
@@ -71,7 +78,7 @@ const CommuBlock = styled.div`
       button {
         margin-top: 1rem;
       }
-      .btn-write {
+      .btn-form {
         padding: 0.25rem 1rem;
         background: ${palette.main};
       }
@@ -119,11 +126,123 @@ const CommuBlock = styled.div`
         padding-top: 0.25rem;
         margin-right: 0.5rem;
       }
+      .like {
+        animation-duration: 0.5s;
+      }
+    }
+  }
+`;
+
+const ModalTemplate = styled.div`
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+
+  .card-modal {
+    width: 56rem;
+    min-height: 28rem;
+    max-height: 80%;
+    display: flex;
+    background: white;
+
+    .img-area {
+      overflow: hidden;
+      width: 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+
+      img {
+        width: 100%;
+      }
+    }
+    .card-area {
+      width: 40%;
+
+      .ant-card {
+        height: 100%;
+
+        .ant-card-body {
+          height: 82%;
+        }
+        .tag {
+          margin-bottom: 1rem;
+        }
+        .ant-avatar {
+          margin-right: 1rem;
+        }
+        .comments {
+          overflow: scroll;
+          height: 96%;
+
+          .comment {
+            font-size: 0.75rem;
+
+            .nickname {
+              margin-right: 0.5rem;
+              font-weight: 700;
+            }
+          }
+          .comment + .comment {
+            margin-top: 0.75rem;
+          }
+        }
+        .comment-form {
+          input {
+            width: 80%;
+            height: 2rem;
+            border: none;
+          }
+        }
+      }
+    }
+  }
+  .form-modal {
+    width: 36rem;
+    padding: 2rem 4rem;
+    background: white;
+
+    p {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+    textarea {
+      margin-top: 1rem;
+      height: 12rem;
+      border: none;
+      font-size: 1.25rem;
+
+      &::placeholder {
+        font-size: 1.5rem;
+      }
+    }
+    .avatar-uploader {
+      padding: 2rem 0;
+      display: flex;
+      justify-content: center;
+    }
+    .avatar-uploader > .ant-upload {
+      width: 100%;
+      height: 8rem;
+    }
+    button {
+      margin-top: 1rem;
     }
   }
 `;
 
 const Commu = ({ history, location }) => {
+  const [clicked, setClicked] = useState(null);
   const [user, setUser] = useState({
     tags: ['태그'],
     profileImage: '',
@@ -136,30 +255,112 @@ const Commu = ({ history, location }) => {
       id: 1,
       checked: false,
       nickname: '제니',
+      profileImage: '',
       image: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
       likes: 107208,
-      description: '셀카한번 올려봤어요',
-      comments: ['우왕..', '여기서 왜 셀카를?'],
+      comments: [
+        {
+          id: 0,
+          nickname: '제니',
+          profileImage: '',
+          text: '댓글이요~',
+        },
+      ],
     },
     {
       id: 2,
       checked: false,
       nickname: '김재민',
+      profileImage: '',
       image: '',
       likes: 0,
       description: '이거뭐임',
-      comments: [],
+      comments: [
+        {
+          id: 0,
+          nickname: '제니',
+          profileImage: '',
+          text: '댓글이요~',
+        },
+      ],
     },
     {
       id: 3,
       checked: true,
       nickname: '제니',
+      profileImage: '',
       image: '',
       likes: 9,
       description: '',
-      comments: [],
+      comments: [
+        {
+          id: 0,
+          nickname: '사람',
+          profileImage: '',
+          text: '댓글이요~',
+        },
+      ],
     },
   ]);
+  const [cardModal, setCardModal] = useState({
+    visible: false,
+    id: 1,
+    checked: false,
+    nickname: '제니',
+    profileImage: '',
+    image: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
+    likes: 107208,
+    description: '셀카한번 올려봤어요',
+    comments: [
+      {
+        id: 0,
+        nickname: '사람',
+        profileImage: '',
+        text: '댓글이요~',
+      },
+    ],
+  });
+  const [formModal, setFormModal] = useState({
+    visible: false,
+    checked: false,
+    image: '',
+    likes: 0,
+    description: '셀카한번 올려봤어요',
+  });
+
+  const onClickLike = (e) => {
+    e.stopPropagation();
+    setClicked(parseInt(e.target.id));
+  };
+  const onAnimationEnd = (e) => {
+    setClicked(null);
+  };
+  const onClickCard = (e) => {
+    console.log(e.currentTarget.id);
+    const id = e.currentTarget.id;
+    const newCardModel = cards.filter((card) => card.id === parseInt(id))[0];
+    setCardModal({
+      ...newCardModel,
+      visible: true,
+    });
+  };
+  const onClickForm = () => {
+    setFormModal({
+      ...formModal,
+      visible: true,
+    });
+  };
+  const onClose = (e) => {
+    setCardModal({
+      ...cardModal,
+      visible: false,
+    });
+    setFormModal({
+      ...formModal,
+      visible: false,
+    });
+  };
+  const onSummit = () => {};
 
   useEffect(() => {
     if (location.pathname === '/') {
@@ -187,14 +388,18 @@ const Commu = ({ history, location }) => {
               </div>
             </div>
           </div>
-          <Button className="btn-write">글쓰기</Button>
+          <Button className="btn-form" onClick={onClickForm}>
+            글쓰기
+          </Button>
           <p className="check-info">
             이번달은 총 <span className="count">{getCommaNumber(109)}</span>
             분께서 인증하셨습니다!
           </p>
-          <Button className="btn-check" fullWidth>
-            나도 인증하기
-          </Button>
+          <Link to="/check">
+            <Button className="btn-check" fullWidth>
+              나도 인증하기
+            </Button>
+          </Link>
           <div className="bottom">
             <div>
               <Link to="/about">
@@ -211,6 +416,7 @@ const Commu = ({ history, location }) => {
             <Card
               hoverable
               key={card.id}
+              id={card.id}
               title={
                 <div>
                   {card.checked && (
@@ -226,7 +432,15 @@ const Commu = ({ history, location }) => {
               }
               cover={card.image && <img alt="card-img" src={card.image} />}
               actions={[
-                <div key="like">
+                <div
+                  key="like"
+                  id={card.id}
+                  onClick={onClickLike}
+                  onAnimationEnd={onAnimationEnd}
+                  className={cn('like animate__animated', {
+                    animate__jello: clicked === card.id,
+                  })}
+                >
                   <FaBone className="action-icon" />
                   좋아요
                 </div>,
@@ -235,6 +449,7 @@ const Commu = ({ history, location }) => {
                   댓글달기
                 </div>,
               ]}
+              onClick={onClickCard}
             >
               <Meta
                 title={`좋아요 ${card.likes}개`}
@@ -244,7 +459,99 @@ const Commu = ({ history, location }) => {
           ))}
         </div>
       </div>
-      <div className="modal"></div>
+      {cardModal.visible && (
+        <ModalTemplate onClick={onClose}>
+          <div
+            className="card-modal"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <div className="img-area">
+              <img src={cardModal.image} alt="modal-img" />
+            </div>
+            <div className="card-area">
+              <Card
+                type="inner"
+                title={
+                  <div>
+                    {cardModal.checked && (
+                      <div className="tag">
+                        <Tag icon={<CheckCircleOutlined />} color="success">
+                          AI 인증글
+                        </Tag>
+                      </div>
+                    )}
+                    <Avatar size={2 * 16} icon={<UserOutlined />} />
+                    {cardModal.nickname}
+                  </div>
+                }
+                actions={[
+                  <div className="comment-form">
+                    <Input placeholder="댓글달기..." />
+                    게시
+                  </div>,
+                ]}
+              >
+                <div className="comments">
+                  <div className="comment">
+                    <Avatar
+                      size={2 * 16}
+                      icon={<UserOutlined />}
+                      src={cardModal.profileImage}
+                    />
+                    <span className="nickname">{cardModal.nickname}</span>
+                    {cardModal.description}
+                  </div>
+                  {cardModal.comments.map((comment) => (
+                    <div className="comment">
+                      <Avatar
+                        size={2 * 16}
+                        icon={<UserOutlined />}
+                        src={comment.profileImage}
+                      />
+                      <span className="nickname">{comment.nickname}</span>
+                      {comment.text}
+                    </div>
+                  ))}
+                </div>
+                <Meta title={`좋아요 ${cardModal.likes}개`} />
+              </Card>
+            </div>
+          </div>
+        </ModalTemplate>
+      )}
+      {formModal.visible && (
+        <ModalTemplate onClick={onClose}>
+          <div
+            className="form-modal"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <p>소통글 올리기</p>
+            <Textarea placeholder="반려동물과 무슨 일이 있었나요?" />
+            <Upload
+              className="avatar-uploader"
+              showUploadList={false}
+              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              listType="picture-card"
+              onPreview={() => {}}
+            >
+              {formModal.image ? null : (
+                <div>
+                  <UploadOutlined />
+                  <div style={{ marginTop: '0.5rem' }}>Upload</div>
+                </div>
+              )}
+            </Upload>
+            <Comment>사진을 꼭 넣어주세요!</Comment>
+            <Button fullWidth onClick={onSummit}>
+              게시
+            </Button>
+          </div>
+        </ModalTemplate>
+      )}
     </CommuBlock>
   );
 };

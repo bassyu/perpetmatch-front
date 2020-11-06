@@ -9,7 +9,7 @@ import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import getBase64 from '../../lib/getBase64';
 import ImgCrop from 'antd-img-crop';
 import Button from '../common/Button';
-import palette from '../../lib/styles/palette';
+import Comment from '../Comment';
 import * as petAPI from '../../lib/api/pet';
 import { withRouter } from 'react-router-dom';
 
@@ -41,13 +41,6 @@ const FormBlock = styled.div`
   .upload-list-inline [class*='-upload-list-rtl'] .ant-upload-list-item {
     float: right;
   }
-`;
-
-const Comment = styled.div`
-  color: ${palette.main};
-  font-size: 0.75rem;
-  margin-top: 0.5rem;
-  padding-left: 0.2rem;
 `;
 
 const Form = ({ history }) => {
@@ -247,9 +240,7 @@ const Form = ({ history }) => {
           </Upload>
         </div>
       </div>
-      <Comment>
-        &#8251; 필수는 아니지만 추가하면 매칭이 더욱 빨라집니다.
-      </Comment>
+      <Comment>필수는 아니지만 추가하면 매칭이 더욱 빨라집니다.</Comment>
       <p>사진</p>
       <ImgCrop rotate>
         <Upload

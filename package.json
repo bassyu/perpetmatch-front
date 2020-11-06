@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@yaireo/tagify": "^3.19.0",
+    "animate.css": "^4.1.1",
     "antd": "^4.7.0",
     "antd-img-crop": "^3.13.1",
     "axios": "^0.19.2",
