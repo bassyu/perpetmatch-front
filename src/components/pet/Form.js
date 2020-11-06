@@ -9,7 +9,7 @@ import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import getBase64 from '../../lib/getBase64';
 import ImgCrop from 'antd-img-crop';
 import Button from '../common/Button';
-import palette from '../../lib/styles/palette';
+import Comment from '../Comment';
 import * as petAPI from '../../lib/api/pet';
 import { withRouter } from 'react-router-dom';
 
@@ -43,13 +43,6 @@ const FormBlock = styled.div`
   }
 `;
 
-const Comment = styled.div`
-  color: ${palette.main};
-  font-size: 0.75rem;
-  margin-top: 0.5rem;
-  padding-left: 0.2rem;
-`;
-
 const Form = ({ history }) => {
   const [form, setForm] = useState({
     title: '',
@@ -69,11 +62,15 @@ const Form = ({ history }) => {
   });
 
   const onChange = (e) => {
-    const { value, name } = e.target;
+    const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
+  const onChangeNumber = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value && parseInt(value) });
+  };
   const onChangeCheckbox = (e) => {
-    const { checked, name } = e.target;
+    const { name, checked } = e.target;
     setForm({ ...form, [name]: checked });
   };
 
@@ -98,7 +95,6 @@ const Form = ({ history }) => {
     for (let i = 0; i < fileList.length; i++) {
       boardImages[i] = await getBase64(fileList[i].originFileObj);
     }
-    console.log(boardImages);
 
     setForm({
       ...form,
@@ -197,7 +193,7 @@ const Form = ({ history }) => {
             type="number"
             name="year"
             value={form.year}
-            onChange={onChange}
+            onChange={onChangeNumber}
           />
         </div>
         <div>
@@ -205,7 +201,7 @@ const Form = ({ history }) => {
             type="number"
             name="month"
             value={form.month}
-            onChange={onChange}
+            onChange={onChangeNumber}
           />
         </div>
         <div />
@@ -244,9 +240,7 @@ const Form = ({ history }) => {
           </Upload>
         </div>
       </div>
-      <Comment>
-        &#8251; 필수는 아니지만 추가하면 매칭이 더욱 빨라집니다.
-      </Comment>
+      <Comment>필수는 아니지만 추가하면 매칭이 더욱 빨라집니다.</Comment>
       <p>사진</p>
       <ImgCrop rotate>
         <Upload

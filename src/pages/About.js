@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import Fade from 'react-reveal/Fade';
-import HeaderContainer from '../containers/common/HeaderContainer';
 import Footer from '../components/Footer';
 import palette from '../lib/styles/palette';
 
@@ -19,7 +18,7 @@ const Arrow = ({ className, onClick, type }) => {
   );
 };
 
-const HomeBlock = styled.div``;
+const AboutBlock = styled.div``;
 
 const SliderWrapper = styled.div`
   .slick-list,
@@ -54,7 +53,7 @@ const SliderWrapper = styled.div`
 `;
 
 const SliderItem = styled.div`
-  height: ${document.documentElement.scrollHeight - 4.5 * 16 - 10 * 16}px;
+  height: ${document.documentElement.scrollHeight - 10 * 16}px;
   display: flex !important;
   justify-content: center;
   align-items: center;
@@ -168,8 +167,8 @@ const BottomDep = styled.div`
   }
 `;
 
+const About = () => {
 
-const Home = () => {
   const settings = {
     dots: true,
     infinite: true,
@@ -182,8 +181,7 @@ const Home = () => {
     nextArrow: <Arrow type="next" />,
   };
   return (
-    <HomeBlock>
-      <HeaderContainer width="auto" />
+    <AboutBlock>
       <SliderWrapper>
         <Slider {...settings}>
           <SliderItem background="/images/home/bg_visual1.png">
@@ -263,8 +261,9 @@ const Home = () => {
         </BottomDep>
       </BottomBlock>
       <Footer />
-    </HomeBlock>
+    </AboutBlock>
   );
 };
 
-export default Home;
+export default About;
+

@@ -9,7 +9,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './modules';
-import { tempSetUser } from './modules/auth';
+import { tempSetAuth } from './modules/auth';
 import client from './lib/api/client';
 import 'antd/dist/antd.css';
 
@@ -21,13 +21,12 @@ const store = createStore(
 
 function loadAuth() {
   try {
-    const user = localStorage.getItem('user');
-    if (!user) return;
+    const auth = localStorage.getItem('auth');
+    if (!auth) return;
 
-    const { nickname, accessToken, tokenType } = JSON.parse(user);
-    store.dispatch(tempSetUser({ nickname, accessToken, tokenType }));
+    const { accessToken, tokenType } = JSON.parse(auth);
+    store.dispatch(tempSetAuth({ accessToken, tokenType }));
     client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
-    console.log(client.defaults.headers.Authorization);
   } catch (e) {
     console.log('loadAuth() 오류');
   }

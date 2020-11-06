@@ -51,12 +51,12 @@ const ProfileUserBlock = styled.div`
               color: ${palette.sub};
             }
           }
-        }
-        .tags {
-          margin-top: 0.5rem;
+          .tags {
+            margin-top: 0.5rem;
 
-          .tag + .tag {
-            margin-left: 0.5rem;
+            .tag + .tag {
+              margin-left: 0.5rem;
+            }
           }
         }
         .description {

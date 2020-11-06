@@ -8,12 +8,12 @@ import { message } from 'antd';
 
 const SigninContainer = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, user, authError } = useSelector(({ auth }) => ({
+  const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.signin,
-    user: auth.user,
+    auth: auth.auth,
     authError: auth.authError,
   }));
-  const { accessToken, tokenType } = user;
+  const { accessToken, tokenType } = auth;
 
   const onChange = (e) => {
     const { value, name } = e.target;
@@ -44,14 +44,15 @@ const SigninContainer = ({ history }) => {
     }
     if (accessToken) {
       client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
-      history.push('/');
       try {
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('auth', JSON.stringify(auth));
+        console.log(localStorage);
       } catch (e) {
         console.log('localStorage 오류');
       }
+      history.push('/commu');
     }
-  }, [dispatch, history, user, accessToken, tokenType, authError]);
+  }, [dispatch, history, auth, accessToken, tokenType, authError]);
 
   return <SigninForm form={form} onChange={onChange} onSubmit={onSubmit} />;
 };

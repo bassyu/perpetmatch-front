@@ -8,6 +8,7 @@ import Slider from 'react-slick';
 import Button from '../components/common/Button';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import * as shopAPI from '../lib/api/shop';
+import getCommaNumber from '../lib/getCommaNumber';
 
 const headerLinks = [
   {
@@ -356,9 +357,11 @@ const ShopList = ({ match }) => {
                         {i.sale}
                         <span className="sub">%</span>
                       </span>
-                      <span className="sub price">{i.price}</span>
+                      <span className="sub price">
+                        {getCommaNumber(i.price)}
+                      </span>
                       <span className="price">
-                        {i.price * (1 - i.sale / 100)}
+                        {getCommaNumber(i.price * (1 - i.sale / 100))}
                         <span className="sub">원</span>
                       </span>
                     </div>
@@ -403,9 +406,11 @@ const ShopList = ({ match }) => {
                         {i.sale}
                         <span className="sub">%</span>
                       </span>
-                      <span className="sub price">{i.price}</span>
+                      <span className="sub price">
+                        {getCommaNumber(i.price)}
+                      </span>
                       <span className="price">
-                        {i.price * (1 - i.sale / 100)}
+                        {getCommaNumber(i.price * (1 - i.sale / 100))}
                         <span className="sub">껌</span>
                       </span>
                     </div>
@@ -439,9 +444,11 @@ const ShopList = ({ match }) => {
                         {i.sale}
                         <span className="sub">%</span>
                       </span>
-                      <span className="sub price">{i.price}</span>
+                      <span className="sub price">
+                        {getCommaNumber(i.price)}
+                      </span>
                       <span className="price">
-                        {i.price * (1 - i.sale / 100)}
+                        {getCommaNumber(i.price * (1 - i.sale / 100))}
                         <span className="sub">원</span>
                       </span>
                     </div>

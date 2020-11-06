@@ -5,6 +5,7 @@ import { Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 import getBase64 from '../lib/getBase64';
+import HeaderContainer from '../containers/common/HeaderContainer';
 
 const CheckBlock = styled.div`
   .avatar-uploader {
@@ -26,27 +27,30 @@ const Check = () => {
   }
 
   return (
-    <FormTemplate title="사진으로 인증하고 보상받기!">
-      <CheckBlock>
-        <ImgCrop rotate>
-          <Upload
-            className="avatar-uploader"
-            showUploadList={false}
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            listType="picture-card"
-            onChange={onChange}
-            onPreview={() => {}}
-          >
-            {img ? null : (
-              <div>
-                <UploadOutlined />
-                <div style={{ marginTop: '0.5rem' }}>Upload</div>
-              </div>
-            )}
-          </Upload>
-        </ImgCrop>
-      </CheckBlock>
-    </FormTemplate>
+    <>
+      <HeaderContainer />
+      <FormTemplate title="AI 인증하고 보상받기!">
+        <CheckBlock>
+          <ImgCrop rotate>
+            <Upload
+              className="avatar-uploader"
+              showUploadList={false}
+              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              listType="picture-card"
+              onChange={onChange}
+              onPreview={() => {}}
+            >
+              {img ? null : (
+                <div>
+                  <UploadOutlined />
+                  <div style={{ marginTop: '0.5rem' }}>Upload</div>
+                </div>
+              )}
+            </Upload>
+          </ImgCrop>
+        </CheckBlock>
+      </FormTemplate>
+    </>
   );
 };
 
