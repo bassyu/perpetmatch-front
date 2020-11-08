@@ -11,7 +11,6 @@ const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 const TEMP_SET_AUTH = 'auth/TEMP_SET_AUTH';
 const SIGNOUT = 'auth/SIGNOUT';
-
 const [SIGNIN, SIGNIN_SUCCESS, SIGNIN_FAILURE] = createRequestActionTypes(
   'auth/SIGNIN',
 );
@@ -27,7 +26,6 @@ export const changeField = createAction(
 export const initializeForm = createAction(INITIALIZE_FORM, (form) => form);
 export const tempSetAuth = createAction(TEMP_SET_AUTH, (auth) => auth);
 export const signout = createAction(SIGNOUT);
-
 export const signin = createAction(SIGNIN, ({ usernameOrEmail, password }) => ({
   usernameOrEmail,
   password,

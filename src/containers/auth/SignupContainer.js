@@ -9,6 +9,7 @@ import {
   signin,
   signup,
 } from '../../modules/auth';
+import { getUser } from '../../modules/profile';
 
 const SignupContainer = ({ history }) => {
   const dispatch = useDispatch();
@@ -51,7 +52,8 @@ const SignupContainer = ({ history }) => {
     }
     if (success) {
       alert(message);
-      dispatch(signin({ usernameOrEmail: email, password })); // 회원가입 후 자동 로그인
+      // 회원가입 후 자동 로그인
+      dispatch(signin({ usernameOrEmail: email, password }));
       dispatch(initializeForm('signupResult'));
     }
   }, [dispatch, history, email, password, success, failure, message]);
@@ -64,6 +66,7 @@ const SignupContainer = ({ history }) => {
     }
     if (accessToken) {
       client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
+      dispatch(getUser());
       history.push('/signup/complete');
       try {
         localStorage.setItem('auth', JSON.stringify(auth));

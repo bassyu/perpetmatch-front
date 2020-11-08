@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import * as profileAPI from '../../lib/api/profile';
 import { whiteLocations } from '../../constants/index';
 import styled from 'styled-components';
-import palette from '../../lib/styles/palette';
 import Button from '../common/Button';
 import Input from '../common/Input';
 import Select from '../common/Select';
 import Textarea from '../common/Textarea';
-import { withRouter } from 'react-router-dom';
-import { message } from 'antd';
+import Comment from '../Comment';
 
 const commentMap = {
   apartment: ' 아파트, 연립주택, 대세대주택, 기숙사',
@@ -30,62 +28,7 @@ const ButtonWithMarginTop = styled(Button)`
   margin-top: 3rem;
 `;
 
-const Comment = styled.div`
-  color: ${palette.main};
-  font-size: 0.75rem;
-  margin-top: 0.5rem;
-  padding-left: 0.2rem;
-`;
-
-const UserForm = ({ history }) => {
-  const [form, setForm] = useState({
-    age: 0,
-    occupation: '',
-    location: '강원도',
-    houseType: 'apartment',
-    experience: false,
-    liveAlone: false,
-    hasPet: false,
-    phoneNumber: '',
-    description: '',
-    profileImage: '',
-    expectedFeeForMonth: 150000,
-  });
-
-  const onChange = (e) => {
-    const { value, name } = e.target;
-    setForm({ ...form, [name]: value });
-  };
-  const onChangeCheckbox = (e) => {
-    const { checked, name } = e.target;
-    setForm({ ...form, [name]: checked });
-  };
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await profileAPI.writeUser({
-        ...form,
-        age: Number(form.age),
-      });
-      await message.success(response.data.message, 1);
-      history.push('/profile/taste-form');
-    } catch (e) {
-      await message.error('프로필 등록 오류', 1);
-    }
-  };
-
-  useEffect(() => {
-    async function callAPI() {
-      try {
-        const response = await profileAPI.getUser();
-        setForm({ ...response.data.data });
-      } catch (e) {
-        console.log('프로필 불러오기 오류');
-      }
-    }
-    callAPI();
-  }, []);
-
+const UserForm = ({ form, onChange, onChangeCheckbox, onSubmit }) => {
   return (
     <UserFormBlock>
       <form onSubmit={onSubmit}>
@@ -231,4 +174,4 @@ const UserForm = ({ history }) => {
   );
 };
 
-export default withRouter(UserForm);
+export default UserForm;

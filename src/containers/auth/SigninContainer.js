@@ -5,6 +5,7 @@ import SigninForm from '../../components/auth/SigninForm';
 import client from '../../lib/api/client';
 import { changeField, initializeForm, signin } from '../../modules/auth';
 import { message } from 'antd';
+import { getUser } from '../../modules/profile';
 
 const SigninContainer = ({ history }) => {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const SigninContainer = ({ history }) => {
     }
     if (accessToken) {
       client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
+      dispatch(getUser());
       try {
         localStorage.setItem('auth', JSON.stringify(auth));
       } catch (e) {

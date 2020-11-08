@@ -1,12 +1,12 @@
 import React from 'react';
 import FormTemplate from '../components/FormTemplate';
-import UserForm from '../components/profile/UserForm';
+import UserFormContainer from '../containers/profile/UserFormContainer';
 
 const ProfileUserForm = () => {
   return (
     <>
       <FormTemplate title="저는 이런 사람이에요!">
-        <UserForm />
+        <UserFormContainer />
       </FormTemplate>
     </>
   );
