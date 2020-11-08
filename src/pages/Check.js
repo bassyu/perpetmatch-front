@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import FormTemplate from '../components/FormTemplate';
-import { Upload, message } from 'antd';
+import { Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 import getBase64 from '../lib/getBase64';

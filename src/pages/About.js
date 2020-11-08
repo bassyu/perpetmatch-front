@@ -83,21 +83,21 @@ const SliderItem = styled.div`
 const BottomBlock = styled.div``;
 
 const BottomWel = styled.div`
-  div{
+  div {
     text-align: center;
     background-color: white;
     height: 15rem;
     padding-top: 3rem;
 
-    span{
+    span {
       font-size: 4rem;
       font-weight: 1;
       color: #204030;
     }
-    title{
+    title {
       font-weight: 600;
     }
-    .sub{
+    .sub {
       font-size: 1rem;
       color: black;
     }
@@ -105,30 +105,29 @@ const BottomWel = styled.div`
 `;
 
 const BottomLove = styled.div`
-  div{
+  div {
     height: 39rem;
 
-    .loveImg{
-
-      img{
+    .loveImg {
+      img {
         height: 39rem;
         width: 65rem;
       }
     }
-    .loveSub{
+    .loveSub {
       background-color: ${palette.gray[2]};
       width: 38.75rem;
       padding-left: 4rem;
       padding-top: 3rem;
 
-      .head{
-        font-size:3rem;
+      .head {
+        font-size: 3rem;
         font-weight: 500;
       }
-      p{
+      p {
         font-size: 1.25rem;
       }
-      .subEng{
+      .subEng {
         font-weight: 1;
       }
     }
@@ -136,31 +135,30 @@ const BottomLove = styled.div`
 `;
 
 const BottomDep = styled.div`
-  div{
+  div {
     height: 39rem;
     color: white;
 
-    .depImg{
-
-      img{
+    .depImg {
+      img {
         height: 39rem;
         width: 65rem;
       }
     }
-    .depSub{
-      background-color: #56ADB4;
+    .depSub {
+      background-color: #56adb4;
       width: 38.75rem;
       padding-left: 10rem;
       padding-top: 3rem;
 
-      .head{
-        font-size:3rem;
+      .head {
+        font-size: 3rem;
         font-weight: 500;
       }
-      p{
+      p {
         font-size: 1.25rem;
       }
-      .subEng{
+      .subEng {
         font-weight: 1;
       }
     }
@@ -168,7 +166,6 @@ const BottomDep = styled.div`
 `;
 
 const About = () => {
-
   const settings = {
     dots: true,
     infinite: true,
@@ -219,19 +216,24 @@ const About = () => {
       <BottomBlock>
         <BottomWel>
           <div>
-            <span>Welcom to </span><span className="title">PERPET MATCH</span>
-            <p className="sub">또 다른 만남을 위해 존재하는 PERPET MATCH 이제 안심하고 올바른 선택을 하세요.</p>
+            <span>Welcom to </span>
+            <span className="title">PERPET MATCH</span>
+            <p className="sub">
+              또 다른 만남을 위해 존재하는 PERPET MATCH 이제 안심하고 올바른
+              선택을 하세요.
+            </p>
           </div>
         </BottomWel>
         <BottomLove>
-          <div style={{display: "inline-flex"}}>
+          <div style={{ display: 'inline-flex' }}>
             <div className="loveImg">
-              <img src="/images/home/bg_visual4.png" alt="bg_visual4.png"/>
+              <img src="/images/home/bg_visual4.png" alt="bg_visual4.png" />
             </div>
             <div className="loveSub">
               <span className="head">Love & Belif</span>
               <p>사랑 & 믿음</p>
-              <p className="subEng">A Place where we can acopt only when
+              <p className="subEng">
+                A Place where we can acopt only when
                 <p>we have faith in each other.</p>
               </p>
               <p>서로의 믿음이 있어야 입양할 수 있는 곳</p>
@@ -239,23 +241,27 @@ const About = () => {
           </div>
         </BottomLove>
         <BottomDep>
-        <div style={{display: "inline-flex"}}>
+          <div style={{ display: 'inline-flex' }}>
             <div className="depSub">
               <span className="head">Desposit</span>
               <p>보증금</p>
-              <p className="subEng">The PERPET MATCH will secure trust
-                <p>through deposits.
+              <p className="subEng">
+                The PERPET MATCH will secure trust
+                <p>
+                  through deposits.
                   <p>All these deposits will ve used for pets.</p>
                 </p>
               </p>
-              <p>퍼펫매치는 보증금을 통해 신뢰를 확보하고,
-                <p>이 모든 보증금은
+              <p>
+                퍼펫매치는 보증금을 통해 신뢰를 확보하고,
+                <p>
+                  이 모든 보증금은
                   <p>반려동물을 위해 사용 될 것입니다.</p>
                 </p>
               </p>
             </div>
             <div className="depImg">
-              <img src="/images/home/bg_visual5.png" alt="bg_visual5.png"/>
+              <img src="/images/home/bg_visual5.png" alt="bg_visual5.png" />
             </div>
           </div>
         </BottomDep>
@@ -266,4 +272,3 @@ const About = () => {
 };
 
 export default About;
-

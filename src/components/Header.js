@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../lib/styles/palette';
-import { GoSearch } from 'react-icons/go';
 import { Menu, Dropdown } from 'antd';
 import client from '../lib/api/client';
 

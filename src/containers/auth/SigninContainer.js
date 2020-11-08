@@ -46,7 +46,6 @@ const SigninContainer = ({ history }) => {
       client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
       try {
         localStorage.setItem('auth', JSON.stringify(auth));
-        console.log(localStorage);
       } catch (e) {
         console.log('localStorage 오류');
       }

@@ -72,7 +72,6 @@ const TasteForm = ({ history }) => {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
     try {
       const response = await profileAPI.writeUser(form);
       await message.success(response.data.message, 1);

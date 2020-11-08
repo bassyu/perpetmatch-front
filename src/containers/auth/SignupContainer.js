@@ -63,7 +63,6 @@ const SignupContainer = ({ history }) => {
       return;
     }
     if (accessToken) {
-      console.log('로그인 성공');
       client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
       history.push('/signup/complete');
       try {

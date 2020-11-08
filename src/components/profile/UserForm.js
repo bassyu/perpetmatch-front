@@ -53,7 +53,6 @@ const UserForm = ({ history }) => {
   });
 
   const onChange = (e) => {
-    console.log(e.target.value);
     const { value, name } = e.target;
     setForm({ ...form, [name]: value });
   };
@@ -64,7 +63,6 @@ const UserForm = ({ history }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log({ ...form, age: Number(form.age) });
       const response = await profileAPI.writeUser({
         ...form,
         age: Number(form.age),
@@ -80,7 +78,6 @@ const UserForm = ({ history }) => {
     async function callAPI() {
       try {
         const response = await profileAPI.getUser();
-        console.log({ ...response.data.data });
         setForm({ ...response.data.data });
       } catch (e) {
         console.log('프로필 불러오기 오류');

@@ -336,7 +336,6 @@ const Commu = ({ history, location }) => {
     setClicked(null);
   };
   const onClickCard = (e) => {
-    console.log(e.currentTarget.id);
     const id = e.currentTarget.id;
     const newCardModel = cards.filter((card) => card.id === parseInt(id))[0];
     setCardModal({
