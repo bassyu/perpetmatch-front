@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import HeaderContainer from '../containers/common/HeaderContainer';
-import { Card, Upload, Avatar, Tag } from 'antd';
+import { Card, Upload, Avatar, Tag, message } from 'antd';
 import {
   UserOutlined,
   CheckCircleOutlined,
@@ -16,9 +16,14 @@ import cn from 'classnames';
 import Input from '../components/common/Input';
 import Textarea from '../components/common/Textarea';
 import Comment from '../components/Comment';
+import * as profileAPI from '../lib/api/profile';
+import * as commuAPI from '../lib/api/commu';
+import { useSelector } from 'react-redux';
+import getBase64 from '../lib/getBase64';
 const { Meta } = Card;
 
 const CommuBlock = styled.div`
+  min-height: 100%;
   background: ${palette.gray[0]};
 
   .header {
@@ -148,8 +153,7 @@ const ModalTemplate = styled.div`
 
   .card-modal {
     width: 56rem;
-    min-height: 28rem;
-    max-height: 80%;
+    height: 60%;
     display: flex;
     background: white;
 
@@ -172,7 +176,7 @@ const ModalTemplate = styled.div`
         height: 100%;
 
         .ant-card-body {
-          height: 82%;
+          height: 80%;
         }
         .tag {
           margin-bottom: 1rem;
@@ -182,7 +186,8 @@ const ModalTemplate = styled.div`
         }
         .comments {
           overflow: scroll;
-          height: 96%;
+          margin: 0.5rem 0;
+          height: 90%;
 
           .comment {
             font-size: 0.75rem;
@@ -197,6 +202,8 @@ const ModalTemplate = styled.div`
           }
         }
         .comment-form {
+          cursor: unset;
+
           input {
             width: 80%;
             height: 2rem;
@@ -231,9 +238,13 @@ const ModalTemplate = styled.div`
       display: flex;
       justify-content: center;
     }
-    .avatar-uploader > .ant-upload {
+    .avatar-uploader > .ant-upload-list {
       width: 100%;
       height: 8rem;
+
+      .ant-upload {
+        width: 100%;
+      }
     }
     button {
       margin-top: 1rem;
@@ -242,6 +253,7 @@ const ModalTemplate = styled.div`
 `;
 
 const Commu = ({ history, location }) => {
+  const userId = useSelector(({ profile }) => profile.user.id);
   const [clicked, setClicked] = useState(null);
   const [user, setUser] = useState({
     tags: ['태그'],
@@ -267,40 +279,6 @@ const Commu = ({ history, location }) => {
         },
       ],
     },
-    {
-      id: 2,
-      checked: false,
-      nickname: '김재민',
-      profileImage: '',
-      image: '',
-      likes: 0,
-      description: '이거뭐임',
-      comments: [
-        {
-          id: 0,
-          nickname: '제니',
-          profileImage: '',
-          text: '댓글이요~',
-        },
-      ],
-    },
-    {
-      id: 3,
-      checked: true,
-      nickname: '제니',
-      profileImage: '',
-      image: '',
-      likes: 9,
-      description: '',
-      comments: [
-        {
-          id: 0,
-          nickname: '사람',
-          profileImage: '',
-          text: '댓글이요~',
-        },
-      ],
-    },
   ]);
   const [cardModal, setCardModal] = useState({
     visible: false,
@@ -320,12 +298,13 @@ const Commu = ({ history, location }) => {
       },
     ],
   });
+  const [commentForm, setCommentForm] = useState('');
   const [formModal, setFormModal] = useState({
     visible: false,
     checked: false,
     image: '',
     likes: 0,
-    description: '셀카한번 올려봤어요',
+    description: '',
   });
 
   const onClickLike = (e) => {
@@ -359,15 +338,89 @@ const Commu = ({ history, location }) => {
       visible: false,
     });
   };
-  const onSummit = () => {};
+  const onChangeComment = (e) => {
+    setCommentForm(e.target.value);
+  };
+  const onClickComment = (e) => {
+    async function callAPI() {
+      try {
+        await commuAPI.writeComment({ id: cardModal.id, text: commentForm });
+        const response = await commuAPI.getCards();
+        const newCards = response.data.data;
+        setCards(newCards);
+        const newCardModel = newCards.filter(
+          (card) => card.id === cardModal.id,
+        )[0];
+        setCardModal({
+          ...newCardModel,
+          visible: true,
+        });
+        setCommentForm('');
+      } catch (e) {
+        console.log('댓글 등록 오류');
+      }
+    }
+    callAPI();
+  };
+  const onChangeForm = (e) => {
+    const { name, value } = e.target;
+    setFormModal({
+      ...formModal,
+      [name]: value,
+    });
+  };
+  async function onChangeFormImg({ fileList }) {
+    setFormModal({
+      ...formModal,
+      image: fileList.length ? await getBase64(fileList[0].originFileObj) : '',
+    });
+    console.log(formModal);
+  }
+  const onSummit = () => {
+    async function callAPI() {
+      try {
+        await commuAPI.writeCard(formModal);
+        await message.success('성공적으로 등록되었습니다!', 1);
+        setFormModal({
+          visible: false,
+          checked: false,
+          image: '',
+          likes: 0,
+          description: '',
+        });
+      } catch (e) {
+        message.error('게시글 등록 오류');
+      }
+    }
+    callAPI();
+  };
 
   useEffect(() => {
+    async function callAPI() {
+      try {
+        const response = await commuAPI.getCards();
+        setCards(response.data.data);
+      } catch (e) {
+        console.log('카드 불러오기 오류');
+      }
+    }
     if (location.pathname === '/') {
       history.push('/commu');
     }
+    callAPI();
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    async function callAPI() {
+      try {
+        const response = await profileAPI.getUserBreif({ id: userId });
+        setUser(response.data.data);
+      } catch (e) {
+        console.log('불러오기 오류');
+      }
+    }
+    callAPI();
+  }, [userId]);
 
   return (
     <CommuBlock>
@@ -487,8 +540,13 @@ const Commu = ({ history, location }) => {
                 }
                 actions={[
                   <div className="comment-form">
-                    <Input placeholder="댓글달기..." />
-                    게시
+                    <Input
+                      placeholder="댓글달기..."
+                      name="commnet"
+                      value={commentForm}
+                      onChange={onChangeComment}
+                    />
+                    <span onClick={onClickComment}>게시</span>
                   </div>,
                 ]}
               >
@@ -503,7 +561,7 @@ const Commu = ({ history, location }) => {
                     {cardModal.description}
                   </div>
                   {cardModal.comments.map((comment) => (
-                    <div className="comment">
+                    <div key={comment.id} className="comment">
                       <Avatar
                         size={2 * 16}
                         icon={<UserOutlined />}
@@ -529,12 +587,17 @@ const Commu = ({ history, location }) => {
             }}
           >
             <p>소통글 올리기</p>
-            <Textarea placeholder="반려동물과 무슨 일이 있었나요?" />
+            <Textarea
+              placeholder="반려동물과 무슨 일이 있었나요?"
+              name="description"
+              value={formModal.description}
+              onChange={onChangeForm}
+            />
             <Upload
               className="avatar-uploader"
-              showUploadList={false}
               action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               listType="picture-card"
+              onChange={onChangeFormImg}
               onPreview={() => {}}
             >
               {formModal.image ? null : (

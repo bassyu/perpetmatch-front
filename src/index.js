@@ -12,6 +12,7 @@ import rootReducer, { rootSaga } from './modules';
 import { tempSetAuth } from './modules/auth';
 import client from './lib/api/client';
 import 'antd/dist/antd.css';
+import { getUser } from './modules/profile';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -25,8 +26,9 @@ function loadAuth() {
     if (!auth) return;
 
     const { accessToken, tokenType } = JSON.parse(auth);
-    store.dispatch(tempSetAuth({ accessToken, tokenType }));
     client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
+    store.dispatch(tempSetAuth({ accessToken, tokenType }));
+    store.dispatch(getUser());
   } catch (e) {
     console.log('loadAuth() 오류');
   }

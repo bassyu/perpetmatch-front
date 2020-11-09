@@ -261,7 +261,7 @@ const About = () => {
               </p>
             </div>
             <div className="depImg">
-              <img src="/images/home/bg_visual5.png" alt="bg_visual5.png" />
+              <img src="/images/home/bg_visual3.png" alt="bg_visual5.png" />
             </div>
           </div>
         </BottomDep>
