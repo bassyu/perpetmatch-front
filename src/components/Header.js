@@ -157,7 +157,7 @@ const Header = ({ user, onSignout }) => {
       <HeaderBlock>
         <div className="header-wrapper">
           <div className="logo-area">
-            <Link to="/commu">
+            <Link to="/">
               <img src="/images/common/logo_w.png" alt="logo" />
             </Link>
           </div>

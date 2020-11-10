@@ -254,9 +254,11 @@ const ModalTemplate = styled.div`
 
 const Commu = ({ history, location }) => {
   const userId = useSelector(({ profile }) => profile.user.id);
+  const [loading, setLoading] = useState(true);
   const [clicked, setClicked] = useState(null);
+  const [checkedCount, setCheckedCount] = useState(0);
   const [user, setUser] = useState({
-    tags: ['태그'],
+    tags: [],
     profileImage: '',
     nickname: '',
     description: '',
@@ -266,18 +268,29 @@ const Commu = ({ history, location }) => {
     {
       id: 1,
       checked: false,
-      nickname: '제니',
+      nickname: '백승열',
       profileImage: '',
-      image: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
-      likes: 107208,
-      comments: [
-        {
-          id: 0,
-          nickname: '제니',
-          profileImage: '',
-          text: '댓글이요~',
-        },
-      ],
+      image: '',
+      likes: 0,
+      comments: [],
+    },
+    {
+      id: 2,
+      checked: false,
+      nickname: '유강현',
+      profileImage: '',
+      image: '',
+      likes: 0,
+      comments: [],
+    },
+    {
+      id: 3,
+      checked: false,
+      nickname: '유강현',
+      profileImage: '',
+      image: '',
+      likes: 0,
+      comments: [],
     },
   ]);
   const [cardModal, setCardModal] = useState({
@@ -400,15 +413,17 @@ const Commu = ({ history, location }) => {
       try {
         const response = await commuAPI.getCards();
         setCards(response.data.data);
+        setLoading(false);
       } catch (e) {
         console.log('카드 불러오기 오류');
       }
     }
-    if (location.pathname === '/') {
-      history.push('/commu');
-    }
     callAPI();
   }, []);
+
+  useEffect(() => {
+    setCheckedCount(cards.filter((card) => card.checked).length);
+  }, [cards]);
 
   useEffect(() => {
     async function callAPI() {
@@ -416,7 +431,7 @@ const Commu = ({ history, location }) => {
         const response = await profileAPI.getUserBreif({ id: userId });
         setUser(response.data.data);
       } catch (e) {
-        console.log('불러오기 오류');
+        setUser(null);
       }
     }
     callAPI();
@@ -427,24 +442,29 @@ const Commu = ({ history, location }) => {
       <HeaderContainer />
       <div className="header">
         <div className="box">
-          <div className="top">
-            <Avatar size={4 * 16} icon={<UserOutlined />} />
-            <div className="brief">
-              <div className="nickname">유강현</div>
-              <div className="tags">
-                {user.tags.map((tag, index) => (
-                  <span key={index} className="tag">
-                    #{tag}
-                  </span>
-                ))}
+          {user && (
+            <>
+              <div className="top">
+                <Avatar size={4 * 16} icon={<UserOutlined />} />
+                <div className="brief">
+                  <div className="nickname">{user.nickname}</div>
+                  <div className="tags">
+                    {user.tags.map((tag, index) => (
+                      <span key={index} className="tag">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <Button className="btn-form" onClick={onClickForm}>
-            글쓰기
-          </Button>
+              <Button className="btn-form" onClick={onClickForm}>
+                글쓰기
+              </Button>
+            </>
+          )}
           <p className="check-info">
-            이번달은 총 <span className="count">{getCommaNumber(109)}</span>
+            이번달은 총{' '}
+            <span className="count">{getCommaNumber(checkedCount)}</span>
             분께서 인증하셨습니다!
           </p>
           <Link to="/check">
@@ -467,6 +487,7 @@ const Commu = ({ history, location }) => {
           {cards.map((card) => (
             <Card
               hoverable
+              loading={loading}
               key={card.id}
               id={card.id}
               title={

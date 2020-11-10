@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import About from './pages/About';
 import Shop from './pages/Shop';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
@@ -10,13 +9,14 @@ import SignupComplete from './pages/SignupComplete';
 import Check from './pages/Check';
 import Commu from './pages/Commu';
 import OAuth2Redirection from './components/auth/OAuth2Redirection';
+import Index from './pages/Index';
 
 const App = () => {
   return (
     <div className="App">
       <Switch>
-        <Route path={['/', '/commu']} component={Commu} exact />
-        <Route path="/about" component={About} />
+        <Route path={['/', '/about']} component={Index} exact />
+        <Route path="/commu" component={Commu} />
         <Route path="/profile" component={Profile} />
         <Route path="/pet" component={Pet} />
         <Route path="/shop" component={Shop} />

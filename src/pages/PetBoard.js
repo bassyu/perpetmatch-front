@@ -164,7 +164,7 @@ const PetBoard = ({ match }) => {
     lineAgeImage: '',
     hasNeutered: false,
     description: '반려동물 설명',
-    boardImage1: '/images/sub/img_adopt1.png',
+    boardImage1: '',
     boardImage2: '',
     boardImage3: '',
     closed: true,

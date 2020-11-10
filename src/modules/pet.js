@@ -10,11 +10,6 @@ const CHANGE_FILED = 'pet/CHANGE_FILED';
 const CHANGE_FORM = 'pet/CHANGE_FORM';
 const INIT_BOARDS = 'pet/INIT_BOARDS';
 const [
-  GET_BOARDS,
-  GET_BOARDS_SUCCESS,
-  GET_BOARDS_FAILURE,
-] = createRequestActionTypes('pet/GET_BOARDS');
-const [
   SEARCH_BOARDS,
   SEARCH_BOARDS_SUCCESS,
   SEARCH_BOARDS_FAILURE,
@@ -31,7 +26,6 @@ export const changeField = createAction(
 );
 export const changeForm = createAction(CHANGE_FORM, ({ form }) => ({ form }));
 export const initBoards = createAction(INIT_BOARDS, () => {});
-export const getBoards = createAction(GET_BOARDS, () => {});
 export const searchBoards = createAction(
   SEARCH_BOARDS,
   ({
@@ -56,11 +50,9 @@ export const searchBoards = createAction(
 );
 
 // middleware
-const getBoardsSaga = createRequestSaga(GET_BOARDS, petAPI.getBoards);
 const searchBoardsSaga = createRequestSaga(SEARCH_BOARDS, petAPI.searchBoards);
 
 export function* petSaga() {
-  yield takeLatest(GET_BOARDS, getBoardsSaga);
   yield takeLatest(SEARCH_BOARDS, searchBoardsSaga);
 }
 
@@ -96,15 +88,11 @@ const pet = handleActions(
     }),
     [INIT_BOARDS]: (state) => ({
       ...state,
+      searchForm: {
+        ...state.searchForm,
+        page: 0,
+      },
       boards: [],
-    }),
-    [GET_BOARDS_SUCCESS]: (state, { payload: response }) => ({
-      ...state,
-      boards: state.boards.concat(response.data.data.content),
-    }),
-    [GET_BOARDS_FAILURE]: (state, { payload: error }) => ({
-      ...state,
-      petError: error,
     }),
     [SEARCH_BOARDS_SUCCESS]: (state, { payload: response }) => ({
       ...state,

@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ListHeader from '../../components/pet/ListHeader';
@@ -68,8 +67,8 @@ const ListHeaderContainer = () => {
     } else if (value.filter((i) => whitePetAges.includes(i)).length) {
       form = { ...searchForm, petAges: value };
     }
-    dispatch(initBoards());
     dispatch(changeForm({ form }));
+    dispatch(initBoards());
   };
 
   useEffect(() => {
@@ -96,6 +95,7 @@ const ListHeaderContainer = () => {
           wantNeutered,
           expectedFeeForMonth,
         };
+        dispatch(initBoards());
         dispatch(changeForm({ form }));
       } catch (e) {
         console.log('프로필 로딩 오류');
@@ -103,43 +103,6 @@ const ListHeaderContainer = () => {
     }
     callAPI();
   }, [dispatch]);
-
-  useEffect(() => {
-    const form = {
-      page: 0,
-      zones,
-      petTitles,
-      petAges,
-      wantCheckUp,
-      wantLineAge,
-      wantNeutered,
-      expectedFeeForMonth,
-    };
-    const action = [
-      zones.length,
-      petTitles.length,
-      petAges.length,
-      wantCheckUp,
-      wantLineAge,
-      wantNeutered,
-      expectedFeeForMonth,
-    ]
-      .map((i) => Boolean(i))
-      .includes(true)
-      ? searchBoards(form)
-      : getBoards();
-
-    dispatch(action);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    zones,
-    petTitles,
-    petAges,
-    wantCheckUp,
-    wantLineAge,
-    wantNeutered,
-    expectedFeeForMonth,
-  ]);
 
   return (
     <ListHeader

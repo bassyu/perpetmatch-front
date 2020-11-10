@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import Fade from 'react-reveal/Fade';
 import Footer from '../components/Footer';
 import palette from '../lib/styles/palette';
+import HeaderContainer from '../containers/common/HeaderContainer';
 
 const arrowMap = {
   prev: '/images/home/btn_prev.png',
@@ -53,7 +54,7 @@ const SliderWrapper = styled.div`
 `;
 
 const SliderItem = styled.div`
-  height: ${document.documentElement.scrollHeight - 10 * 16}px;
+  height: ${document.documentElement.scrollHeight - 4.5 * 16}px;
   display: flex !important;
   justify-content: center;
   align-items: center;
@@ -91,11 +92,11 @@ const BottomWel = styled.div`
 
     span {
       font-size: 4rem;
-      font-weight: 1;
+      font-weight: 100;
       color: #204030;
     }
-    title {
-      font-weight: 600;
+    .title {
+      font-weight: 700;
     }
     .sub {
       font-size: 1rem;
@@ -165,7 +166,7 @@ const BottomDep = styled.div`
   }
 `;
 
-const About = () => {
+const Index = () => {
   const settings = {
     dots: true,
     infinite: true,
@@ -179,6 +180,7 @@ const About = () => {
   };
   return (
     <AboutBlock>
+      <HeaderContainer />
       <SliderWrapper>
         <Slider {...settings}>
           <SliderItem background="/images/home/bg_visual1.png">
@@ -216,7 +218,7 @@ const About = () => {
       <BottomBlock>
         <BottomWel>
           <div>
-            <span>Welcom to </span>
+            <span>Welcome to </span>
             <span className="title">PERPET MATCH</span>
             <p className="sub">
               또 다른 만남을 위해 존재하는 PERPET MATCH 이제 안심하고 올바른
@@ -243,7 +245,7 @@ const About = () => {
         <BottomDep>
           <div style={{ display: 'inline-flex' }}>
             <div className="depSub">
-              <span className="head">Desposit</span>
+              <span className="head">Deposit</span>
               <p>보증금</p>
               <p className="subEng">
                 The PERPET MATCH will secure trust
@@ -271,4 +273,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Index;
