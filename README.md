@@ -3,6 +3,7 @@
         <img width="50%" src="https://user-images.githubusercontent.com/54442420/98690859-c1593f80-23b0-11eb-90f0-362c098a9204.png" />
     </a>
 </p>
+<br/>
 <p align="center">
     <img src="https://img.shields.io/github/last-commit/bassyu/perpet-match-front" />
     <img src="https://img.shields.io/github/commit-activity/m/bassyu/perpet-match-front" />
