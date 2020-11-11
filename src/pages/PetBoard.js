@@ -228,11 +228,15 @@ const PetBoard = ({ match }) => {
       <HeaderContainer />
       <div className="menu">
         <div className="box">
-          {board.closed ? (
-            <Tag color="red">입양완료</Tag>
-          ) : (
-            <Tag color="blue">입양가능</Tag>
-          )}
+          <div className="ant-tags">
+            {board.closed ? (
+              <Tag color="red">입양완료</Tag>
+            ) : (
+              <Tag color="blue">입양가능</Tag>
+            )}
+            {board.checkUpImage && <Tag color="green">건강검진</Tag>}
+            {board.lineAgeImage && <Tag color="magenta">혈통서</Tag>}
+          </div>
           <div className="title">{board.title}</div>
           <div className="tags">
             {[
@@ -316,6 +320,18 @@ const PetBoard = ({ match }) => {
           )}
           <p>아이 설명</p>
           <div className="description">{board.description}</div>
+          {board.checkUpImage && (
+            <>
+              <p>건강검진</p>
+              <img src={board.checkUpImage} alt="check-up-img" />
+            </>
+          )}
+          {board.lineAgeImage && (
+            <>
+              <p>혈통서</p>
+              <img src={board.lineAgeImage} alt="line-age-img" />
+            </>
+          )}
         </div>
       </div>
       <Footer />

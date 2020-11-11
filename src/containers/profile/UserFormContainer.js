@@ -8,7 +8,6 @@ import { withRouter } from 'react-router-dom';
 const UserFormContainer = ({ history }) => {
   const user = useSelector(({ profile }) => profile.user);
   const [form, setForm] = useState({ ...user });
-  console.log(form);
 
   const onChange = (e) => {
     const { value, name } = e.target;

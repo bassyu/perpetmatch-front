@@ -95,7 +95,10 @@ const List = ({ boards }) => {
                 ) : (
                   <Tag color="blue">입양가능</Tag>
                 )}
-                {board.title.substr(0, 16)}...
+                {board.hasCheckUp && <Tag color="green">건강검진</Tag>}
+                {board.hasLineAge && <Tag color="magenta">혈통서</Tag>}
+                {board.closed && board.hasCheckUp && board.hasLineAge && <br />}
+                {board.title.substr(0, 14)}...
               </div>
               <div className="tags">
                 {board.tags.map((tag) => (

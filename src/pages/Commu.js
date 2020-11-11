@@ -355,6 +355,7 @@ const Commu = ({ history, location }) => {
     setCommentForm(e.target.value);
   };
   const onClickComment = (e) => {
+    setCommentForm('');
     async function callAPI() {
       try {
         await commuAPI.writeComment({ id: cardModal.id, text: commentForm });
@@ -368,7 +369,6 @@ const Commu = ({ history, location }) => {
           ...newCardModel,
           visible: true,
         });
-        setCommentForm('');
       } catch (e) {
         console.log('댓글 등록 오류');
       }

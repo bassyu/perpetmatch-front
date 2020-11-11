@@ -32,11 +32,9 @@ const ListContainer = () => {
         window.scrollY + document.documentElement.clientHeight >
         document.documentElement.scrollHeight - 400
       ) {
-        console.log(searchForm);
         dispatch(searchBoards(searchForm));
       }
     };
-    console.log('change');
     const onScrollThrottle = throttle(onScroll, 100);
 
     window.addEventListener('scroll', onScrollThrottle);
