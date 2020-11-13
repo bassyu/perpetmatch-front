@@ -11,7 +11,7 @@
     <img src="https://img.shields.io/github/repo-size/bassyu/perpet-match-front" />
 </p>
 
-> 퍼펫매치는 `포인트 충전 시스템`으로 반려동물 입양 과정의 신뢰성 문제를 해결하고,
+> 퍼펫매치는 `포인트 충전` 시스템으로 반려동물 입양 과정의 신뢰성 문제를 해결하고,
 > `소통하기`와 `쇼핑하기`를 통해 입양 이후에도 이용할 수 있는 반려동물 입양 플랫폼 입니다.
 
 # Front-end Server
@@ -25,3 +25,6 @@
 ## 🛠 Pull Request Steps
 
 ## ⚖️ License
+
+This software is licensed under the
+**<a href="https://github.com/bassyu/perpet-match-front/blob/master/LICENSE">MIT</a>**
