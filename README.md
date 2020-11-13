@@ -48,7 +48,7 @@
 - 소통
 
     <img width="32%" alt="/commu" src="https://user-images.githubusercontent.com/54442420/99078980-9d8d3800-2602-11eb-8b04-157877bb37ee.png">
-    <img width="32%" alt="/commu/card" src="https://user-images.githubusercontent.com/54442420/99079080-c4e40500-2602-11eb-8e9e-6e756fc2cc83.png">
+    <img width="32%" alt="/commu/card" src="https://user-images.githubusercontent.com/54442420/99083730-48a0f000-2609-11eb-975d-c65e927abf8d.png">
     <img width="32%" alt="/commu/form" src="https://user-images.githubusercontent.com/54442420/99083404-df20e180-2608-11eb-962e-ecefb2aaa1df.png">
 
 <br />
