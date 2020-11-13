@@ -13,6 +13,10 @@ import Comment from '../Comment';
 import * as petAPI from '../../lib/api/pet';
 import { withRouter } from 'react-router-dom';
 
+const placeholder = `+ 어떤 병력을 앓았는지, 장애 요소, 불편한 점, 특이사항은 없는지 등 을 자세하게 써주세요.
++ 좋아하는 사료, 좋아하는 행동, 싫어하는 것들 등을 적어주시면 더 좋습니다.
+`;
+
 const FormBlock = styled.div`
   p {
     font-weight: 700;
@@ -262,6 +266,7 @@ const Form = ({ history }) => {
         name="description"
         value={form.description}
         onChange={onChange}
+        placeholder={placeholder}
       />
       <Button onClick={onClick} fullWidth>
         등록

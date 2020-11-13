@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 import Input from '../common/Input';
 
-const SignupFormBlock = styled.div``;
-
-const ButtonWithMarginTop = styled(Button)`
-  margin-top: 3rem;
+const SignupFormBlock = styled.div`
+  .spacer {
+    height: 3rem;
+  }
 `;
 
 const Comment = styled.div`
@@ -16,7 +16,7 @@ const Comment = styled.div`
   padding-left: 0.2rem;
 `;
 
-const SignupForm = ({ form, onChange, onSubmit }) => {
+const SignupForm = ({ form, onChange, onSubmit, loading }) => {
   const { nickname, email, password, passwordConfirm } = form;
   return (
     <SignupFormBlock>
@@ -61,7 +61,10 @@ const SignupForm = ({ form, onChange, onSubmit }) => {
               : ' 비밀번호가 일치하지 않습니다.'}
           </Comment>
         )}
-        <ButtonWithMarginTop fullWidth>다음</ButtonWithMarginTop>
+        <div className="spacer" />
+        <Button fullWidth loading={loading['auth/SIGNUP']}>
+          다음
+        </Button>
       </form>
     </SignupFormBlock>
   );

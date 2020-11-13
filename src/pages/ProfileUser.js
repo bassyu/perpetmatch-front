@@ -7,6 +7,7 @@ import palette from '../lib/styles/palette';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import * as profileAPI from '../lib/api/profile';
+import Board from '../components/profile/Board';
 
 const ProfileUserBlock = styled.div`
   position: absolute;
@@ -134,7 +135,7 @@ const ProfileUser = ({ match }) => {
     },
     {
       text: '파양관리',
-      to: `/profile/user/${id}/write`,
+      to: `/profile/user/${id}/board`,
     },
   ];
 
@@ -185,7 +186,12 @@ const ProfileUser = ({ match }) => {
           </div>
         </div>
         <Switch>
-          <Route to={`/profile/user/:id/order`} component={Order} exact />
+          <Route
+            path={['profile/user/:id', '/profile/user/:id/order']}
+            component={Order}
+            exact
+          />
+          <Route path="/profile/user/:id/board" component={Board} />
         </Switch>
       </div>
     </ProfileUserBlock>

@@ -64,23 +64,12 @@ const OrderBlcok = styled.div`
 
 const Order = ({ match }) => {
   const id = match.params.id;
-  const [orders, setOrders] = useState([
-    {
-      id: 353,
-      image:
-        'https://shopbucket.s3.ap-northeast-2.amazonaws.com/%EC%9D%B4%EB%AF%B8%EC%A7%80+42%402x.png',
-      title: '밸리스 만능 츄르',
-      price: 8500,
-      company: '마이비펫',
-      count: 3,
-      orderDate: '2020-10-28',
-    },
-  ]);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     async function callAPI() {
       try {
-        const response = await profileAPI.getOrders({ id });
+        const response = await profileAPI.getUserOrders({ id });
         setOrders(response.data.data);
       } catch (e) {
         console.log('주문내역 오류');

@@ -120,17 +120,19 @@ const ShopBoardBlock = styled.div`
       .btn-area {
         margin-top: 1.5rem;
         display: flex;
+        justify-content: space-between;
 
-        button {
+        .btn {
           width: 48%;
-          height: 4rem;
-          font-size: 1.25rem;
-        }
-        button + button {
-          margin-left: 1rem;
-          border: solid 0.01rem ${palette.gray[5]};
-          background: white;
-          color: ${palette.gray[5]};
+
+          button {
+            font-size: 1rem;
+          }
+          .cart {
+            border: solid 0.01rem ${palette.gray[5]};
+            background: none;
+            color: ${palette.gray[5]};
+          }
         }
       }
     }
@@ -207,17 +209,19 @@ const ShopBoardBlock = styled.div`
       .btn-area {
         margin-top: 1.5rem;
         display: flex;
+        justify-content: space-between;
 
-        button {
+        .btn {
           width: 48%;
-          height: 3.5rem;
-          font-size: 1rem;
-        }
-        button + button {
-          margin-left: 1rem;
-          border: solid 0.01rem ${palette.gray[5]};
-          background: white;
-          color: ${palette.gray[5]};
+
+          button {
+            padding: 0.75rem 0;
+          }
+          .cart {
+            border: solid 0.01rem ${palette.gray[5]};
+            background: none;
+            color: ${palette.gray[5]};
+          }
         }
       }
     }
@@ -505,12 +509,21 @@ const ShopBoard = ({ history, match }) => {
             </span>
           </div>
           <div className="btn-area">
-            <Button name="buy" onClick={onClickBuy}>
-              바로구매
-            </Button>
-            <Button name="cart" onClick={onClickCart}>
-              장바구니 추가
-            </Button>
+            <div className="btn">
+              <Button fullWidth name="buy" onClick={onClickBuy}>
+                바로구매
+              </Button>
+            </div>
+            <div className="btn">
+              <Button
+                fullWidth
+                className="cart"
+                name="cart"
+                onClick={onClickCart}
+              >
+                장바구니 추가
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -543,8 +556,16 @@ const ShopBoard = ({ history, match }) => {
             </span>
           </div>
           <div className="btn-area">
-            <Button onClick={onClickBuy}>바로구매</Button>
-            <Button onClick={onClickCart}>장바구니 추가</Button>
+            <div className="btn">
+              <Button fullWidth onClick={onClickBuy}>
+                바로구매
+              </Button>
+            </div>
+            <div className="btn">
+              <Button fullWidth className="cart" onClick={onClickCart}>
+                장바구니 추가
+              </Button>
+            </div>
           </div>
         </div>
       </div>

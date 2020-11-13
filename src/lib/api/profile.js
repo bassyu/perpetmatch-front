@@ -42,5 +42,7 @@ export const getCredit = () => client.get('/api/profiles/credit');
 export const getUserBreif = ({ id }) =>
   client.get(`/api/profiles/mypage/${id}`);
 
-export const getOrders = ({ id }) =>
+export const getUserOrders = ({ id }) =>
   client.get(`/api/profiles/mypage/orders/${id}`);
+
+export const getUserBoards = () => client.get(`/api/profiles/mypage/board`);

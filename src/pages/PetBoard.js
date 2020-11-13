@@ -75,14 +75,16 @@ const PetBoardBlock = styled.div`
       }
       .btn-area {
         margin: 1rem 0;
+        display: flex;
+        justify-content: space-between;
 
-        button {
-          width: 9.75rem;
-          height: 3rem;
-          font-size: 1.125rem;
-        }
-        a + button {
-          margin-left: 1rem;
+        .btn {
+          width: 48%;
+
+          button {
+            padding: 0.5rem 0;
+            font-size: 1rem;
+          }
         }
       }
       .share-area {
@@ -149,6 +151,7 @@ const PetBoardBlock = styled.div`
 
 const PetBoard = ({ match }) => {
   const id = match.params.id;
+  const [loading, setLoading] = useState(false);
   const [board, setBoard] = useState({
     id: null,
     manager: '',
@@ -172,12 +175,21 @@ const PetBoard = ({ match }) => {
   const [applied, setApplied] = useState(false);
   const [applyList, setApplyList] = useState(null);
 
+  async function setBoardAPI() {
+    try {
+      const response = await petAPI.getBoard({ id });
+      setBoard(response.data.data);
+    } catch (e) {
+      console.log('불러오기 오류');
+    }
+  }
   const onClickApply = () => {
     async function callAPI() {
       try {
         await petAPI.applyBoard({ id });
         await message.info('신청이 취소되었습니다.', 1);
-        window.location.reload();
+        const response = await petAPI.getApplyed({ id });
+        setApplied(response.data.success);
       } catch (e) {
         console.log('신청취소 오류');
       }
@@ -188,12 +200,15 @@ const PetBoard = ({ match }) => {
     e.persist();
     async function callAPI() {
       try {
+        setLoading(true);
         const nickname = e.target.name;
         await petAPI.acceptBoard({ id, nickname });
         await message.success('신청이 성공적으로 수락되었습니다!', 1);
+        setLoading(false);
       } catch (e) {
         console.log('신청수락 오류');
       }
+      setBoardAPI();
     }
     callAPI();
   };
@@ -201,12 +216,7 @@ const PetBoard = ({ match }) => {
   useEffect(() => {
     window.scrollTo({ top: 0 });
     async function callAPI() {
-      try {
-        const response = await petAPI.getBoard({ id });
-        setBoard(response.data.data);
-      } catch (e) {
-        console.log('불러오기 오류');
-      }
+      setBoardAPI();
       try {
         const response = await petAPI.getApplyed({ id });
         setApplied(response.data.success);
@@ -252,18 +262,26 @@ const PetBoard = ({ match }) => {
           </div>
           {!board.closed && !applyList && (
             <div className="btn-area">
-              {applied ? (
-                <a href>
-                  <Button background={palette.gray[6]} onClick={onClickApply}>
+              <div className="btn">
+                {applied ? (
+                  <Button
+                    fullWidth
+                    background={palette.gray[6]}
+                    onClick={onClickApply}
+                  >
                     신청취소
                   </Button>
-                </a>
-              ) : (
-                <Link to={`/pet/board/${board.id}/apply`}>
-                  <Button background="#8164ae">신 청</Button>
-                </Link>
-              )}
-              <Button>관심글 등록</Button>
+                ) : (
+                  <Link to={`/pet/board/${board.id}/apply`}>
+                    <Button fullWidth background="#8164ae">
+                      신 청
+                    </Button>
+                  </Link>
+                )}
+              </div>
+              <div className="btn">
+                <Button fullWidth>관심글 등록</Button>
+              </div>
             </div>
           )}
           <p className="sub-title">공유하기</p>
@@ -302,6 +320,7 @@ const PetBoard = ({ match }) => {
                         name={user.nickname}
                         fullWidth
                         onClick={onClickAccept}
+                        loading={loading}
                       >
                         수락
                       </Button>

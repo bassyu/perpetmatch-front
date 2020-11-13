@@ -13,12 +13,15 @@ import { getUser } from '../../modules/profile';
 
 const SignupContainer = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, signupResult, auth, authError } = useSelector(({ auth }) => ({
-    form: auth.signup,
-    signupResult: auth.signupResult,
-    auth: auth.auth,
-    authError: auth.authError,
-  }));
+  const { form, signupResult, auth, authError, loading } = useSelector(
+    ({ auth, loading }) => ({
+      form: auth.signup,
+      signupResult: auth.signupResult,
+      auth: auth.auth,
+      authError: auth.authError,
+      loading: loading,
+    }),
+  );
   const { nickname, email, password } = form;
   const { success, failure, message } = signupResult;
   const { accessToken, tokenType } = auth;
@@ -76,7 +79,14 @@ const SignupContainer = ({ history }) => {
     }
   }, [history, auth, accessToken, tokenType, authError]);
 
-  return <SignupForm form={form} onChange={onChange} onSubmit={onSubmit} />;
+  return (
+    <SignupForm
+      form={form}
+      onChange={onChange}
+      onSubmit={onSubmit}
+      loading={loading}
+    />
+  );
 };
 
 export default withRouter(SignupContainer);
