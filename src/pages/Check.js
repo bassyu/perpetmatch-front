@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import FormTemplate from '../components/FormTemplate';
-import { Upload } from 'antd';
+import { Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 import getBase64 from '../lib/getBase64';
 import HeaderContainer from '../containers/common/HeaderContainer';
+import { withRouter } from 'react-router-dom';
 
 const CheckBlock = styled.div`
   .avatar-uploader {
@@ -19,12 +20,17 @@ const CheckBlock = styled.div`
   }
 `;
 
-const Check = () => {
+const Check = ({ history }) => {
   const [img, setImg] = useState('');
 
   async function onChange({ fileList }) {
     setImg(await getBase64(fileList[0].originFileObj));
   }
+
+  useEffect(() => {
+    history.goBack();
+    message.warning('준비중입니다.', 1);
+  }, []);
 
   return (
     <>
@@ -54,4 +60,4 @@ const Check = () => {
   );
 };
 
-export default Check;
+export default withRouter(Check);
