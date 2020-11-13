@@ -45,4 +45,5 @@ export const getUserBreif = ({ id }) =>
 export const getUserOrders = ({ id }) =>
   client.get(`/api/profiles/mypage/orders/${id}`);
 
-export const getUserBoards = () => client.get(`/api/profiles/mypage/board`);
+export const getUserBoards = ({ id }) =>
+  client.get(`/api/profiles/mypage/boards/${id}`);

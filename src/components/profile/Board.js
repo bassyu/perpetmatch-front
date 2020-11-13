@@ -61,18 +61,11 @@ const Board = ({ match }) => {
   const [boadrs, setBoards] = useState([
     {
       id: 293,
-      title: '버려진 포메 보호하고 있습니다',
-      credit: 100000,
+      title: '',
+      credit: 0,
       year: 1,
       month: 11,
-      tags: [
-        '서울특별시',
-        '치와와',
-        '1년~7년',
-        '건강검진증',
-        '혈통서',
-        '중성화',
-      ],
+      tags: ['서울특별시', '치와와', '1년~7년'],
       boardImage1: '',
       hasCheckUp: false,
       hasLineAge: false,
@@ -83,7 +76,7 @@ const Board = ({ match }) => {
   useEffect(() => {
     async function callAPI() {
       try {
-        const reponse = await profileAPI.getUserBoards();
+        const reponse = await profileAPI.getUserBoards({ id });
         setBoards(reponse.data.data);
       } catch (e) {
         console.log('게시글 불러오기 오류', e);
