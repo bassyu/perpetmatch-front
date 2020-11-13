@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const StyledButton = styled.button`
   border: none;
@@ -35,6 +37,13 @@ const StyledButton = styled.button`
 `;
 
 // 자동 import를 위해서 StyledButton을 바로 내보내지 않고, Button컴포넌트를 만들어서 내보냄
-const Button = (props) => <StyledButton {...props} />;
+const Button = (props) => (
+  <Spin
+    spinning={props.loading ? true : false}
+    indicator={<LoadingOutlined spin />}
+  >
+    <StyledButton {...props} />
+  </Spin>
+);
 
 export default Button;
