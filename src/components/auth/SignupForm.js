@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Comment from '../Comment';
 import Button from '../common/Button';
 import Input from '../common/Input';
 
@@ -7,13 +8,6 @@ const SignupFormBlock = styled.div`
   .spacer {
     height: 3rem;
   }
-`;
-
-const Comment = styled.div`
-  color: ${({ confirm }) => (confirm ? 'green' : 'red')};
-  font-size: 0.75rem;
-  margin-top: 0.5rem;
-  padding-left: 0.2rem;
 `;
 
 const SignupForm = ({ form, onChange, onSubmit, loading }) => {
@@ -54,7 +48,9 @@ const SignupForm = ({ form, onChange, onSubmit, loading }) => {
           value={passwordConfirm}
         />
         {password && passwordConfirm && (
-          <Comment confirm={password === passwordConfirm}>
+          <Comment
+            style={{ color: password === passwordConfirm ? 'green' : 'red' }}
+          >
             &#8251;
             {password === passwordConfirm
               ? ' 비밀번호가 일치합니다.'

@@ -10,7 +10,7 @@ import * as profileAPI from '../../lib/api/profile';
 import Button from '../common/Button';
 import Input from '../common/Input';
 import { Select, message } from 'antd';
-import palette from '../../lib/styles/palette';
+import Comment from '../Comment';
 const { Option } = Select;
 
 const TasteFormBlock = styled.div`
@@ -33,13 +33,6 @@ const Row = styled.div`
 
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 3rem;
-`;
-
-const Comment = styled.div`
-  color: ${palette.main};
-  font-size: 0.75rem;
-  margin-top: 0.5rem;
-  padding-left: 0.2rem;
 `;
 
 const TasteForm = ({ history }) => {
@@ -141,7 +134,7 @@ const TasteForm = ({ history }) => {
           ))}
         </Select>
         {form.zones.length ? null : (
-          <Comment>&#8251; 최소 1개 이상 적어주세요!</Comment>
+          <Comment>최소 1개 이상 적어주세요!</Comment>
         )}
         <p>원하는 품종</p>
         <Select
@@ -154,7 +147,7 @@ const TasteForm = ({ history }) => {
           ))}
         </Select>
         {form.petTitles.length ? null : (
-          <Comment>&#8251; 최소 1개 이상 적어주세요!</Comment>
+          <Comment>최소 1개 이상 적어주세요!</Comment>
         )}
         <p>원하는 나이</p>
         <Select mode="multiple" value={form.petAges} onChange={onChangeSelect}>
@@ -163,7 +156,7 @@ const TasteForm = ({ history }) => {
           ))}
         </Select>
         {form.petAges.length ? null : (
-          <Comment>&#8251; 최소 1개 이상 적어주세요!</Comment>
+          <Comment>최소 1개 이상 적어주세요!</Comment>
         )}
         <p>기타 희망 내용</p>
         <Row>

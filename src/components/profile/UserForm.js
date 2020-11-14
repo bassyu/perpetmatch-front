@@ -63,10 +63,7 @@ const UserForm = ({ form, onChange, onChangeCheckbox, onSubmit }) => {
           value={form.phoneNumber}
           onChange={onChange}
         />
-        <Comment>
-          &#8251;
-          {' 전화번호는 입양신청을 제외하고 공개되지 않습니다.'}
-        </Comment>
+        <Comment>전화번호는 입양신청을 제외하고 공개되지 않습니다.</Comment>
         <Row>
           <div>
             <p>사는 곳</p>
@@ -159,9 +156,7 @@ const UserForm = ({ form, onChange, onChangeCheckbox, onSubmit }) => {
             <span>#비주택</span>
           </label>
         </Row>
-        {form.houseType && (
-          <Comment>&#8251;{commentMap[form.houseType]}</Comment>
-        )}
+        {form.houseType && <Comment>{commentMap[form.houseType]}</Comment>}
         <p>한줄소개</p>
         <Textarea
           name="description"
