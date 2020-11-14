@@ -11,7 +11,7 @@ import {
 } from '../../modules/auth';
 import { getUser } from '../../modules/profile';
 
-const SignupContainer = ({ history }) => {
+function SignupContainer({ history }) {
   const dispatch = useDispatch();
   const { form, signupResult, auth, authError, loading } = useSelector(
     ({ auth, loading }) => ({
@@ -87,6 +87,6 @@ const SignupContainer = ({ history }) => {
       loading={loading}
     />
   );
-};
+}
 
 export default withRouter(SignupContainer);

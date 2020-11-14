@@ -5,7 +5,7 @@ import { message } from 'antd';
 import * as profileAPI from '../../lib/api/profile';
 import { withRouter } from 'react-router-dom';
 
-const UserFormContainer = ({ history }) => {
+function UserFormContainer({ history }) {
   const user = useSelector(({ profile }) => profile.user);
   const [form, setForm] = useState({ ...user });
 
@@ -39,6 +39,6 @@ const UserFormContainer = ({ history }) => {
       onSubmit={onSubmit}
     />
   );
-};
+}
 
 export default withRouter(UserFormContainer);

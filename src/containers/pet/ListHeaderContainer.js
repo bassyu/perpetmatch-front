@@ -15,21 +15,12 @@ import {
   whitePetTitles,
 } from '../../constants/index';
 
-const ListHeaderContainer = () => {
+function ListHeaderContainer() {
   const dispatch = useDispatch();
   const { searchForm, boardsLength } = useSelector(({ pet }) => ({
     searchForm: pet.searchForm,
     boardsLength: pet.boardsLength,
   }));
-  const {
-    zones,
-    petTitles,
-    petAges,
-    wantCheckUp,
-    wantLineAge,
-    wantNeutered,
-    expectedFeeForMonth,
-  } = searchForm;
 
   const onChange = (e) => {
     e.persist();
@@ -113,6 +104,6 @@ const ListHeaderContainer = () => {
       onChangeSelect={onChangeSelect}
     />
   );
-};
+}
 
 export default ListHeaderContainer;

@@ -46,7 +46,7 @@ const SocialButton = styled.button`
   }
 `;
 
-const SocialLogin = () => {
+function SocialLogin() {
   const onClick = (e) => {
     window.location.href = GOOGLE_AUTH_URL;
     //window.open(GOOGLE_AUTH_URL);
@@ -65,6 +65,6 @@ const SocialLogin = () => {
       </SocialButton>
     </SocialLoginBlock>
   );
-};
+}
 
 export default SocialLogin;

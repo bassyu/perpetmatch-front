@@ -104,7 +104,7 @@ const Spacer = styled.div`
   height: 4.5rem;
 `;
 
-const Header = ({ user, onSignout }) => {
+function Header({ user, onSignout }) {
   const { nickname, id, credit } = user;
 
   const menu = (
@@ -191,6 +191,6 @@ const Header = ({ user, onSignout }) => {
       <Spacer />
     </>
   );
-};
+}
 
 export default Header;

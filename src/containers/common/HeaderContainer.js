@@ -6,7 +6,7 @@ import { signout } from '../../modules/auth';
 import client from '../../lib/api/client';
 import { initUser } from '../../modules/profile';
 
-const HeaderContainer = ({ history }) => {
+function HeaderContainer({ history }) {
   const dispatch = useDispatch();
   const user = useSelector(({ profile }) => profile.user);
 
@@ -19,6 +19,6 @@ const HeaderContainer = ({ history }) => {
   };
 
   return <Header user={user} onSignout={onSignout} />;
-};
+}
 
 export default withRouter(HeaderContainer);

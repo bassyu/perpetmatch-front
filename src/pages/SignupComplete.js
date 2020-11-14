@@ -22,7 +22,7 @@ const SignupCompleteBlock = styled.div`
   }
 `;
 
-const SignupComplete = () => {
+function SignupComplete() {
   return (
     <FormTemplate>
       <SignupCompleteBlock>
@@ -48,6 +48,6 @@ const SignupComplete = () => {
       </SignupCompleteBlock>
     </FormTemplate>
   );
-};
+}
 
 export default SignupComplete;

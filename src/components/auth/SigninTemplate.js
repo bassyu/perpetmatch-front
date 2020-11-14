@@ -39,7 +39,7 @@ const WhiteBox = styled.div`
   }
 `;
 
-const SigninTemplate = ({ children }) => {
+function SigninTemplate({ children }) {
   return (
     <SigninTemplateBlock>
       <WhiteBox>
@@ -52,6 +52,6 @@ const SigninTemplate = ({ children }) => {
       </WhiteBox>
     </SigninTemplateBlock>
   );
-};
+}
 
 export default SigninTemplate;

@@ -5,7 +5,7 @@ import ShopCart from './ShopCart';
 import ShopCheckout from './ShopCheckout';
 import ShopList from './ShopList';
 
-const Shop = () => {
+function Shop() {
   return (
     <>
       <Switch>
@@ -16,6 +16,6 @@ const Shop = () => {
       </Switch>
     </>
   );
-};
+}
 
 export default Shop;

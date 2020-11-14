@@ -172,7 +172,7 @@ const ShopCartBlcok = styled.div`
   }
 `;
 
-const ShopCart = () => {
+function ShopCart() {
   const [cartItems, setCartItems] = useState([
     {
       id: 321,
@@ -294,6 +294,6 @@ const ShopCart = () => {
       </div>
     </ShopCartBlcok>
   );
-};
+}
 
 export default ShopCart;

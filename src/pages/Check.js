@@ -20,7 +20,7 @@ const CheckBlock = styled.div`
   }
 `;
 
-const Check = ({ history }) => {
+function Check({ history }) {
   const [img, setImg] = useState('');
 
   async function onChange({ fileList }) {
@@ -58,6 +58,6 @@ const Check = ({ history }) => {
       </FormTemplate>
     </>
   );
-};
+}
 
 export default withRouter(Check);

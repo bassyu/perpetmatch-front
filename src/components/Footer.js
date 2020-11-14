@@ -56,7 +56,7 @@ const FooterBlock = styled.div`
   }
 `;
 
-const Footer = () => {
+function Footer() {
   return (
     <div>
       <FooterBlock>
@@ -97,6 +97,6 @@ const Footer = () => {
       </FooterBlock>
     </div>
   );
-};
+}
 
 export default Footer;

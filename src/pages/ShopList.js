@@ -249,7 +249,7 @@ const Spacer = styled.div`
   height: 3.5rem;
 `;
 
-const ShopList = ({ match }) => {
+function ShopList({ match }) {
   const category = match.params.category;
   const isMain = category === 'main';
   const [bests, setBests] = useState([
@@ -462,6 +462,6 @@ const ShopList = ({ match }) => {
       <Footer />
     </ShopListBlock>
   );
-};
+}
 
 export default ShopList;

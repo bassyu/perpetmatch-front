@@ -149,7 +149,7 @@ const PetBoardBlock = styled.div`
   }
 `;
 
-const PetBoard = ({ match }) => {
+function PetBoard({ match }) {
   const id = match.params.id;
   const [loading, setLoading] = useState(false);
   const [board, setBoard] = useState({
@@ -356,6 +356,6 @@ const PetBoard = ({ match }) => {
       <Footer />
     </PetBoardBlock>
   );
-};
+}
 
 export default PetBoard;

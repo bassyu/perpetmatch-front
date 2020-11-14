@@ -166,7 +166,7 @@ const BottomDep = styled.div`
   }
 `;
 
-const Index = () => {
+function Index() {
   const settings = {
     dots: true,
     infinite: true,
@@ -271,6 +271,6 @@ const Index = () => {
       <Footer />
     </AboutBlock>
   );
-};
+}
 
 export default Index;

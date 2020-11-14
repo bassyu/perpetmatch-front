@@ -8,7 +8,7 @@ const PetListBlock = styled.div`
   background-color: white;
 `;
 
-const PetList = () => {
+function PetList() {
   return (
     <PetListBlock>
       <HeaderContainer />
@@ -16,6 +16,6 @@ const PetList = () => {
       <ListContainer />
     </PetListBlock>
   );
-};
+}
 
 export default PetList;

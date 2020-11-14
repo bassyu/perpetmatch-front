@@ -10,7 +10,7 @@ const SignupFormBlock = styled.div`
   }
 `;
 
-const SignupForm = ({ form, onChange, onSubmit, loading }) => {
+function SignupForm({ form, onChange, onSubmit, loading }) {
   const { nickname, email, password, passwordConfirm } = form;
   return (
     <SignupFormBlock>
@@ -64,6 +64,6 @@ const SignupForm = ({ form, onChange, onSubmit, loading }) => {
       </form>
     </SignupFormBlock>
   );
-};
+}
 
 export default SignupForm;

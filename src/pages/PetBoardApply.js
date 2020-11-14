@@ -24,7 +24,7 @@ const StyledBox = styled.div`
   }
 `;
 
-const PetBoardApply = ({ match, history }) => {
+function PetBoardApply({ match, history }) {
   const id = match.params.id;
 
   const onClickApply = () => {
@@ -69,6 +69,6 @@ const PetBoardApply = ({ match, history }) => {
       </StyledBox>
     </FormTemplate>
   );
-};
+}
 
 export default withRouter(PetBoardApply);

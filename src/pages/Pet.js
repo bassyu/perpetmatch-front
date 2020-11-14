@@ -5,7 +5,7 @@ import PetBoardApply from './PetBoardApply';
 import PetForm from './PetForm';
 import PetList from './PetList';
 
-const Pet = () => {
+function Pet() {
   return (
     <>
       <Switch>
@@ -16,6 +16,6 @@ const Pet = () => {
       </Switch>
     </>
   );
-};
+}
 
 export default Pet;

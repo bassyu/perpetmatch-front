@@ -32,7 +32,7 @@ const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
 
-const SigninForm = ({ form, onChange, onSubmit }) => {
+function SigninForm({ form, onChange, onSubmit }) {
   return (
     <>
       <SigninFormBlock>
@@ -61,6 +61,6 @@ const SigninForm = ({ form, onChange, onSubmit }) => {
       </SigninFormBlock>
     </>
   );
-};
+}
 
 export default SigninForm;

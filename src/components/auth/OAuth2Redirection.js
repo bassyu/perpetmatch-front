@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getUser } from '../../modules/profile';
 
-const OAuth2Redirection = ({ location, history }) => {
+function OAuth2Redirection({ location, history }) {
   const dispatch = useDispatch();
   const tokenType = 'Bearer';
   const accessToken = queryString.parse(location.search).token;
@@ -21,6 +21,6 @@ const OAuth2Redirection = ({ location, history }) => {
     }
   }
   return <h1>OAuth2Redirection</h1>;
-};
+}
 
 export default withRouter(OAuth2Redirection);

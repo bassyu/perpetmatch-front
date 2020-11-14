@@ -356,7 +356,7 @@ const ShopBoardBlock = styled.div`
   }
 `;
 
-const ShopBoard = ({ history, match }) => {
+function ShopBoard({ history, match }) {
   const id = match.params.id;
   const refImg = useRef();
   const refReviews = useRef();
@@ -656,6 +656,6 @@ const ShopBoard = ({ history, match }) => {
       <Footer />
     </ShopBoardBlock>
   );
-};
+}
 
 export default withRouter(ShopBoard);

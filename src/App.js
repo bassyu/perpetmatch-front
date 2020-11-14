@@ -11,7 +11,7 @@ import Commu from './pages/Commu';
 import OAuth2Redirection from './components/auth/OAuth2Redirection';
 import Index from './pages/Index';
 
-const App = () => {
+function App() {
   return (
     <div className="App">
       <Switch>
@@ -36,6 +36,6 @@ const App = () => {
       </Switch>
     </div>
   );
-};
+}
 
 export default App;

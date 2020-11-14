@@ -5,7 +5,7 @@ import ProfileUserForm from './ProfileUserForm';
 import ProfileTasteForm from './ProfileTasteForm';
 import ProfileUser from './ProfileUser';
 
-const Profile = () => {
+function Profile() {
   return (
     <>
       <Switch>
@@ -15,6 +15,6 @@ const Profile = () => {
       </Switch>
     </>
   );
-};
+}
 
 export default Profile;

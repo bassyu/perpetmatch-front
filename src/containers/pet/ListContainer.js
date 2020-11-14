@@ -5,7 +5,7 @@ import throttle from '../../lib/throttle';
 import { changeField } from '../../modules/pet';
 import { initBoards, searchBoards } from '../../modules/pet';
 
-const ListContainer = () => {
+function ListContainer() {
   const dispatch = useDispatch();
   const { searchForm, boards } = useSelector(({ pet }) => ({
     boards: pet.boards,
@@ -44,6 +44,6 @@ const ListContainer = () => {
   }, [dispatch, searchForm]);
 
   return <List boards={boards} />;
-};
+}
 
 export default ListContainer;

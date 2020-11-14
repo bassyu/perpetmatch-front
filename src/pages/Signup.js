@@ -2,7 +2,7 @@ import React from 'react';
 import SignupContainer from '../containers/auth/SignupContainer';
 import FormTemplate from '../components/FormTemplate';
 
-const Signup = () => {
+function Signup() {
   return (
     <>
       <FormTemplate title="회원가입">
@@ -10,6 +10,6 @@ const Signup = () => {
       </FormTemplate>
     </>
   );
-};
+}
 
 export default Signup;

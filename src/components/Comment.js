@@ -9,8 +9,7 @@ const CommentBlock = styled.div`
   padding-left: 0.2rem;
 `;
 
-const Comment = ({ children }) => {
-  return <CommentBlock>&#8251; {children}</CommentBlock>;
-};
-
+const Comment = ({ children }) => (
+  <CommentBlock>&#8251; {children}</CommentBlock>
+);
 export default Comment;

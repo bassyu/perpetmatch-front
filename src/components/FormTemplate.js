@@ -58,7 +58,7 @@ const WhiteBox = styled.div`
   }
 `;
 
-const FormTemplate = ({ children, title }) => {
+function FormTemplate({ children, title }) {
   return (
     <FormTemplateBlock>
       <div className="img-area">
@@ -71,6 +71,6 @@ const FormTemplate = ({ children, title }) => {
       </WhiteBox>
     </FormTemplateBlock>
   );
-};
+}
 
 export default FormTemplate;

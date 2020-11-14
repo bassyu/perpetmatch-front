@@ -3,7 +3,7 @@ import SigninTemplate from '../components/auth/SigninTemplate';
 import SocialLogin from '../components/auth/SocialLogin';
 import SigninContainer from '../containers/auth/SigninContainer';
 
-const Signin = () => {
+function Signin() {
   return (
     <>
       <SigninTemplate>
@@ -13,6 +13,6 @@ const Signin = () => {
       </SigninTemplate>
     </>
   );
-};
+}
 
 export default Signin;

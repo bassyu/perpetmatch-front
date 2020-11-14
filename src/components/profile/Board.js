@@ -79,7 +79,7 @@ const Board = ({ match }) => {
         const reponse = await profileAPI.getUserBoards({ id });
         setBoards(reponse.data.data);
       } catch (e) {
-        console.log('게시글 불러오기 오류', e);
+        console.log('게시글 불러오기 오류');
       }
     }
     callAPI();

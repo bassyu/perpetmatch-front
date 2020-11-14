@@ -98,7 +98,7 @@ const ProfileUserBlock = styled.div`
   }
 `;
 
-const ProfileUser = ({ match }) => {
+function ProfileUser({ match }) {
   const id = match.params.id;
   const [user, setUser] = useState({
     tags: [],
@@ -196,6 +196,6 @@ const ProfileUser = ({ match }) => {
       </div>
     </ProfileUserBlock>
   );
-};
+}
 
 export default ProfileUser;

@@ -252,7 +252,7 @@ const ModalTemplate = styled.div`
   }
 `;
 
-const Commu = ({ history, location }) => {
+function Commu() {
   const userId = useSelector(({ profile }) => profile.user.id);
   const [loading, setLoading] = useState(true);
   const [clicked, setClicked] = useState(null);
@@ -637,6 +637,6 @@ const Commu = ({ history, location }) => {
       )}
     </CommuBlock>
   );
-};
+}
 
 export default Commu;

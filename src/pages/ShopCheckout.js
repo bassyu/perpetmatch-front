@@ -196,7 +196,7 @@ const ShopCheckoutBlcok = styled.div`
   }
 `;
 
-const ShopCheckout = ({ history }) => {
+function ShopCheckout({ history }) {
   const [form, setForm] = useState({
     dear: '',
     zipcode: '',
@@ -454,6 +454,6 @@ const ShopCheckout = ({ history }) => {
       </div>
     </ShopCheckoutBlcok>
   );
-};
+}
 
 export default withRouter(ShopCheckout);

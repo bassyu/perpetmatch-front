@@ -7,7 +7,7 @@ import { changeField, initializeForm, signin } from '../../modules/auth';
 import { message } from 'antd';
 import { getUser } from '../../modules/profile';
 
-const SigninContainer = ({ history }) => {
+function SigninContainer({ history }) {
   const dispatch = useDispatch();
   const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.signin,
@@ -56,6 +56,6 @@ const SigninContainer = ({ history }) => {
   }, [dispatch, history, auth, accessToken, tokenType, authError]);
 
   return <SigninForm form={form} onChange={onChange} onSubmit={onSubmit} />;
-};
+}
 
 export default withRouter(SigninContainer);
