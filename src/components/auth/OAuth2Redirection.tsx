@@ -1,14 +1,19 @@
-import React from 'react';
+import * as React from 'react';
 import queryString from 'query-string';
 import client from '../../lib/api/client';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getUser } from '../../modules/profile';
+import FormTemplate from '../FormTemplate';
 
-function OAuth2Redirection({ location, history }) {
+interface OAuth2RedirectionProps extends RouteComponentProps<any> {}
+
+function OAuth2Redirection({ location, history }: OAuth2RedirectionProps) {
   const dispatch = useDispatch();
-  const tokenType = 'Bearer';
-  const accessToken = queryString.parse(location.search).token;
+  const tokenType: string = 'Bearer';
+  const accessToken: string | string[] | null = queryString.parse(
+    location.search,
+  ).token;
 
   if (accessToken) {
     client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
@@ -20,7 +25,11 @@ function OAuth2Redirection({ location, history }) {
       console.log('localStorage 오류');
     }
   }
-  return <h1>OAuth2Redirection</h1>;
+  return (
+    <FormTemplate title="OAuth2">
+      해당 페이지가 계속 보인다면 담당자에게 문의 주세요.
+    </FormTemplate>
+  );
 }
 
 export default withRouter(OAuth2Redirection);
