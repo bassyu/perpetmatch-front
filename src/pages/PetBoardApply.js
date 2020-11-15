@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/common/Button';
 import FormTemplate from '../components/FormTemplate';
@@ -60,10 +60,13 @@ function PetBoardApply({ match, history }) {
         </div>
         <p>+ 강아지, 고양이를 기르지 못하는 아파트 등일 경우</p>
         <div className="context">- 고슴도치와 같은 반려동물이 적합합니다.</div>
+        <Link to="/profile/card-form">
+          <Button fullWidth>결제정보 수정</Button>
+        </Link>
         <Button fullWidth onClick={onClickApply} background="#9f83cb">
           준비됐어요!
         </Button>
-        <Button fullWidth onClick={onClickBack}>
+        <Button fullWidth onClick={onClickBack} background={palette.gray[6]}>
           생각해볼게요
         </Button>
       </StyledBox>
