@@ -66,7 +66,7 @@ function PetBoardApply({ match, history }) {
         <Button fullWidth onClick={onClickApply} background="#9f83cb">
           준비됐어요!
         </Button>
-        <Button fullWidth onClick={onClickBack} background={palette.gray[6]}>
+        <Button fullWidth onClick={onClickBack} background={palette.gray[5]}>
           생각해볼게요
         </Button>
       </StyledBox>
