@@ -10,6 +10,8 @@ import Check from './pages/Check';
 import Commu from './pages/Commu';
 import OAuth2Redirection from './components/auth/OAuth2Redirection';
 import Index from './pages/Index';
+import PrivateRoute from './components/PrivateRoute';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
@@ -20,19 +22,12 @@ function App() {
         <Route path="/profile" component={Profile} />
         <Route path="/pet" component={Pet} />
         <Route path="/shop" component={Shop} />
-        <Route path="/check" component={Check} />
+        <PrivateRoute path="/check" component={Check} redirectTo={Signin} />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} exact />
         <Route path="/signup/complete" component={SignupComplete} />
         <Route path="/oauth2" component={OAuth2Redirection} />
-        <Route
-          render={({ location }) => (
-            <div>
-              <h2>Page Not Found</h2>
-              <h3>{location.pathname}</h3>
-            </div>
-          )}
-        />
+        <Route component={NotFound} />
       </Switch>
     </div>
   );
