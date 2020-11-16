@@ -11,7 +11,7 @@
     <img src="https://img.shields.io/github/repo-size/bassyu/perpet-match-front" />
 </p>
 
-<img alt="/" src="https://user-images.githubusercontent.com/54442420/99077307-e42d6300-25ff-11eb-8d46-726d1ec69532.png">
+<img alt="/" src="https://user-images.githubusercontent.com/54442420/99244184-1380e180-2845-11eb-9526-1449f3454064.png">
 
 > 퍼펫매치는 `포인트 충전` 시스템으로 반려동물 입양 과정의 신뢰성 문제를 해결하고,
 > `소통하기`와 `쇼핑하기`를 통해 입양 이후에도 이용할 수 있는 반려동물 입양 플랫폼 입니다.
@@ -39,9 +39,10 @@
 
 - Shopping
 
-    <img width="32%" alt="/shop/list" src="https://user-images.githubusercontent.com/54442420/99078525-de388180-2601-11eb-9452-a136324fc6d7.png">
-    <img width="32%" alt="/shop/board" src="https://user-images.githubusercontent.com/54442420/99078369-9fa2c700-2601-11eb-81c2-32b19e6f0ef7.png">
-    <img width="32%" alt="/shop/chekout" src="https://user-images.githubusercontent.com/54442420/99078653-16d85b00-2602-11eb-9b65-796c326a046e.png">
+    <img width="24%" alt="/shop/list" src="https://user-images.githubusercontent.com/54442420/99078525-de388180-2601-11eb-9452-a136324fc6d7.png">
+    <img width="24%" alt="/shop/board" src="https://user-images.githubusercontent.com/54442420/99078369-9fa2c700-2601-11eb-81c2-32b19e6f0ef7.png">
+    <img width="24%" alt="/shop/board" src="https://user-images.githubusercontent.com/54442420/99245030-48d9ff00-2846-11eb-8e28-23b7f0898b75.png">
+    <img width="24%" alt="/shop/chekout" src="https://user-images.githubusercontent.com/54442420/99078653-16d85b00-2602-11eb-9b65-796c326a046e.png">
 
 <br />
 
@@ -55,9 +56,10 @@
 
 - Costomize
 
-    <img width="32%" alt="/signin" src="https://user-images.githubusercontent.com/54442420/99083056-543fe700-2608-11eb-8080-f948ef640527.png">
-    <img width="32%" alt="/profile/user-form" src="https://user-images.githubusercontent.com/54442420/99083116-6d489800-2608-11eb-8009-de6a0d69cea2.png">
-    <img width="32%" alt="/profile/user" src="https://user-images.githubusercontent.com/54442420/99083256-9c5f0980-2608-11eb-8b56-703c7b924f7a.png">
+    <img width="24%" alt="/signin" src="https://user-images.githubusercontent.com/54442420/99244391-5ba00400-2845-11eb-90a4-81d8c5f29945.png">
+    <img width="24%" alt="/profile/user-form" src="https://user-images.githubusercontent.com/54442420/99083116-6d489800-2608-11eb-8009-de6a0d69cea2.png">
+    <img width="24%" alt="/profile/taste-form" src="https://user-images.githubusercontent.com/54442420/99244692-cb15f380-2845-11eb-84db-bc9681b09822.png">
+    <img width="24%" alt="/profile/user" src="https://user-images.githubusercontent.com/54442420/99083256-9c5f0980-2608-11eb-8b56-703c7b924f7a.png">
 
 ## 🌏 Browser Support
 
