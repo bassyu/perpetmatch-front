@@ -29,7 +29,7 @@
 
 ## 📷 Screenshots
 
-- 입양
+- Adopt
 
     <img width="32%" alt="/pet/list" src="https://user-images.githubusercontent.com/54442420/99077540-3ff7ec00-2600-11eb-9fcc-053e120091cb.png">
     <img width="32%" alt="/pet/form" src="https://user-images.githubusercontent.com/54442420/99078860-6e76c680-2602-11eb-9aff-f8360ecae45a.png">
@@ -37,7 +37,7 @@
 
 <br />
 
-- 쇼핑
+- Shopping
 
     <img width="32%" alt="/shop/list" src="https://user-images.githubusercontent.com/54442420/99078525-de388180-2601-11eb-9452-a136324fc6d7.png">
     <img width="32%" alt="/shop/board" src="https://user-images.githubusercontent.com/54442420/99078369-9fa2c700-2601-11eb-81c2-32b19e6f0ef7.png">
@@ -45,7 +45,7 @@
 
 <br />
 
-- 소통
+- SNS
 
     <img width="32%" alt="/commu" src="https://user-images.githubusercontent.com/54442420/99078980-9d8d3800-2602-11eb-8b04-157877bb37ee.png">
     <img width="32%" alt="/commu/card" src="https://user-images.githubusercontent.com/54442420/99083730-48a0f000-2609-11eb-975d-c65e927abf8d.png">
@@ -53,7 +53,7 @@
 
 <br />
 
-- 프로필
+- Costomize
 
     <img width="32%" alt="/signin" src="https://user-images.githubusercontent.com/54442420/99083056-543fe700-2608-11eb-8080-f948ef640527.png">
     <img width="32%" alt="/profile/user-form" src="https://user-images.githubusercontent.com/54442420/99083116-6d489800-2608-11eb-8009-de6a0d69cea2.png">
