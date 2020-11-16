@@ -11,7 +11,11 @@ function Pet() {
   return (
     <>
       <Switch>
-        <Route path="/pet/form" component={PetForm} />
+        <PrivateRoute
+          path="/pet/form"
+          component={PetForm}
+          redirectTo={Signin}
+        />
         <Route path="/pet/list" component={PetList} />
         <Route path="/pet/board/:id" component={PetBoard} exact />
         <PrivateRoute

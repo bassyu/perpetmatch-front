@@ -18,23 +18,23 @@ const SigninTemplateBlock = styled.div`
 `;
 
 const WhiteBox = styled.div`
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
-  border: solid 1.2rem ${palette.gray[2]};
-  padding: 3rem;
   width: 480px;
-  background: white;
+  border: solid 1.2rem ${palette.gray[2]};
   border-radius: 2px;
+  padding: 3rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
+  background: white;
 
   .logo-area {
-    display: block;
     margin-top: 1.5rem;
     margin-bottom: 3rem;
+    display: block;
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
 
     img {
-      width: 10rem;
+      width: 12rem;
     }
   }
 `;

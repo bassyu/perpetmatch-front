@@ -143,7 +143,7 @@ function Header({ user, onSignout }) {
     {
       key: 'petform',
       text: '파양하기',
-      to: client.defaults.headers.Authorization ? '/pet/form' : '/signin',
+      to: '/pet/form',
     },
     {
       key: 'shoplist',

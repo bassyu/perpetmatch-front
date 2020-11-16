@@ -40,7 +40,7 @@ function SigninForm({ form, onChange, onSubmit }) {
           <Input
             autoComplete="username"
             name="usernameOrEmail"
-            placeholder="닉네임 혹은 이메일"
+            placeholder="닉네임 또는 이메일"
             onChange={onChange}
             value={form.usernameOrEmail}
           />
