@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
 import {
@@ -5,6 +6,7 @@ import {
   FACEBOOK_AUTH_URL,
   NAVER_AUTH_URL,
 } from '../../constants/index';
+import { FaFacebook, FaGoogle } from 'react-icons/fa';
 
 const socialMap = {
   google: {
@@ -26,18 +28,23 @@ const SocialLoginBlock = styled.div`
 `;
 
 const SocialButton = styled.button`
-  color: white;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  text-align: center;
+  background: ${(props) => socialMap[props.name]['color']};
+  opacity: 0.8;
   font-size: 0.8rem;
   font-weight: bold;
-  border: none;
-  padding: 1rem;
+  color: white;
   outline: none;
-  width: 100%;
-  background: ${(props) => socialMap[props.name]['color']};
-  cursor: pointer;
-  border-radius: 0.4rem;
-  opacity: 0.8;
 
+  .icon {
+    float: left;
+    font-size: 1.5rem;
+  }
   &:hover {
     opacity: 1;
   }
@@ -51,17 +58,23 @@ function SocialLogin() {
     window.location.href = GOOGLE_AUTH_URL;
     //window.open(GOOGLE_AUTH_URL);
   };
+  const onClickDummy = (e) => {
+    message.info({
+      content: '구글 로그인을 이용해 주세요!',
+      key: 'dummy',
+      duration: 1,
+    });
+  };
 
   return (
     <SocialLoginBlock>
       <SocialButton name="google" onClick={onClick}>
-        Sign in with Google
+        <FaGoogle className="icon" />
+        Sign up with Google
       </SocialButton>
-      <SocialButton name="facebook" onClick={onClick}>
-        Sign in with facebook
-      </SocialButton>
-      <SocialButton name="naver" onClick={onClick}>
-        Sign in with NAVER
+      <SocialButton name="facebook" onClick={onClickDummy}>
+        <FaFacebook className="icon" />
+        Sign up with facebook
       </SocialButton>
     </SocialLoginBlock>
   );
