@@ -133,6 +133,9 @@ const ShopCartBlcok = styled.div`
     .right {
       width: 32%;
       margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       background: white;
 
       .calc {
@@ -176,12 +179,11 @@ function ShopCart() {
   const [cartItems, setCartItems] = useState([
     {
       id: 321,
-      image:
-        'https://shopbucket.s3.ap-northeast-2.amazonaws.com/%EB%B2%85%EC%8A%A41.jpg',
-      title: '벅스펫 국내산 유기농 베지믹스 관절건강 사료',
-      price: 51990,
-      company: '벨리스',
-      count: 3,
+      image: '',
+      title: '',
+      price: 0,
+      company: '',
+      count: 0,
     },
   ]);
   const [total, setTotal] = useState(0);

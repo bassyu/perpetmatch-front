@@ -13,11 +13,7 @@ function Shop() {
       <Switch>
         <Route path="/shop/list/:category" component={ShopList} />
         <Route path="/shop/board/:id" component={ShopBoard} />
-        <PrivateRoute
-          path="/shop/cart"
-          component={ShopCart}
-          redirectTo={Signin}
-        />
+        <Route path="/shop/cart" component={ShopCart} />
         <PrivateRoute
           path="/shop/checkout"
           component={ShopCheckout}

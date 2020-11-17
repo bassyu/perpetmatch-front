@@ -12,7 +12,7 @@ function Profile() {
   return (
     <>
       <Switch>
-        <Route path="/profile/user/:id" component={ProfileUser} exact />
+        <Route path="/profile/user/:id" component={ProfileUser} />
         <PrivateRoute
           path="/profile/user-form"
           component={ProfileUserForm}

@@ -3,7 +3,8 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Route } from 'react-router-dom';
 
-function PrivateRoute({ path, redirectTo, component, exact }) {
+function PrivateRoute(props) {
+  const { path, redirectTo, component, exact } = props;
   const auth = useSelector(({ auth }) => auth.auth);
 
   useEffect(() => {
