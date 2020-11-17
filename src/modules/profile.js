@@ -26,7 +26,7 @@ const initialState = {
   user: {
     age: 0,
     occupation: '',
-    location: '서울특별시',
+    location: '',
     houseType: 'apartment',
     experience: false,
     liveAlone: false,

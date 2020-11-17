@@ -19,7 +19,47 @@ const Arrow = ({ className, onClick, type }) => {
   );
 };
 
-const AboutBlock = styled.div``;
+const IndexBlock = styled.div`
+  .index-banner {
+    padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+
+    .bold {
+      font-weight: 700;
+    }
+    .head {
+      margin: 1rem 0;
+      color: ${palette.main};
+      font-size: 4rem;
+      font-weight: 100;
+    }
+    .description {
+      font-size: 1.25rem;
+    }
+  }
+  .description-wrapper {
+    .section {
+      display: flex;
+
+      img {
+        width: 64%;
+      }
+      .description {
+        width: 36%;
+        padding: 4rem;
+      }
+      .gray {
+        background: ${palette.gray[4]};
+      }
+      .sub {
+        background: ${palette.sub};
+      }
+    }
+  }
+`;
 
 const SliderWrapper = styled.div`
   .slick-list,
@@ -81,91 +121,6 @@ const SliderItem = styled.div`
   }
 `;
 
-const BottomBlock = styled.div``;
-
-const BottomWel = styled.div`
-  div {
-    text-align: center;
-    background-color: white;
-    height: 15rem;
-    padding-top: 3rem;
-
-    span {
-      font-size: 4rem;
-      font-weight: 100;
-      color: #204030;
-    }
-    .title {
-      font-weight: 700;
-    }
-    .sub {
-      font-size: 1rem;
-      color: black;
-    }
-  }
-`;
-
-const BottomLove = styled.div`
-  div {
-    height: 39rem;
-
-    .loveImg {
-      img {
-        height: 39rem;
-        width: 65rem;
-      }
-    }
-    .loveSub {
-      background-color: ${palette.gray[2]};
-      width: 38.75rem;
-      padding-left: 4rem;
-      padding-top: 3rem;
-
-      .head {
-        font-size: 3rem;
-        font-weight: 500;
-      }
-      p {
-        font-size: 1.25rem;
-      }
-      .subEng {
-        font-weight: 1;
-      }
-    }
-  }
-`;
-
-const BottomDep = styled.div`
-  div {
-    height: 39rem;
-    color: white;
-
-    .depImg {
-      img {
-        height: 39rem;
-        width: 65rem;
-      }
-    }
-    .depSub {
-      background-color: #56adb4;
-      width: 38.75rem;
-      padding-left: 10rem;
-      padding-top: 3rem;
-
-      .head {
-        font-size: 3rem;
-        font-weight: 500;
-      }
-      p {
-        font-size: 1.25rem;
-      }
-      .subEng {
-        font-weight: 1;
-      }
-    }
-  }
-`;
-
 function Index() {
   const settings = {
     dots: true,
@@ -179,7 +134,7 @@ function Index() {
     nextArrow: <Arrow type="next" />,
   };
   return (
-    <AboutBlock>
+    <IndexBlock>
       <HeaderContainer />
       <SliderWrapper>
         <Slider {...settings}>
@@ -202,7 +157,7 @@ function Index() {
           </SliderItem>
           <SliderItem background="/images/home/bg_visual3.png">
             <div>
-              <span className="head">Point</span>
+              <span className="head">Point System</span>
               <p>
                 The PERPET MATCH will secure trust through point. All these
                 points will be used for pets.
@@ -215,61 +170,35 @@ function Index() {
           </SliderItem>
         </Slider>
       </SliderWrapper>
-      <BottomBlock>
-        <BottomWel>
-          <div>
-            <span>Welcome to </span>
-            <span className="title">PERPET MATCH</span>
-            <p className="sub">
-              또 다른 만남을 위해 존재하는 PERPET MATCH 이제 안심하고 올바른
-              선택을 하세요.
-            </p>
+      <div className="index-banner">
+        <p className="head">
+          Welcome to <span className="bold">PERPET MATCH</span>
+        </p>
+        <p className="description">
+          또 다른 만남을 위해 존재하는 PERPET MATCH 이제 안심하고 올바른 선택을
+          하세요.
+        </p>
+      </div>
+      <div className="description-wrapper">
+        <div className="section">
+          <img src="/images/home/bg_visual4.png" alt="section1-img" />
+          <div className="description gray">
+            <p>Love & Belif</p>
+            <p>사랑 & 믿음</p>
+            <div className=""></div>
           </div>
-        </BottomWel>
-        <BottomLove>
-          <div style={{ display: 'inline-flex' }}>
-            <div className="loveImg">
-              <img src="/images/home/bg_visual4.png" alt="bg_visual4.png" />
-            </div>
-            <div className="loveSub">
-              <span className="head">Love & Belif</span>
-              <p>사랑 & 믿음</p>
-              <p className="subEng">
-                A Place where we can acopt only when
-                <p>we have faith in each other.</p>
-              </p>
-              <p>서로의 믿음이 있어야 입양할 수 있는 곳</p>
-            </div>
+        </div>
+        <div className="section">
+          <div className="description sub">
+            <p>Point System</p>
+            <p>포인트 (껌)</p>
+            <div></div>
           </div>
-        </BottomLove>
-        <BottomDep>
-          <div style={{ display: 'inline-flex' }}>
-            <div className="depSub">
-              <span className="head">Deposit</span>
-              <p>보증금</p>
-              <p className="subEng">
-                The PERPET MATCH will secure trust
-                <p>
-                  through deposits.
-                  <p>All these deposits will ve used for pets.</p>
-                </p>
-              </p>
-              <p>
-                퍼펫매치는 보증금을 통해 신뢰를 확보하고,
-                <p>
-                  이 모든 보증금은
-                  <p>반려동물을 위해 사용 될 것입니다.</p>
-                </p>
-              </p>
-            </div>
-            <div className="depImg">
-              <img src="/images/home/bg_visual3.png" alt="bg_visual5.png" />
-            </div>
-          </div>
-        </BottomDep>
-      </BottomBlock>
+          <img src="/images/home/bg_visual3.png" alt="section2-img" />
+        </div>
+      </div>
       <Footer />
-    </AboutBlock>
+    </IndexBlock>
   );
 }
 

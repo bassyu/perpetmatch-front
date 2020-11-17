@@ -7,10 +7,12 @@ import { initBoards, searchBoards } from '../../modules/pet';
 
 function ListContainer() {
   const dispatch = useDispatch();
-  const { searchForm, boards } = useSelector(({ pet }) => ({
-    boards: pet.boards,
+  const { searchForm, boards, boardsLength } = useSelector(({ pet }) => ({
     searchForm: pet.searchForm,
+    boards: pet.boards,
+    boardsLength: pet.boardsLength,
   }));
+  const loading = useSelector(({ loading }) => loading);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -29,8 +31,9 @@ function ListContainer() {
   useEffect(() => {
     const onScroll = () => {
       if (
+        !searchForm.done &&
         window.scrollY + document.documentElement.clientHeight >
-        document.documentElement.scrollHeight - 400
+          document.documentElement.scrollHeight - 400
       ) {
         dispatch(searchBoards(searchForm));
       }
@@ -43,7 +46,7 @@ function ListContainer() {
     };
   }, [dispatch, searchForm]);
 
-  return <List boards={boards} />;
+  return <List boards={boards} loading={loading} />;
 }
 
 export default ListContainer;

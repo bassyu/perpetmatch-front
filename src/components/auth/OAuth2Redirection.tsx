@@ -5,6 +5,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getUser } from '../../modules/profile';
 import FormTemplate from '../FormTemplate';
+import { tempSetAuth } from '../../modules/auth';
 
 interface OAuth2RedirectionProps extends RouteComponentProps<any> {}
 
@@ -16,14 +17,15 @@ function OAuth2Redirection({ location, history }: OAuth2RedirectionProps) {
   ).token;
 
   if (accessToken) {
-    client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
-    dispatch(getUser());
-    history.push('/signup/complete');
     try {
       localStorage.setItem('auth', JSON.stringify({ tokenType, accessToken }));
     } catch (e) {
       console.log('localStorage 오류');
     }
+    client.defaults.headers['Authorization'] = `${tokenType} ${accessToken}`;
+    dispatch(tempSetAuth({ accessToken, tokenType }));
+    dispatch(getUser());
+    history.push('/signup/complete');
   }
   return (
     <FormTemplate title="OAuth2">

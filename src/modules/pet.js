@@ -60,6 +60,7 @@ export function* petSaga() {
 const initialState = {
   searchForm: {
     page: 0,
+    done: false,
     zones: [],
     petTitles: [],
     petAges: [],
@@ -70,6 +71,7 @@ const initialState = {
   },
   boards: [],
   boardsLength: 0,
+
   petError: null,
 };
 
@@ -91,6 +93,7 @@ const pet = handleActions(
       searchForm: {
         ...state.searchForm,
         page: 0,
+        done: false,
       },
       boards: [],
     }),
@@ -99,6 +102,7 @@ const pet = handleActions(
       searchForm: {
         ...state.searchForm,
         page: state.searchForm.page + 1,
+        done: response.data.data.last,
       },
       boards: state.boards.concat(response.data.data.content),
       boardsLength: response.data.data.totalElements,

@@ -29,6 +29,7 @@ const ButtonWithMarginTop = styled(Button)`
 `;
 
 const UserForm = ({ form, onChange, onChangeCheckbox, onSubmit }) => {
+  console.log(form);
   return (
     <UserFormBlock>
       <form onSubmit={onSubmit}>

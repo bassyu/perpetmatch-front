@@ -51,7 +51,6 @@ function SignupForm({ form, onChange, onSubmit, loading }) {
           <Comment
             style={{ color: password === passwordConfirm ? 'green' : 'red' }}
           >
-            &#8251;
             {password === passwordConfirm
               ? ' 비밀번호가 일치합니다.'
               : ' 비밀번호가 일치하지 않습니다.'}

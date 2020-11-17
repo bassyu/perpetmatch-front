@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
-import { Tag } from 'antd';
+import { Tag, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const ListBlock = styled.div`
   width: 80rem;
@@ -73,9 +74,13 @@ const ListBlock = styled.div`
       margin-right: 0;
     }
   }
+  .loading-block {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
-const List = ({ boards }) => {
+const List = ({ boards, loading }) => {
   return (
     <ListBlock>
       <p>
@@ -114,6 +119,13 @@ const List = ({ boards }) => {
           </li>
         ))}
       </ul>
+      {loading['pet/SEARCH_BOARDS'] && (
+        <div className="loading-block">
+          <Spin
+            indicator={<LoadingOutlined style={{ fontSize: 4 * 16 }} spin />}
+          />
+        </div>
+      )}
     </ListBlock>
   );
 };
