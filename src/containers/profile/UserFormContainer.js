@@ -52,10 +52,6 @@ function UserFormContainer({ history }) {
   };
 
   useEffect(() => {
-    dispatch(getUser());
-  }, []);
-
-  useEffect(() => {
     setForm({ ...user });
   }, [user]);
 

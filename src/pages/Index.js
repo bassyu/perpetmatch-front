@@ -21,7 +21,7 @@ const Arrow = ({ className, onClick, type }) => {
 
 const IndexBlock = styled.div`
   .index-banner {
-    padding: 3rem 0;
+    padding: 4rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,15 +47,35 @@ const IndexBlock = styled.div`
       img {
         width: 64%;
       }
-      .description {
+      .box {
         width: 36%;
-        padding: 4rem;
+        padding: 5rem;
+
+        p {
+          margin: 0;
+          font-size: 1.5rem;
+        }
+        .thin {
+          margin-bottom: 2rem;
+          font-weight: 100;
+        }
+        .head {
+          font-size: 2.5rem;
+          font-weight: 700;
+        }
+        .description {
+          margin-top: 3rem;
+          border-top: solid 0.01rem;
+          padding-top: 3rem;
+        }
       }
       .gray {
         background: ${palette.gray[4]};
+        color: ${palette.gray[8]};
       }
       .sub {
         background: ${palette.sub};
+        color: white;
       }
     }
   }
@@ -171,9 +191,11 @@ function Index() {
         </Slider>
       </SliderWrapper>
       <div className="index-banner">
-        <p className="head">
-          Welcome to <span className="bold">PERPET MATCH</span>
-        </p>
+        <Fade right big>
+          <p className="head">
+            Welcome to <span className="bold">PERPET MATCH</span>
+          </p>
+        </Fade>
         <p className="description">
           또 다른 만남을 위해 존재하는 PERPET MATCH 이제 안심하고 올바른 선택을
           하세요.
@@ -181,20 +203,39 @@ function Index() {
       </div>
       <div className="description-wrapper">
         <div className="section">
-          <img src="/images/home/bg_visual4.png" alt="section1-img" />
-          <div className="description gray">
-            <p>Love & Belif</p>
-            <p>사랑 & 믿음</p>
-            <div className=""></div>
-          </div>
+          <Fade big>
+            <img src="/images/home/bg_visual4.png" alt="section1-img" />
+            <div className="box gray">
+              <p className="head">Love & Belif</p>
+              <p>사랑 & 믿음</p>
+              <div className="description">
+                <p className="thin">
+                  A place where we can acopt only when we have faith in each
+                  other.
+                </p>
+                <p>서로의 믿음이 있어야 입양할 수 있는 곳</p>
+              </div>
+            </div>
+          </Fade>
         </div>
         <div className="section">
-          <div className="description sub">
-            <p>Point System</p>
-            <p>포인트 (껌)</p>
-            <div></div>
-          </div>
-          <img src="/images/home/bg_visual3.png" alt="section2-img" />
+          <Fade big>
+            <div className="box sub">
+              <p className="head">Point System</p>
+              <p>포인트 (껌)</p>
+              <div className="description">
+                <p className="thin">
+                  The PERPET MATCH will secure trust through point. All these
+                  points will be used for pets.
+                </p>
+                <p>
+                  퍼펫매치는 포인트를 통해 신뢰를 확보하고, 이 포인트는
+                  반려동물을 위해서 사용됩니다.
+                </p>
+              </div>
+            </div>
+            <img src="/images/home/bg_visual3.png" alt="section2-img" />
+          </Fade>
         </div>
       </div>
       <Footer />
