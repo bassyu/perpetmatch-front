@@ -320,6 +320,24 @@ function Commu() {
     description: '',
   });
 
+  async function getCardsAPI() {
+    try {
+      setLoading(true);
+      const response = await commuAPI.getCards();
+      setCards(response.data.data);
+      setLoading(false);
+    } catch (e) {
+      console.log('카드 불러오기 오류');
+    }
+  }
+  async function onChangeFormImg({ fileList }) {
+    setFormModal({
+      ...formModal,
+      image: fileList.length ? await getBase64(fileList[0].originFileObj) : '',
+    });
+    console.log(formModal);
+  }
+
   const onClickLike = (e) => {
     e.stopPropagation();
     setClicked(parseInt(e.target.id));
@@ -382,18 +400,12 @@ function Commu() {
       [name]: value,
     });
   };
-  async function onChangeFormImg({ fileList }) {
-    setFormModal({
-      ...formModal,
-      image: fileList.length ? await getBase64(fileList[0].originFileObj) : '',
-    });
-    console.log(formModal);
-  }
-  const onSummit = () => {
+  const onSubmit = () => {
     async function callAPI() {
       try {
         await commuAPI.writeCard(formModal);
         await message.success('성공적으로 등록되었습니다!', 1);
+        getCardsAPI();
         setFormModal({
           visible: false,
           checked: false,
@@ -409,16 +421,7 @@ function Commu() {
   };
 
   useEffect(() => {
-    async function callAPI() {
-      try {
-        const response = await commuAPI.getCards();
-        setCards(response.data.data);
-        setLoading(false);
-      } catch (e) {
-        console.log('카드 불러오기 오류');
-      }
-    }
-    callAPI();
+    getCardsAPI();
   }, []);
 
   useEffect(() => {
@@ -629,7 +632,7 @@ function Commu() {
               )}
             </Upload>
             <Comment>사진을 꼭 넣어주세요!</Comment>
-            <Button fullWidth onClick={onSummit}>
+            <Button fullWidth onClick={onSubmit}>
               게시
             </Button>
           </div>
