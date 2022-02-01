@@ -16,7 +16,7 @@
 > 퍼펫매치는 `포인트 충전` 시스템으로 반려동물 입양 과정의 신뢰성 문제를 해결하고,
 > `소통하기`와 `쇼핑하기`를 통해 입양 이후에도 이용할 수 있는 반려동물 입양 플랫폼 입니다.
 
-# Front-end Server
+# Front-End Server
 
 - www.perpetmatch.com
 
