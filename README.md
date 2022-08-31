@@ -74,8 +74,8 @@
 Fork `master` branch into your personal repository. Clone it to local computer. Install node modules. Before starting development, you should check to see if there are any errors.
 
 ```
-$ git clone https://github.com/[username]/perpet-match-front.git
-$ cd perpet-match-front
+$ git clone https://github.com/[username]/perpetmatch-front.git
+$ cd perpetmatch-front
 $ yarn install
 $ yarn start
 ```
