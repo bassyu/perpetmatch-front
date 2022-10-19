@@ -16,20 +16,15 @@
 > 퍼펫매치는 **포인트 충전**으로 반려동물 입양 과정의 신뢰성을 확보하고,
 > **소통하기**와 **쇼핑하기**를 통해 입양 이후에도 이용할 수 있는 반려동물 입양 플랫폼 입니다.
 
-# Front-End Server
+## 📺 데모영상
 
-- www.perpetmatch.com
+https://www.youtube.com/watch?v=pyyAn5ecbxA
 
-## 🚩 Table of Content
-
-- [Screenshots](#-screenshots)
-- [Browser Support](#-browser-support)
-- [Pull Request Steps](#-pull-request-steps)
-- [License](#%EF%B8%8F-license)
+<br/>
 
 ## 📷 Screenshots
 
-- Adopt
+- 입양하기, 파양하기
 
     <img width="32%" alt="/pet/list" src="https://user-images.githubusercontent.com/54442420/99077540-3ff7ec00-2600-11eb-9fcc-053e120091cb.png">
     <img width="32%" alt="/pet/form" src="https://user-images.githubusercontent.com/54442420/99078860-6e76c680-2602-11eb-9aff-f8360ecae45a.png">
@@ -37,7 +32,7 @@
 
 <br />
 
-- Shopping
+- 쇼핑하기
 
     <img width="24%" alt="/shop/list" src="https://user-images.githubusercontent.com/54442420/99078525-de388180-2601-11eb-9452-a136324fc6d7.png">
     <img width="24%" alt="/shop/board" src="https://user-images.githubusercontent.com/54442420/99078369-9fa2c700-2601-11eb-81c2-32b19e6f0ef7.png">
@@ -46,7 +41,7 @@
 
 <br />
 
-- SNS
+- 소통하기
 
     <img width="32%" alt="/commu" src="https://user-images.githubusercontent.com/54442420/99078980-9d8d3800-2602-11eb-8b04-157877bb37ee.png">
     <img width="32%" alt="/commu/card" src="https://user-images.githubusercontent.com/54442420/99083730-48a0f000-2609-11eb-975d-c65e927abf8d.png">
@@ -54,7 +49,7 @@
 
 <br />
 
-- Costomize
+- 로그인, 커스텀
 
     <img width="24%" alt="/signin" src="https://user-images.githubusercontent.com/54442420/99244391-5ba00400-2845-11eb-90a4-81d8c5f29945.png">
     <img width="24%" alt="/profile/user-form" src="https://user-images.githubusercontent.com/54442420/99083116-6d489800-2608-11eb-8009-de6a0d69cea2.png">
